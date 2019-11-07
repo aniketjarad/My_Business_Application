@@ -1,0 +1,12 @@
+a{
+	font-size: 30px;!important
+	display: inline-block;!important
+	font-weight: 600;!important
+}
+label{
+	font-size: 18px;!important
+	display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 800;!important
+}
