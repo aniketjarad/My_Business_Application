@@ -33,6 +33,8 @@ $(document).ready(function() {
         "order":[["2","asc"]],
         //"scrollX": true
     });
+
+    
 } );
 
     function Update_Element(id) {
