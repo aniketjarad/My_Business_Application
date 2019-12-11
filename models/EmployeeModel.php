@@ -1,5 +1,5 @@
 <?php
-class URLModel {
+class EmployeeModel {
     /**
      * Check database connection
      */
@@ -11,18 +11,82 @@ class URLModel {
         }
     }
 
+    /**
+     * Insert record in URLs table
+     */
+    public function addEmployee($data)
+    {   
+        $data = $this->processData($data);
 
+        $result = array();
+        // clean the input from javascript code for example
+        $emp_code = strip_tags($data['emp_code']);
+        
+        $json_data = $this->checkExisting($emp_code);
+        
+        if(!$json_data){
+            if(isset($data['is_manager']) && !empty($data)){ // Signup Case
 
+                $sql = "INSERT INTO `emp_master` (`emp_code`, `emp_name`, `wiw_id`, `emea_id`, `email_id`, `doj`, `contact_no`, `manager`, `cost_center`, `designation`, `grade`, `department`, `is_manager`) VALUES ('".$data['emp_code']."','".$data['emp_name']."','".$data['wiw_id']."','".$data['emea_id']."','".$data['email_id']."','".$data['doj']."','".$data['contact_no']."','".$data['manager']."','".$data['cost_center']."','".$data['designation']."','".$data['grade']."','".$data['department']."','1')";
+                mysqli_query($this->db, $sql);
+
+                $result['status'] = "success";
+                $result['response'] = "Registered Successfully.";
+            }else if(!empty($data)){
+                $sql = "INSERT INTO `emp_master` (`emp_code`, `emp_name`, `wiw_id`, `emea_id`, `email_id`, `doj`, `contact_no`, `manager`, `cost_center`, `designation`, `grade`, `department`) VALUES ('".$data['emp_code']."','".$data['emp_name']."','".$data['wiw_id']."','".$data['emea_id']."','".$data['email_id']."','".$data['doj']."','".$data['contact_no']."','".$data['manager']."','".$data['cost_center']."','".$data['designation']."','".$data['grade']."','".$data['department']."')";
+                mysqli_query($this->db, $sql);
+                $result['status'] = "success";
+                $result['response'] = "Registered Successfully.";
+            }
+        }else{
+            $result['status'] = "error";
+            $result['response'] = "User Already Exists.";
+        }
+        return $result;
+    }
 
     /**
-     * Get all data from URLs
+     * Process data before insertion.
+     */
+    public function processData($data)
+    {  
+        $result = array();
+        foreach ($data as $key => $value) {
+            if($key =='email_id' || $key == 'wiw_id'){
+                $result[$key] = strtolower($value);
+            }elseif($key=='emp_name'||$key=='manager'||$key=='designation'||$key=='department'){
+                $result[$key] = ucwords($value);
+            }elseif($key=='emea_id'){
+                $result[$key] = strtoupper($value);
+            }else{
+                $result[$key] = $value;
+            }
+        }
+        return $result;
+    }
+    /**
+     * Get all data from Employees
      */
     public function getAll()
     {
         $sql = "select * from emp_master";
         $result = mysqli_query($this->db, $sql);
         $count = 1;
-        while($array = mysqli_fetch_object($result)){
+        while($array = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+            $row->{$count} = $array;
+            $count++;
+        }
+        return $row;
+    }
+    /**
+     * Get all data from All Managers.
+     */
+    public function getAllManagers()
+    {
+        $sql = "select distinct(`emp_name`) from `emp_master` where `is_manager`= '1'";
+        $result = mysqli_query($this->db, $sql);
+        $count = 1;
+        while($array = mysqli_fetch_array($result,MYSQLI_ASSOC)){
             $row->{$count} = $array;
             $count++;
         }
@@ -30,53 +94,41 @@ class URLModel {
     }
 
     /**
-     * Insert record in URLs table
+     * Where query for Employees table
      */
-    public function addURL($long_url)
-    {   
-        $result = array();
-        // clean the input from javascript code for example
-        $long_url = strip_tags($long_url);
-        
-        $json_data = $this->checkExisting($long_url);
-        if($json_data){
-            $data = json_decode($json_data,true);
-            if(empty($data['short_url']) && !empty($data['id'])){
-                $short_url = $this->generateShortUrl($data['id']);
-                //$short_url = "http://bit.ly/".$short_url."/";
-                $this->updateWhere($long_url,$short_url);
-                $result = $short_url;
-            }else{
-                $result = $data['short_url'];
-            }
-            
-        }else{
-            $sql = "INSERT INTO URLs (long_url) VALUES ('".$long_url."')";
-            mysqli_query($this->db, $sql);
-            $unique_id = mysqli_insert_id($this->db);
-            $short_url = $this->generateShortUrl($unique_id);
-            //$short_url = "http://bit.ly/".$short_url."/";
-            $this->updateWhere($long_url,$short_url);
-            $result = $short_url;
-        }
-        
-        return $result;
-    }
-
-    /**
-     * Where query for URLs table
-     */
-    public function whereURL($array)
+    public function whereEmployee($array)
     {
         $cond_string = '';
         foreach($array as $key => $value) {
           $cond_string .= $key.'= "'.$value.'"';
         }
-        $sql = "SELECT * FROM URLs WHERE ".$cond_string;
+        $sql = "SELECT * FROM emp_master WHERE ".$cond_string;
 
         $result = mysqli_query($this->db, $sql);
 
         return mysqli_fetch_assoc($result);
+    }
+    
+    /**
+     * updateWhere query for URLs table
+     */
+    public function updateEmployee($data)
+    {
+        //print_r($data);exit(0);
+        if(isset($data['active']) && isset($data['is_manager'])){
+            $sql = "UPDATE `emp_master` SET `emp_name`='".$data['emp_name']."',`contact_no`='".$data['contact_no']."',`cost_center`='".$data['cost_center']."',`department`='".$data['department']."',`designation`='".$data['designation']."',`grade`='".$data['grade']."',`manager`='".$data['manager']."',`active`='1',`is_manager`='1' WHERE `emp_code`='".$data['emp_code']."'";
+        }else if(isset($data['is_manager']) && !isset($data['active'])){
+            $sql = "UPDATE `emp_master` SET `emp_name`='".$data['emp_name']."',`contact_no`='".$data['contact_no']."',`cost_center`='".$data['cost_center']."',`department`='".$data['department']."',`designation`='".$data['designation']."',`grade`='".$data['grade']."',`manager`='".$data['manager']."',`is_manager`='1',`active`='0' WHERE `emp_code`='".$data['emp_code']."'";
+        }else if(isset($data['active']) && !isset($data['is_manager'])){
+            $sql = "UPDATE `emp_master` SET `emp_name`='".$data['emp_name']."',`contact_no`='".$data['contact_no']."',`cost_center`='".$data['cost_center']."',`department`='".$data['department']."',`designation`='".$data['designation']."',`grade`='".$data['grade']."',`manager`='".$data['manager']."',`active`='1',`is_manager`='0' WHERE `emp_code`='".$data['emp_code']."'";
+        }else if(!isset($data['active']) && !isset($data['is_manager'])){
+            $sql = "UPDATE `emp_master` SET `emp_name`='".$data['emp_name']."',`contact_no`='".$data['contact_no']."',`cost_center`='".$data['cost_center']."',`department`='".$data['department']."',`designation`='".$data['designation']."',`grade`='".$data['grade']."',`manager`='".$data['manager']."',`active`='0',`is_manager`='0' WHERE `emp_code`='".$data['emp_code']."'";
+        }
+        
+        mysqli_query($this->db, $sql);
+        $result['status'] = "success";
+        $result['response'] = "Updated Successfully";
+        return $result;
     }
     /**
      * updateWhere query for URLs table
@@ -91,32 +143,10 @@ class URLModel {
         return mysqli_fetch_object($result);
     }
 
-    public function generateShortUrl($unique_id)
-    {   
-        
-        $map_string = "0aR1bS2cT3dU4eV5fW6gX7hY8iZ9jAkBlCmDnEoFpGqHrIsJtKuLvMwNxOyPzQ";
-        $map_array = str_split($map_string);
-        $short_url = array();
+    
+    public function checkExisting($emp_code) {
 
-        // Convert given integer id to a base 36 number
-        while ($unique_id)
-        {
-            // use above map to store actual character
-            // in short url
-            array_push($short_url,$map_array[$unique_id%62]);
-            $unique_id = (int)($unique_id/62);
-        }
-
-        // Reverse shortURL to complete base conversion
-        $short_url = implode(array_reverse($short_url));
-        
-        return $short_url;
-
-    }
-
-    public function checkExisting($long_url) {
-
-        $return_obj = $this->whereURL(['long_url'=> $long_url]);
+        $return_obj = $this->whereEmployee(['emp_code'=> $emp_code]);
         
         if ($return_obj) {
             $result = json_encode($return_obj);

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 class Application{
 	public static function route(Request $request) {
 		$controller = $request->getController().'Controller';

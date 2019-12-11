@@ -4,13 +4,12 @@ class HomeController extends Controller {
   /**
    * Default home controller index function
    */
-  public function index() {
+	public function index() {
 	  $this->render('home/index');
-  }
+	}
 
-  public function signup() {
-	  $this->render('home/signup');
-  }
-
+	public function login() {
+	  $this->render('home/login');
+	}
 
 }

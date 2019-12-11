@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This is the "base controller class".
  */
@@ -8,6 +9,7 @@ class Controller {
     * Create database connection
     */
     function __construct() {
+        session_start();
         $this->openDatabaseConnection();
     }
 
@@ -47,9 +49,15 @@ class Controller {
             }
             // render view file with layout
             require 'view/layout/header.php';
+            if(isset($_SESSION['emp_code'])){
+                require 'view/layout/navigation.php';
+            }
             require $file;
-            require 'view/layout/footer.php';
 
+            if(isset($_SESSION['emp_code'])){
+                require 'view/layout/nav-footer.php';
+            }
+            require 'view/layout/footer.php';
             return true;
         }
         throw new Exception('View issues');
