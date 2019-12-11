@@ -32,6 +32,11 @@ if(isset($_SESSION['emp_code'])){
 							Forgot Password ?
 						</a>
 					</div>
+					<div>
+						<a href="/user/signup/" class="txt1">
+							Not a user ? Register here 
+						</a>
+					</div>
 				</div>
 				<div id="hide" class="wrap-input50">
 					
@@ -45,7 +50,7 @@ if(isset($_SESSION['emp_code'])){
 			</form>
 
 			<div class="login100-more" style="background-image: url('/public/img/bg-01.jpg');">
-				<center><h2 style="margin-top:23%;text-align: center; width: 75%">Welcome to My Business Application</h2></center>
+				<center><h2 style="margin-top:15%;text-align: center; width: 75%">Welcome to My Business Application</h2></center>
 			</div>
 		</div>
 	</div>
