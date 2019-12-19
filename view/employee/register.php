@@ -83,10 +83,7 @@
 					<div  style="margin-left:80%;">
 						<!-- Material switch -->
 						<div class="">
-							<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-								  Tooltip on top
-								</button>
-						    <input name="is_manager" type="checkbox" class="custom-control-input">
+						    <input name="is_manager" type="checkbox">
 						</div>
 					</div>
 				</div>

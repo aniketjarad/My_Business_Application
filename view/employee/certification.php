@@ -21,18 +21,16 @@
       <li class="breadcrumb-item"><a href="/home/">Home</a></li>
       <li class="breadcrumb-item"><a href="/employee/">Employee</a></li>
       <li class="breadcrumb-item active">Certification</li>
-
     </ol>
   </div><!-- /.col -->
   </div><!-- /.row -->
   </div><!-- /.container-fluid -->
-    <div>
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCertiModal">Add</button>
-      
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#importCertiModal">Import Excel</button>
-    </div>
-  </div><!-- /.content-header -->
     
+  </div><!-- /.content-header -->
+    <div align="left" style="margin-left:2%;">
+      <button type="button" name="add" class="btn btn-info fa fa-plus" style="color: white;" data-toggle="modal" data-target="#addCertiModal">Add Certification</button>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#importCertiModal">Import</button>
+    </div>
   <center>
        
 
