@@ -54,4 +54,4 @@ CREATE TABLE `skill_matrix` (
   `proficiency`  enum('Basic','Intermediate','Advance','Expert') DEFAULT 'Basic',
   `skill_category` enum('Primary','Secondary') DEFAULT 'Secondary',
  FOREIGN KEY (emp_code) REFERENCES emp_master(emp_code) 
-)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
