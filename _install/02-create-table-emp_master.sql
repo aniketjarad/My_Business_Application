@@ -7,7 +7,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`wiw_id`),
   FOREIGN KEY (wiw_id) REFERENCES emp_master(wiw_id) 
   FOREIGN KEY (email_id) REFERENCES emp_master(email_id)
-)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1
 
 
 /*done*/
@@ -18,7 +18,7 @@ CREATE TABLE `certification` (
   `cert_expiry` date DEFAULT '2999-12-31',
   `category` enum('ServiceNow','ITIL','Other') DEFAULT 'Other',
  FOREIGN KEY (emp_code) REFERENCES emp_master(emp_code) 
-)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1
 
 
 
