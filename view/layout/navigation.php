@@ -190,7 +190,7 @@
                 </a>
               </li>
               <li class="nav-item " style="background-color: #343a40;">
-                <a id="skill-link" href="/employee/certification" class="nav-link">
+                <a id="skill-link" href="/employee/skillmatrix" class="nav-link">
                   <i class="far fa-bookmark nav-icon"></i>
                   <p>Skill Matrix</p>
                 </a>

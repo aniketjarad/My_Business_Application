@@ -47,3 +47,11 @@ CREATE TABLE `emp_master` (
 
 
 
+CREATE TABLE `skill_matrix` (
+  `emp_code` int(11) NOT NULL,
+  `emp_name` varchar(50) default NULL,
+  `skill` varchar(60) NOT NULL,
+  `proficiency`  enum('Basic','Intermediate','Advance','Expert') DEFAULT 'Basic',
+  `skill_category` enum('Primary','Secondary') DEFAULT 'Secondary',
+ FOREIGN KEY (emp_code) REFERENCES emp_master(emp_code) 
+)
