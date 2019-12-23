@@ -98,7 +98,13 @@ $(document).ready(function(){
       });
     }
   });
-
+  
+/*Skill matrix add skill acitivy*/
+$('#addskill-form').on('submit', function (e) {
+  //e.preventDefault();
+  console.log("step here");
+  
+});
 $('#update-form').on('submit', function (e) {
   //e.preventDefault();
   console.log("step here");
@@ -151,3 +157,5 @@ else if(url == "http://www.mybusinessapplication.local.com/home/"){
 else if(url == "http://www.mybusinessapplication.local.com/home/"){
   
 }*/
+
+

@@ -11,6 +11,9 @@ class EmployeeController extends Controller {
 	public function certification() {
 		$this->render('employee/certification');
 	}
+	public function skillmatrix() {
+		$this->render('employee/skillmatrix');
+	}
 
 	public function getAll() {
 		$obj = $this->loadModel('EmployeeModel');
@@ -20,6 +23,11 @@ class EmployeeController extends Controller {
 	public function getAllCertification() {
 		$obj = $this->loadModel('CertificationModel');
 		$data = $obj->getAllCertifications();
+		return $data;
+	}
+	public function getAllSkill() {
+		$obj = $this->loadModel('SkillMatrixModel');
+		$data = $obj->getAllSkills();
 		return $data;
 	}
 	public function getAllManager() {

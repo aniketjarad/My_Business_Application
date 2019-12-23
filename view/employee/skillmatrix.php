@@ -13,14 +13,14 @@
   <div class="container-fluid">
   <div class="row mb-2">
   <div class="col-sm-6">
-    <h4 class="m-0 text-dark">Certification</h4>
+    <h4 class="m-0 text-dark">Skill Matrix</h4>
     
   </div><!-- /.col -->
   <div class="col-sm-6">
     <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="/home/">Home</a></li>
       <li class="breadcrumb-item"><a href="/employee/">Employee</a></li>
-      <li class="breadcrumb-item active">Certification</li>
+      <li class="breadcrumb-item active">Skill</li>
     </ol>
   </div><!-- /.col -->
   </div><!-- /.row -->
@@ -28,8 +28,8 @@
     
   </div><!-- /.content-header -->
     <div align="left" style="margin-left:2%;">
-      <button type="button" name="add" class="btn btn-info fa fa-plus" style="color: white;padding: 10px;" data-toggle="modal" data-target="#addCertiModal">  Add Certification</button>
-      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#importCertiModal">Import</button>
+      <button type="button" name="add" class="btn btn-info fa fa-plus" style="color: white;padding: 10px;" data-toggle="modal" data-target="#addCertiModal"> <b>Skill</b></button>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#importCertiModal"><b>Import</b></button>
     </div>
   <center>
        
@@ -47,7 +47,7 @@
     <tbody style="font-size: 13px;text-align: center;">
     <?php 
       $i = 0 ;
-      $data = $this->getAllCertification();
+      $data = $this->getAllSkill();
       foreach($data as $key => $emp_data)
       {
         $e_code = explode("|",$key)[0];
@@ -65,9 +65,9 @@
     <tbody id="group-of-rows-<?php echo $i; ?>" class="collapse" style="font-size: 13px;text-align: center;">
       <tr>
         <td></td>
-        <td><b>Name</b></td>
-        <td><b>Expiry</b></td>
-        <td><b>Category</b></td>
+        <td><b>Skill</b></td>
+        <td><b>Proficiency</b></td>
+        <td><b>Skill Category</b></td>
       </tr> 
       <?php  
       foreach($data[$key] as $keys => $cert_arr)
@@ -75,9 +75,9 @@
       ?>          
       <tr>
         <td><?php echo $keys; ?></td>
-        <td><?php echo $cert_arr['cert_name']; ?></td>
-        <td><?php echo $cert_arr['cert_expiry']; ?></td>  
-        <td><?php echo $cert_arr['category']; ?></td> 
+        <td><?php echo $cert_arr['skill']; ?></td>
+        <td><?php echo $cert_arr['proficiency']; ?></td>  
+        <td><?php echo $cert_arr['skill_category']; ?></td> 
       </tr>                
       <?php
       }
@@ -104,38 +104,46 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addCertiModalLongTitle">Add Employee Certificate</h5>
+        <h5 class="modal-title" id="addCertiModalLongTitle">Add Employee Skill</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
 
-        <form>        
+        <form id="addskill-form" method="post" >        
           <div class="form-group">
             <label for="usr">Employee Code :</label>
             <input type="text" class="form-control" id="certEmpCode" placeholder="Enter Employee Code">
           </div>
           <div class="form-group">
-            <label for="usr">Certificate Name :</label>
-            <input type="text" class="form-control" id="certEmpCode" placeholder="Enter Employee Code">
+            <label for="usr">Skill :</label>
+            <input type="text" class="form-control" id="certEmpCode" placeholder="Enter Employee Skill">
           </div>
 
           <div class="form-group">
-            <label for="certCategory">Certificate Category : </label>
+            <label for="certCategory">Proficiency : </label>
             <select class="form-control" id="certCategory">
-              <option value="None">NONE</option>
-              <option value="Servicenow">Servicenow</option>
-              <option value="ITIL">ITIL</option>
-              <option value="Other">Other</option>
+              <option value="Basic">Basic</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advance">Advance</option>
+              <option value="Expert">Expert</option>
             </select>
           </div>
-        </form>
+      
+      <div class="form-group">
+            <label for="certCategory">Skill Category : </label>
+            <select class="form-control" id="certCategory">
+              <option value="Primary">Primary</option>
+              <option value="Secondary">Secondary</option>
+             
+            </select>
+          </div>       
       </div>
-      <div class="modal-footer">
-        
-        <button type="button" class="btn btn-success">Save</button>
+      <div class="modal-footer">        
+        <button type="submit" class="btn btn-success">Save</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
