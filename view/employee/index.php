@@ -31,7 +31,7 @@ if(!isset($_SESSION['emp_code'])){
         <div align="left" style="margin-left:2%;">  
             <button type="button" name="add" class="btn btn-info"><a href="/employee/register" style="color: white;">Add Employee</a></button>
          </div>
-    	<table id="example" class="table table-bordred display" style="width:100%">
+    	<table id="example" class="table table-bordred display dataTable" style="width:100%">
             <thead style="font-size: 13px;text-align:center;">
                 <tr>
                     <th>Code</th>

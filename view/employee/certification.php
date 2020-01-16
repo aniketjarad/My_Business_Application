@@ -28,7 +28,7 @@
     
   </div><!-- /.content-header -->
     <div align="left" style="margin-left:2%;">
-      <button type="button" name="add" class="btn btn-info fa fa-plus" style="color: white;padding: 10px;" data-toggle="modal" data-target="#addCertiModal">  Add Certification</button>
+      <button type="button" name="add" class="btn btn-info " data-toggle="modal" data-target="#addCertiModal">Add Certification</button>
       <button type="button" class="btn btn-info" data-toggle="modal" data-target="#importCertiModal">Import</button>
     </div>
   <center>
@@ -36,15 +36,16 @@
 
 
   <table id="certiTable" class="table table-bordred display dataTable" >
-    <thead style="font-size: 13px;text-align: center;">
+    <thead style="font-size: 13px;text-align: center; ">
       <tr>
         <th style="width: 20px;"> # </th>
         <th></th>
         <th>Emp Code</th>
         <th>Emp Name</th>
+        <th></th>
       </tr>
     </thead>
-    <tbody style="font-size: 13px;text-align: center;">
+    <tbody style="font-size: 13px;text-align: center;" class="table-bordred">
     <?php 
       $i = 0 ;
       $data = $this->getAllCertification();
@@ -53,31 +54,34 @@
         $e_code = explode("|",$key)[0];
         $e_name = explode("|",$key)[1];
       ?>      
-      <tr class="clickable" data-toggle="collapse" data-target="#group-of-rows-<?php echo $i; ?>" aria-expanded="false" aria-controls="group-of-rows-<?php echo $i; ?>" style="font-size: 13px;text-align: center;">
+      <tr class="clickable" data-toggle="collapse" class="table-bordred"data-target="#group-of-rows-<?php echo $i; ?>" aria-expanded="false" aria-controls="group-of-rows-<?php echo $i; ?>" style="font-size: 13px;text-align: center; ">
         <td style="width: 20px;">
         <i class="fa fa-plus" ></i>
         <i class="fa fa-minus"></i></td>
         <td></td>
         <td><?php echo $e_code; ?></td>
         <td><?php echo $e_name; ?></td>  
+        <td></td>
       </tr>
     </tbody>
-    <tbody id="group-of-rows-<?php echo $i; ?>" class="collapse" style="font-size: 13px;text-align: center;">
-      <tr>
+    <tbody id="group-of-rows-<?php echo $i; ?>" class="table-bordred collapse" style="font-size: 13px;text-align: center;">
+      <tr style="background-color:  #f7d38f;">
         <td></td>
-        <td><b>Name</b></td>
-        <td><b>Expiry</b></td>
         <td><b>Category</b></td>
+        <td><b>Name</b></td>
+        <td><b>Module</b></td>        
+        <td><b>Expiry</b></td>
       </tr> 
       <?php  
       foreach($data[$key] as $keys => $cert_arr)
       {
       ?>          
-      <tr>
+      <tr style="background-color:  #faf1d9;">
         <td><?php echo $keys; ?></td>
-        <td><?php echo $cert_arr['cert_name']; ?></td>
-        <td><?php echo $cert_arr['cert_expiry']; ?></td>  
         <td><?php echo $cert_arr['category']; ?></td> 
+        <td><?php echo $cert_arr['cert_name']; ?></td>
+        <td><?php echo $cert_arr['module']; ?></td>           
+        <td><?php echo $cert_arr['cert_expiry']; ?></td> 
       </tr>                
       <?php
       }
@@ -86,6 +90,7 @@
     <?php $i= $i + 1 ;
     }
   ?>   
+
   </tbody>
   <tfoot style="font-size: 13px;text-align: center;">
       <tr>
@@ -93,6 +98,7 @@
         <th></th>
         <th>Emp Code</th>
         <th>Emp Name</th>
+        <th></th>
        </tr>
   </tfoot>
   </table>
@@ -111,32 +117,82 @@
       </div>
       <div class="modal-body">
 
-        <form>        
+        <form id="addCertificate-form" method="post" action="">  
+
           <div class="form-group">
-            <label for="usr">Employee Code :</label>
-            <input type="text" class="form-control" id="certEmpCode" placeholder="Enter Employee Code">
+            <label for="emp_Name">Employee Name : </label>
+            <select class="form-control" id="employee_Name"  name="emp_Name">
+               <?php 
+                  $i = 0 ;
+                  $data = $this->getAll();
+                  
+
+                  foreach($data as $key => $emp_data)
+                  {
+                    print_r($emp_data);
+                    $e_code = $emp_data['emp_code'];
+                    $e_name = $emp_data['emp_name'];
+                  ?>     
+                   <option value=<?php echo $e_code; ?>  ><?php echo $e_name; ?></option>
+                     <?php 
+                   }
+                   ?>
+            </select>
           </div>
-          <div class="form-group">
-            <label for="usr">Certificate Name :</label>
-            <input type="text" class="form-control" id="certEmpCode" placeholder="Enter Employee Code">
-          </div>
+         
 
           <div class="form-group">
             <label for="certCategory">Certificate Category : </label>
-            <select class="form-control" id="certCategory">
-              <option value="None">NONE</option>
+            <select class="form-control" id="certificateCategory"  name="certCategory">
+              <option value="None" >NONE</option>
               <option value="Servicenow">Servicenow</option>
               <option value="ITIL">ITIL</option>
               <option value="Other">Other</option>
             </select>
           </div>
-        </form>
+
+           <div class="form-group hide-div" id="certificateModulediv" >
+            <label for="certModule" >Certificate Module : </label>
+            <select class="form-control" id="certificateModule"  name="certModule">
+             
+            </select>
+          </div>
+
+           <div class="form-group hide-div" id="certificatediv" >
+            <label for="certName" >Certificate Name : </label>
+            <select class="form-control" id="certificateName"  name="certName">
+             
+            </select>
+          </div>
+          <div class="form-group hide-div" id="certificatedivCustomModule">
+            <label for="certNameCustom" id="certificateCustomMOD"  >Certificate Module :</label>
+            <input type="text" class="form-control"  name="certModuleCustom" id="IdcertModuleCustom" placeholder="Enter Certificate Name">
+          </div>
+
+           <div class="form-group hide-div" id="certificatedivCustomName">      
+            <label for="certNameCustom" id="certificateNameCustom" >Certificate Name :</label>
+            <input type="text" class="form-control"  name="certNameCustom" id="certificatedivCustomNameId" placeholder="Enter Certificate Name">
+          </div>
+
+           <div class="form-group" id="certificateExpDateDiv">
+            <label for="certNameCustom" id="certificateExpDat" >Expiry Date :</label>
+            <input type="date" class="form-control"  name="certExpDatename" id="certificateExpDateId" placeholder="Expiry Date">
+          </div>
+
+       
       </div>
+      
       <div class="modal-footer">
         
-        <button type="button" class="btn btn-success">Save</button>
+        <div id="hide_result" class="col-md-12 hide-div" style="padding-bottom: 45px;">
+          <!-- <span class="label-input50" >'+res.data+'</span> -->
+        </div>
+        <button  type="submit" class="btn btn-success">Save</button>
+
       </div>
+         </form>
     </div>
+
   </div>
 </div>
 

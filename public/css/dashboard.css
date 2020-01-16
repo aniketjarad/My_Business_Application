@@ -1,0 +1,108 @@
+.row {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+.tile-box {
+    line-height: inherit;
+    display: block;
+    position: relative;
+    height: auto;
+    padding: 0;
+    text-align: center;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.tile-box-shortcut .bs-badge {
+    left: auto;
+    right: 10px;
+    top: 10px;
+    background: rgba(0,0,0,.5);
+}
+.bs-badge.badge-absolute {
+    position: absolute;
+    z-index: 5;
+    top: 10px;
+    
+}
+.badge, .bs-badge {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 19px;
+    display: inline-block;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 4px 0 5px;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
+    color: #fff;
+    border-radius: 10px;
+}
+.tile-box-shortcut .tile-header {
+    background: 0 0;
+    padding: 0;
+    position: absolute;
+    right: 10px;
+    bottom: 6px;
+    font-size: 13px;
+    font-weight: 400;
+}
+.tile-box-shortcut .tile-content-wrapper {
+    padding: 0;
+    min-height: 80px;
+}
+
+.tile-content-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding: 10px;
+}
+.tile-box-shortcut .tile-content-wrapper>.glyph-icon {
+    position: absolute;
+    left: 15px;
+    top: 30px;
+}
+.tile-content-wrapper>.glyph-icon {
+    font-size: 35px;
+    line-height: 70px;
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    height: 70px;
+    margin-top: -36px;
+    opacity: .3;
+    -moz-opacity: .3;
+    filter: alpha(opacity:30);
+}
+.glyph-icon {
+    text-align: center;
+}
+.icon-file-photo-o:before, .icon-file-picture-o:before, .icon-file-image-o:before {
+    content: "\f1c5";
+}
+#page-sidebar li a.sf-with-ul:after, #page-sidebar li ul li a:before, .dataTables_paginate a i:before, .fc-icon, .glyph-icon:before, .search-choice-close:before, .ui-dialog-titlebar-close:before, .ui-icon:before {
+    font-family: FontAwesome;
+    font-weight: 400;
+    font-style: normal;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    background: 0 0;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.fafa-icon-css{
+	font-size:40px;
+	float: left;
+	padding: 15px;
+}
+

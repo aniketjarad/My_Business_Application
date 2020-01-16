@@ -38,6 +38,7 @@ class CertificationModel {
                     $arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key]['cert_name'] = $emp_data['cert_name'];
                     $arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key]['cert_expiry'] = $emp_data['cert_expiry'];
                     $arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key]['category'] = $emp_data['category'];
+                     $arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key]['module'] = $emp_data['module'];
                 }
             }
             // echo '<pre>';

@@ -17,9 +17,9 @@ CREATE TABLE `certification` (
   `cert_name` varchar(60) NOT NULL,
   `cert_expiry` date DEFAULT '2999-12-31',
   `category` enum('ServiceNow','ITIL','Other') DEFAULT 'Other',
+  `module` varchar(100) DEFAULT NULL,
  FOREIGN KEY (emp_code) REFERENCES emp_master(emp_code) 
 )ENGINE=InnoDB DEFAULT CHARSET=latin1
-
 
 
 CREATE TABLE `emp_master` (
@@ -45,8 +45,6 @@ CREATE TABLE `emp_master` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
 
-
-
 CREATE TABLE `skill_matrix` (
   `emp_code` int(11) NOT NULL,
   `emp_name` varchar(50) default NULL,
@@ -55,3 +53,13 @@ CREATE TABLE `skill_matrix` (
   `skill_category` enum('Primary','Secondary') DEFAULT 'Secondary',
  FOREIGN KEY (emp_code) REFERENCES emp_master(emp_code) 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+
+CREATE TABLE `all_certificate` (
+ `srno` int(11) NOT NULL AUTO_INCREMENT,
+ `certificate_name` varchar(100) NOT NULL,
+ `certificate_category` varchar(100) NOT NULL,
+ `certificate_module` varchar(100) NOT NULL,
+ `certificate_type` varchar(100) NOT NULL,
+ PRIMARY KEY (`srno`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1

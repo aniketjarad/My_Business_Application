@@ -20,6 +20,7 @@ class EmployeeController extends Controller {
 		$data = $obj->getAll();
 		return $data;
 	}
+
 	public function getAllCertification() {
 		$obj = $this->loadModel('CertificationModel');
 		$data = $obj->getAllCertifications();
@@ -97,4 +98,68 @@ class EmployeeController extends Controller {
 		header('Content-Type: application/json');
 		echo json_encode($result);
 	}
+	/**
+ 	* Insert Users Skill
+ 	*/
+
+	public function add_skill() {
+		$data = $_POST;
+		// print_r("expression");	
+		print_r($data);
+		exit(0);
+		//$model = $this->loadModel('EmployeeModel');
+		//$response = $model->updateEmployee($data);
+
+		if($response['status'] == 'success') {
+		  	//$result = ['status' => 'success' , 'data' =>$response['response']];
+		}else{
+			//$result = ['status' => 'error','data' => 'Please Contact Admin'];
+		}
+		//header('Content-Type: application/json');
+		//echo json_encode($result);
+	}
+
+	// public function getAllCertificationDetails() {
+	// 	// print_r("inthe controller");
+	// 	$obj = $this->loadModel('CertificationCategoryModel');
+	// 	$data = $obj->getAllCertificationList();
+	// 	return $data;
+	// }
+
+	public function certification_category() {
+		$data = $_POST;		
+		$result =  array();
+		$model = $this->loadModel('CertificationCategoryModel');
+		$response = $model->getAllCertificationList($data);
+		// print_r($response);
+		if($response['response']['status'] == 'success') {
+			//echo "status is iucess";
+		  	$result = ['status' => 'success' , 'data' =>$response['result']];
+		}else{
+			//echo "status is failed";
+			$result = ['status' => 'error','data' => 'Please Contact Admin'];
+		}
+		//print_r($result);
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+
+
+	public function add_certification() {
+		$data = $_POST;
+		// print_r("expression");	
+		// print_r($data);
+		// exit(0);
+		$model = $this->loadModel('CertificationCategoryModel');
+		$response = $model->addEmployeeCertificate($data);
+
+		if($response['status'] == 'success') {
+		  	$result = ['status' => 'success' , 'data' =>$response['response']];
+		}else{
+			$result = ['status' => 'error','data' => 'Please Contact Admin'];
+		}
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+
 }

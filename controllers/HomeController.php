@@ -12,4 +12,16 @@ class HomeController extends Controller {
 	  $this->render('home/login');
 	}
 
+
+	     
+   public function getAllCount() {
+	$obj = $this->loadModel('DashboardModel');
+	$data = $obj->getAllCounts();
+	return $data;
+	
+	}
+        
+	
+
+
 }

@@ -150,3 +150,17 @@ input:checked + .slider:before {
 [aria-expanded="false"] .fa-minus {
   display: none;
 }
+
+div.dt-buttons{
+  position: relative;
+  float: right !important;
+  margin-left: 2%;
+  padding-top: 10px;
+}
+#example_filter{
+  display: none;
+}
+
+.hide-div{
+  display: none;
+}

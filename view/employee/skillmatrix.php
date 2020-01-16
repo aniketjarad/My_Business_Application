@@ -111,19 +111,19 @@
       </div>
       <div class="modal-body">
 
-        <form id="addskill-form" method="post" >        
+        <form id="addskill-form" method="post" action="">        
           <div class="form-group">
             <label for="usr">Employee Code :</label>
-            <input type="text" class="form-control" id="certEmpCode" placeholder="Enter Employee Code">
+            <input type="text" class="form-control" name="emp_code" placeholder="Enter Employee Code" required>
           </div>
           <div class="form-group">
             <label for="usr">Skill :</label>
-            <input type="text" class="form-control" id="certEmpCode" placeholder="Enter Employee Skill">
+            <input type="text" class="form-control" name="emp_skill" placeholder="Enter Employee Skill" required="">
           </div>
 
           <div class="form-group">
             <label for="certCategory">Proficiency : </label>
-            <select class="form-control" id="certCategory">
+            <select class="form-control" name="proficiency">
               <option value="Basic">Basic</option>
               <option value="Intermediate">Intermediate</option>
               <option value="Advance">Advance</option>
@@ -133,7 +133,7 @@
       
       <div class="form-group">
             <label for="certCategory">Skill Category : </label>
-            <select class="form-control" id="certCategory">
+            <select class="form-control" name="skill_category">
               <option value="Primary">Primary</option>
               <option value="Secondary">Secondary</option>
              

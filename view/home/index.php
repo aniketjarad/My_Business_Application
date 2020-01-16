@@ -3,7 +3,9 @@
 if(!isset($_SESSION['emp_code'])){
 	header("Location: /home/login");
 	exit;
+
 }
+$counts = $this->getAllCount();
 ?>
 <!-- Content Header (Page header) -->
  <div class="content-header">
@@ -23,5 +25,43 @@ if(!isset($_SESSION['emp_code'])){
   </div>
   <!-- /.content-header -->
 <center>
-	<h1>This is Home Page</h1>
+
+
+<div class="row">
+   <div class="col-md-3">
+      <a href="#" title="Example tile shortcut" class="tile-box tile-box-shortcut btn-danger">
+         <span class="bs-badge badge-absolute"><?php echo $counts['emp_count']; ?></span>
+         <div class="tile-header">Number of Employees</div>
+         <div class="tile-content-wrapper"><i class="fa fa-user fafa-icon-css"></i></div>
+      </a>
+   </div>
+   <div class="col-md-3">
+      <a href="#" title="Example tile shortcut" class="tile-box tile-box-shortcut btn-success">
+        <span class="bs-badge badge-absolute"><?php echo $counts['certificate_count']; ?></span>
+         <div class="tile-header">Number of Certificates</div>
+         <div class="tile-content-wrapper"><i class="fa fa-certificate fafa-icon-css"></i></div>
+      </a>
+   </div>
+   <div class="col-md-3">
+      <a href="#" title="Example tile shortcut" class="tile-box tile-box-shortcut btn-info">
+         <span class="bs-badge badge-absolute">2</span>
+         <div class="tile-header">Reviews</div>
+         <div class="tile-content-wrapper"><i class="fa fa-address-book fafa-icon-css"></i></div>
+      </a>
+   </div>
+   <div class="col-md-3">
+      <a href="#" title="Example tile shortcut" class="tile-box tile-box-shortcut btn-warning">
+         <div class="tile-header">Visitors</div>
+         <div class="tile-content-wrapper"><i class="fa fa-address-book fafa-icon-css"></i></div>
+      </a>
+   </div>
+</div>
+
+
+
+
+
+
+
+
 </center>

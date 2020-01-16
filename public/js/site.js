@@ -83,7 +83,7 @@ $(document).ready(function(){
         url: '/employee/save',
         data:$('#register-form').serialize(),
         success: function (res) {
-          console.log(res);
+          // console.log(res);
           if (res.status == 'success') {
             $('#hide').show();
             $('#hide').html('<span class="label-input50">'+res.data+'</span>');
@@ -101,13 +101,155 @@ $(document).ready(function(){
   
 /*Skill matrix add skill acitivy*/
 $('#addskill-form').on('submit', function (e) {
-  //e.preventDefault();
-  console.log("step here");
+  e.preventDefault();
+  //console.log("step asdadhere");
+ //e.preventDefault();
+  
+  
+ 
+  $.ajax({
+    type: 'post',
+    url: '/employee/add_certification',
+    data:$('#addskill-form').serialize(),
+    success: function (res) {
+      // console.log(res);
+      if (res.status == 'success') {
+        // $('#hide').show();
+        // $('#hide').html('<span class="label-input50">'+res.data+'</span>');
+        console.log("Success");
+        // setTimeout(function() {
+        // window.location.href = "/employee/";
+        // }, 1000);
+      }else if (res.status == 'error') {
+        console.log("Error");
+        // $('#hide').show();
+        // $('#hide').html('<span class="label-input50">'+res.data+'</span>');
+      }
+    }
+  });
+  
   
 });
+
+
+
+// This is for the certification details
+$('#certificateCategory').on('change', function (e) {
+  e.preventDefault();
+
+  // console.log($('#certificateCategory').val());
+  if ($('#certificateCategory').val() == "None") {
+     $('#certificatediv').hide();
+     $('#certificateModulediv').hide();
+     $('#certificatedivCustomModule').hide();
+     $('#certificatedivCustomName').hide();
+     $('#IdcertModuleCustom').val('');
+     $('#certificatedivCustomNameId').val('');
+     $('#certificateExpDateId').val('');
+   
+  }
+  else if( $('#certificateCategory').val() =="Other")
+    {
+      $('#certificatediv').hide();
+     $('#certificateModulediv').hide();
+     $('#IdcertModuleCustom').val('');
+     $('#certificatedivCustomNameId').val('');
+     $('#certificateExpDateId').val('');
+     
+
+     $('#certificatedivCustomModule').show();
+     $('#certificatedivCustomName').show();
+     $('#IdcertModuleCustom').val('');
+     $('#certificatedivCustomNameId').val('');
+     $('#certificateExpDateId').val('');
+   }
+   else{
+      $('#certificatediv').show();
+     $('#certificateModulediv').show();
+     $('#certificatedivCustomModule').hide();
+     $('#certificatedivCustomName').hide();
+     $('#certificateExpDateId').val('');
+   }  
+   // $('#certificatedivCustom').hide();
+ $('#certificateModule ').find('option') .remove(); 
+  $.ajax({
+    type: 'post',
+    url: '/employee/certification_category',
+    data: $('#addCertificate-form').serialize(),
+    success: function (res) {
+      // console.log(res.data);
+      if (res.status == 'success') {
+         $('#certificateModule').val('');
+         // $('#certificatediv').show();
+        for (var i = Object.keys(res.data).length - 1; i >= 0; i--) {
+          // console.log(res.data['ITSM'])[i];
+          
+              $('#certificateModule').append('<option name='+ Object.keys(res.data)[i] +' >'+Object.keys(res.data)[i]+'</option>');
+            }
+            $('#certificateModule').on('change', function (e) {
+                $('#certificateName').html("");
+
+                var key = $('#certificateModule').val();
+               
+                for (var j = 0; j < res.data[key].length; j++) {
+                 
+                  $('#certificateName').append('<option name='+  res.data[key][j] +' >'+ res.data[key][j]+'</option>');
+              
+                }
+                
+        });
+        
+      }else if (res.status == 'error') {
+         // console.log("Error");
+         // $('#certificatediv').hide();
+         
+         // $('#certificatedivCustom').show();
+        // $('#hide').html('<span class="label-input50">'+res.data+'</span>');
+      }
+    }
+  });
+  
+  
+});
+
+// Add Certification details
+$('#addCertificate-form').on('submit', function (e) {
+  e.preventDefault();
+  // console.log("step asdadhere");
+ //e.preventDefault();
+  $.ajax({
+    type: 'post',
+    url: '/employee/add_certification',
+    data:$('#addCertificate-form').serialize(),
+    success: function (res) {
+      // console.log(res);
+      if (res.status == 'success') {
+        // $('#hide').show();
+        // $('#hide').html('<span class="label-input50">'+res.data+'</span>');
+        // console.log("Success");
+
+        setTimeout(function() {
+           $('#hide_result').show();
+            $('#hide_result').html('<span class="label-input50">'+res.data+'</span>');
+        window.location.href = "/employee/certification";
+        }, 2000);
+      }else if (res.status == 'error') {
+        // console.log("Error");
+        // $('#hide').show();
+        // $('#hide').html('<span class="label-input50">'+res.data+'</span>');
+      }
+    }
+  });
+  
+  
+});
+
+
+
+
 $('#update-form').on('submit', function (e) {
   //e.preventDefault();
-  console.log("step here");
+  // console.log("step here");
   if(!$('#contact-div').hasClass('alert-validate')){
     e.preventDefault();
     $.ajax({
@@ -115,7 +257,7 @@ $('#update-form').on('submit', function (e) {
       url: '/employee/update',
       data:$('#update-form').serialize(),
       success: function (res) {
-        console.log(res);
+        // console.log(res);
         if (res.status == 'success') {
           $('#hide').show();
           $('#hide').html('<span class="label-input50">'+res.data+'</span>');

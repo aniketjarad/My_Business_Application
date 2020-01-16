@@ -24,13 +24,22 @@ $(document).ready(function() {
         //fixedHeader: true,
         //colReorder: true,
         "order":[["1","asc"]],
+        dom: 'Bfrtip',
+        buttons: [
+            'copy','excel', 'pdf', 'print'
+        ],
         "scrollX": true
     });
     
     var certification_table = $('#certiTable').DataTable({
         fixedHeader: true,
         //colReorder: true,
+        dom: 'Bfrtip',
+        buttons: [
+            'copy','excel'
+        ],
         "order":[["2","asc"]],
+
         //"scrollX": true
     });
 
