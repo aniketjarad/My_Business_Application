@@ -1,12 +1,12 @@
 <?php
 
 if(!isset($_SESSION['emp_code'])){
+
 	header("Location: /home/login");
 	exit;
 }else{
-    
-	//$manager = $this->getAllManagers();
-    //print_r($manager);
+    $count = $this->getDemandCount();
+    print_r($_SERVER);
 }
 ?>
 <!-- Content Header (Page header) -->
@@ -27,11 +27,19 @@ if(!isset($_SESSION['emp_code'])){
   </div>
   <!-- /.content-header -->
 <center>
-	<div class="table-responsive">
-        <div align="left" style="margin-left:2%;">  
-            <button type="button" name="add" class="btn btn-info"><a href="/employee/register" style="color: white;">Add Employee</a></button>
-         </div>
-    	<table id="example" class="table table-bordred display dataTable" style="width:100%">
+	<div class="">
+        <div align="left" style="margin-left:2%;">
+        <button type="button" id="add_btn" name="add" class="btn btn-info fa fa-plus" style="color: white;padding: 10px;" data-toggle="modal" data-target="#addDemandModal"> New Demand</button>
+        <div class="col-md-3" style="float: right;">
+          <a href="#" title="Example tile shortcut" class="tile-box tile-box-shortcut btn-danger">
+             <span class="bs-badge badge-absolute"><?php echo $count['count']; ?></span>
+             <div class="tile-header">Available Demand's Now</div>
+             <div class="tile-content-wrapper"><i class="fa fa-user fafa-icon-css"></i></div>
+          </a>
+       </div>
+    </div>
+    
+    	<!--<table id="example" class="table table-bordred display" style="width:100%">
             <thead style="font-size: 13px;text-align:center;">
                 <tr>
                     <th>Code</th>
@@ -82,11 +90,11 @@ if(!isset($_SESSION['emp_code'])){
                     <th>Action</th>
                 </tr>
             </tfoot>
-    	</table>
-	</div>
-
+    	</table> -->
+	</div> 
+    <!-- Modal Edit-->
     <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
@@ -226,4 +234,71 @@ if(!isset($_SESSION['emp_code'])){
         </div>
           <!-- /.modal-dialog --> 
     </div>
+    </div>
+    <!-- End of Modal Edit-->
+
+    <!-- Modal Add new -->
+    <div class="modal fade" id="addDemandModal" tabindex="-1" role="dialog" aria-labelledby="addDemandModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-md" role="dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addCertiModalLongTitle">Add New Demand</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="text-align:left;">
+            <form action="/DemandModel.php" method="post" id="add-demand-form" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="usr">Demand Id :</label>
+                <input type="text" class="form-control" name="demand_id" id="demand_id_text" placeholder="Enter Demand Id" style="display: none;">
+                <select class="form-control" name="demand_id" id="demand_id_select" style="display: none;">
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="usr">Candidate Name :</label>
+                <input type="text" class="form-control" name="candidate_name" placeholder="Enter Candidate Name">
+              </div>
+              <div class="form-group">
+                <label for="usr">Joining Date :</label>
+                <input type="date" class="form-control" name="joining_date" placeholder="Enter Candidate Name">
+              </div>
+              <div class="form-group">
+                <label for="usr">Tentative Mapping :</label>
+                <input type="text" class="form-control" name="tentative_mapping" placeholder="Enter Tentative Mapping">
+              </div>
+              <div class="form-group">
+                <label for="certCategory">Current Status : </label> 
+                <select class="form-control" name="status" id="demand_status">
+                    <option value="On Track">On Track</option>
+                    <option value="Dropped">Dropped</option>
+                    <option value="Backfill">Backfill</option>
+                    <option value="Joined">Joined</option>
+                </select>
+              </div>
+              <div class="form-group" id="backfill_div" style="display: none;">
+                <label for="usr">Backfill Employee Name :</label>
+                <select class="form-control" name="backfill_id" id="backfill_select">
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="usr">Attach Job Description :</label>
+                <input type="file" class="form-control" name="jd_attach" style="align-items: right;" placeholder="Attach Job Description" required>
+              </div>
+              <div class="form-group">
+                <label for="usr">Attach CV of Candidate:</label>
+                <input type="file" class="form-control" name="cv_attach" style="align-items: right;" required placeholder="Attach CV Description">
+              </div>
+          </div>
+            <div id="msg" class="wrap-input50">
+                    
+            </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Add Demand</button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+    <!-- End of Modal Add new -->
 </center>

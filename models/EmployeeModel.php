@@ -78,6 +78,21 @@ class EmployeeModel {
         }
         return $row;
     }
+
+    /**
+     * Get all data from Employees
+     */
+    public function getInActiveEmployee()
+    {
+        $sql = "select * from emp_master where active='0'";
+        $result = mysqli_query($this->db, $sql);
+        $count = 1;
+        while($array = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+            $row->{$count} = $array;
+            $count++;
+        }
+        return $row;
+    }
     /**
      * Get all data from All Managers.
      */

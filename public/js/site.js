@@ -102,11 +102,7 @@ $(document).ready(function(){
 /*Skill matrix add skill acitivy*/
 $('#addskill-form').on('submit', function (e) {
   e.preventDefault();
-  //console.log("step asdadhere");
- //e.preventDefault();
-  
-  
- 
+
   $.ajax({
     type: 'post',
     url: '/employee/add_certification',
@@ -272,6 +268,94 @@ $('#update-form').on('submit', function (e) {
     });
   }
 });
+
+$('#add_btn').on('click',function (e) {
+  e.preventDefault();
+  $.ajax({
+    type: 'post',
+    url: '/demand/getDemand',
+    data: null,
+    success: function (res) {
+      if(res.status == 'success'){
+        $('#demand_id_text').hide();
+        $('#demand_id_select').show();
+        
+        for (var j = 0; j < res.data.length; j++) {
+          $('#demand_id_select').append('<option value='+  res.data[j] +' >'+ res.data[j]+'</option>');
+        }
+      }else{
+        $('#demand_id_select').hide();
+        $('#demand_id_text').show();
+      }
+    }
+  });
+});
+/*Skill matrix add skill acitivy*/
+$('#add-demand-form').on('submit', function (e) {
+  e.preventDefault();
+  $.ajax({
+    type: 'post',
+    url: '/demand/add',
+    data:  new FormData(this),
+    contentType: false,
+    cache: false,
+    processData:false,
+    beforeSend:function(){
+      console.log("we are here");
+      $('#msg').show();
+      $('#msg').html('<span class="label-input50">Uploading......!</span>');
+      setTimeout(function() {
+        $('#msg').hide();
+      }, 5000);
+    },
+    success: function (res) {
+      // console.log(res);
+      if (res.status == 'success') {
+        // $('#msg').show();
+        // $('#msg').html('<span class="label-input50">'+res.data+'</span>');
+        console.log("Success");
+        // setTimeout(function() {
+        // window.location.href = "/demand/";
+        // }, 1000);
+      }else if (res.status == 'error') {
+        console.log("Error");
+        // $('#msg').show();
+        // $('#msg').html('<span class="label-input50">'+res.data+'</span>');
+      }
+    },error: function(xhr, ajaxOptions, thrownError) {
+      console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+    }
+  });
+});
+
+$('#demand_status').on('change', function (e) {
+  var val = $('#demand_status').val();
+  if(val =="Backfill"){
+    $.ajax({
+      type: 'post',
+      url: '/demand/getInActiveEmployee',
+      data: null,
+      success: function (res) {
+        console.log(res);
+        console.log(res.data[1].emp_code);
+        console.log(res.data[1].emp_name);
+        if(res.status == 'success'){
+          $('#backfill_div').show();
+          $('#backfill_select').show();
+          $('#backfill_select').html("");
+          //console.log(Object.keys(res.data)[1].emp_code);
+          for (var i=1; i<= Object.keys(res.data).length ; i++) {
+            $('#backfill_select').append('<option value='+ res.data[i].emp_code +' >'+res.data[i].emp_name+'</option>');
+          }
+        }
+      }
+    });
+  }
+  else{
+    $('#backfill_div').hide();
+  }
+});
+
 
 });
 var url = window.location;

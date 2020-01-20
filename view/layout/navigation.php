@@ -197,6 +197,23 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview menu-open">
+            <a id="demand-tab" href="/demand/" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Demand Management
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item" style="background-color: #343a40;">
+                <a id="demand-manage-link" href="/demand/" class="nav-link">
+                  <i class="far fa-address-book nav-icon"></i>
+                  <p>Manage</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <!--<li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-th"></i>

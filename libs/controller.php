@@ -18,7 +18,7 @@ class Controller {
     */
     private function openDatabaseConnection() {
         $this->db = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-
+        //$this->db = new PDO("mysql:host=localhost;dbname=mybusinessapplication", DB_USER, DB_PASS);
         // Check connection
         if (mysqli_connect_errno())
         {
