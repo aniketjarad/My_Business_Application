@@ -6,6 +6,7 @@ class HomeController extends Controller {
    */
 	public function index() {
 	  $this->render('home/index');
+
 	}
 
 	public function login() {
@@ -17,10 +18,21 @@ class HomeController extends Controller {
    public function getAllCount() {
 	$obj = $this->loadModel('DashboardModel');
 	$data = $obj->getAllCounts();
+	// print_r($data);
+	// exit(0);
+
 	return $data;
 	
 	}
-        
+     
+    public function getModulesChart() {
+	$obj = $this->loadModel('DashboardModel');
+	$data = $obj->getModulesChartDetails();
+	// return $data;
+	header('Content-Type: application/json');
+		echo json_encode($data);
+	
+	}
 	
 
 

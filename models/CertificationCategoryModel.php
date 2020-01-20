@@ -54,8 +54,7 @@ class CertificationCategoryModel {
       
         $array_elements['response'] = $arr_CertiName; 
         $array_elements['result'] = $result_array;
-        //       print_r($array_elements);
-        // exit(0);
+        
         return $array_elements;
     }
 
