@@ -128,10 +128,10 @@ class EmployeeController extends Controller {
 
 	public function certification_category() {
 		$data = $_POST;		
-		$result =  array();
+		$result = array();
 		$model = $this->loadModel('CertificationCategoryModel');
 		$response = $model->getAllCertificationList($data);
-		// print_r($response);
+		//print_r($response);
 		if($response['response']['status'] == 'success') {
 			//echo "status is iucess";
 		  	$result = ['status' => 'success' , 'data' =>$response['result']];
@@ -139,8 +139,9 @@ class EmployeeController extends Controller {
 			//echo "status is failed";
 			$result = ['status' => 'error','data' => 'Please Contact Admin'];
 		}
-		//print_r($result);
+		//echo "====>".$result;
 		header('Content-Type: application/json');
+		//$result = json_encode($result);
 		echo json_encode($result);
 	}
 

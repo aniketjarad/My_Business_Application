@@ -23,6 +23,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" type="text/css" href="/public/css/adminlte.css">
     <link rel="stylesheet" type="text/css" href="/public/css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/widget.css">
     <link rel="stylesheet" type="text/css" href="/public/vendor/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="/public/vendor/datatables/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="/public/vendor/datatables/css/fixedHeader.dataTables.min.css">
@@ -55,6 +56,8 @@
       <script src="/public/vendor/datatables/js/buttons.print.min.js"></script>
 
     <script src="/public/vendor/datatables/js/buttons.html5.min.js"></script>
+    <script src="/public/js/widget.js"></script>
+     <script src="/public/vendor/chartjs/Chart.js"> </script>
 
     <link rel="icon" type="image/png" href="/favicon.png"/>
 </head>

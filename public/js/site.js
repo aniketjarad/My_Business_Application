@@ -168,12 +168,13 @@ $('#certificateCategory').on('change', function (e) {
    }  
    // $('#certificatedivCustom').hide();
  $('#certificateModule ').find('option') .remove(); 
+
   $.ajax({
     type: 'post',
     url: '/employee/certification_category',
     data: $('#addCertificate-form').serialize(),
-    success: function (res) {
-      // console.log(res.data);
+    success: function (res){
+       console.log(res);
       if (res.status == 'success') {
          $('#certificateModule').val('');
          // $('#certificatediv').show();
