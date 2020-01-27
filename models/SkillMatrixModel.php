@@ -15,8 +15,7 @@ class SkillMatrixModel {
     /**
      * Get all data from URLs
      */
-    public function getAllSkills()
-    {
+    public function getAllSkills()    {
     	
         $sql = "SELECT * FROM `skill_matrix` ORDER BY `emp_code`";
         $result = mysqli_query($this->db, $sql);
@@ -35,9 +34,9 @@ class SkillMatrixModel {
                 if(!empty($arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key])){
                     $arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key] = array();    
                 }else{
-                    $arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key]['skill'] = $emp_data['skill'];
-                    $arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key]['proficiency'] = $emp_data['proficiency'];
-                    $arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key]['skill_category'] = $emp_data['skill_category'];
+                    $arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key]['primary_skill'] = $emp_data['primary_skill'];
+                    $arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key]['secondary_skill'] = $emp_data['secondary_skill'];
+                    
                 }
             }
             // echo '<pre>';
@@ -47,9 +46,7 @@ class SkillMatrixModel {
         return $arrEMPDetails;
     }
 
-    /**
-     * Insert record in URLs table
-     */
+   
    
 
 }

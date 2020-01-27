@@ -99,24 +99,81 @@ class EmployeeController extends Controller {
 		echo json_encode($result);
 	}
 	/**
+	Skill Matrix
+	**/
+ 	public function getSkillList() {
+			
+		// print_r("sdasd");
+		// exit(0);
+		$model = $this->loadModel('AllSkillsModel');
+		$response = $model->getAllSkillsList();
+		
+		if($response['status'] == 'success') {
+			
+		  	$result = ['status' => 'success' , 'data' =>$response['response']];
+		  
+		}else{
+			$result = ['status' => 'error','data' => 'Please Contact Admin'];
+		}
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+	/**
  	* Insert Users Skill
  	*/
-
-	public function add_skill() {
+	public function addSkillSets() {
 		$data = $_POST;
-		// print_r("expression");	
-		print_r($data);
-		exit(0);
-		//$model = $this->loadModel('EmployeeModel');
-		//$response = $model->updateEmployee($data);
+		$model = $this->loadModel('AllSkillsModel');
+		$response = $model->addEmployeeSkill($data);
 
 		if($response['status'] == 'success') {
-		  	//$result = ['status' => 'success' , 'data' =>$response['response']];
+		  	$result = ['status' => 'success' , 'data' =>$response['response']];
 		}else{
-			//$result = ['status' => 'error','data' => 'Please Contact Admin'];
+			$result = ['status' => 'error','data' =>$response['response']];
 		}
-		//header('Content-Type: application/json');
-		//echo json_encode($result);
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+	public function addNewSkill() {
+		$data = $_POST;
+		$model = $this->loadModel('AllSkillsModel');
+		$response = $model->addCustomSkills($data);
+		// print_r($response);
+		if($response['status'] == 'success') {
+		  	$result = ['status' => 'success' , 'data' =>$response['response']];
+		}else{
+			$result = ['status' => 'error','data' => $response['response']];
+		}
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+	public function deleteSkill() {
+		$data = $_POST;
+		$model = $this->loadModel('AllSkillsModel');
+		$response = $model->deleteSkillRecord($data);
+		if($response['status'] == 'success') {
+		  	$result = ['status' => 'success' , 'data' =>$response['response']];
+		}else{
+			$result = ['status' => 'error','data' => $response['response']];
+		}
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+	//Get skill data for edit
+	public function getEmpSkill() {
+		$data = $_POST;
+		$model = $this->loadModel('AllSkillsModel');
+		$response = $model->getEmpSkillRecord($data);
+		 // echo '<pre>';
+   //      print_r($response);
+   //      echo '</pre>';
+		if($response['status'] == 'success') {
+		  	$result = ['status' => 'success' , 'data' =>$response['response'] , 'selectedVal' =>$response['selectedVal']];
+		}else{
+			$result = ['status' => 'error','data' => $response['response']];
+		}
+		header('Content-Type: application/json');
+		echo json_encode($result);
 	}
 
 	// public function getAllCertificationDetails() {
