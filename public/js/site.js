@@ -176,26 +176,17 @@ $('#certificateCategory').on('change', function (e) {
     success: function (res){
        console.log(res);
       if (res.status == 'success') {
-         $('#certificateModule').val('');
-         // $('#certificatediv').show();
+        $('#certificateModule').val('');
         for (var i = Object.keys(res.data).length - 1; i >= 0; i--) {
-          // console.log(res.data['ITSM'])[i];
-          
-              $('#certificateModule').append('<option name='+ Object.keys(res.data)[i] +' >'+Object.keys(res.data)[i]+'</option>');
-            }
-            $('#certificateModule').on('change', function (e) {
-                $('#certificateName').html("");
-
-                var key = $('#certificateModule').val();
-               
-                for (var j = 0; j < res.data[key].length; j++) {
-                 
-                  $('#certificateName').append('<option name='+  res.data[key][j] +' >'+ res.data[key][j]+'</option>');
-              
-                }
-                
+          $('#certificateModule').append('<option name='+ Object.keys(res.data)[i] +' >'+Object.keys(res.data)[i]+'</option>');
+        }
+        $('#certificateModule').on('change', function (e) {
+          $('#certificateName').html("");
+          var key = $('#certificateModule').val();
+          for (var j = 0; j < res.data[key].length; j++) {
+            $('#certificateName').append('<option name='+  res.data[key][j] +' >'+ res.data[key][j]+'</option>');
+          }            
         });
-        
       }else if (res.status == 'error') {
          // console.log("Error");
          // $('#certificatediv').hide();
@@ -205,8 +196,6 @@ $('#certificateCategory').on('change', function (e) {
       }
     }
   });
-  
-  
 });
 
 // Add Certification details
@@ -280,7 +269,7 @@ $('#add_btn').on('click',function (e) {
       if(res.status == 'success'){
         $('#demand_id_text').hide();
         $('#demand_id_select').show();
-        
+        $('#demand_id_select').html("");
         for (var j = 0; j < res.data.length; j++) {
           $('#demand_id_select').append('<option value='+  res.data[j] +' >'+ res.data[j]+'</option>');
         }
@@ -320,8 +309,8 @@ $('#add-demand-form').on('submit', function (e) {
         // }, 1000);
       }else if (res.status == 'error') {
         console.log("Error");
-        // $('#msg').show();
-        // $('#msg').html('<span class="label-input50">'+res.data+'</span>');
+        $('#msg').show();
+        $('#msg').html('<span class="label-input50">'+res.data+'</span>');
       }
     },error: function(xhr, ajaxOptions, thrownError) {
       console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

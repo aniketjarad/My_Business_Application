@@ -6,25 +6,27 @@ if(!isset($_SESSION['emp_code'])){
 	exit;
 }else{
     $count = $this->getDemandCount();
-    print_r($_SERVER);
+    // echo "<pre>";
+    //print_r($count);
+    // echo "</pre>";
 }
 ?>
 <!-- Content Header (Page header) -->
- <div class="content-header">
+<div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h4 class="m-0 text-dark">Employee</h4>
+        <h4 class="m-0 text-dark">Demand</h4>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="/home/">Home</a></li>
-          <li class="breadcrumb-item active">Employee</li>
+          <li class="breadcrumb-item active">Demand</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
   </div><!-- /.container-fluid -->
-  </div>
+</div>
   <!-- /.content-header -->
 <center>
 	<div class="">
@@ -248,28 +250,33 @@ if(!isset($_SESSION['emp_code'])){
             </button>
           </div>
           <div class="modal-body" style="text-align:left;">
-            <form action="/DemandModel.php" method="post" id="add-demand-form" enctype="multipart/form-data">
-              <div class="form-group">
-                <label for="usr">Demand Id :</label>
+            <form method="post" id="add-demand-form" enctype="multipart/form-data">
+              <div class="form-group" required>
+                <label >Demand Id :</label>
                 <input type="text" class="form-control" name="demand_id" id="demand_id_text" placeholder="Enter Demand Id" style="display: none;">
-                <select class="form-control" name="demand_id" id="demand_id_select" style="display: none;">
+                <select class="form-control" name="demand_id" id="demand_id_select" style="display: none;" >
                 </select>
               </div>
               <div class="form-group">
-                <label for="usr">Candidate Name :</label>
+                <label >Candidate Name :</label>
                 <input type="text" class="form-control" name="candidate_name" placeholder="Enter Candidate Name">
               </div>
               <div class="form-group">
-                <label for="usr">Joining Date :</label>
+                <label >Position :</label>
+                <input type="text" class="form-control" name="position" placeholder="Enter the Position " required>
+              </div>
+              <div class="form-group">
+                <label >Joining Date :</label>
                 <input type="date" class="form-control" name="joining_date" placeholder="Enter Candidate Name">
               </div>
               <div class="form-group">
-                <label for="usr">Tentative Mapping :</label>
-                <input type="text" class="form-control" name="tentative_mapping" placeholder="Enter Tentative Mapping">
+                <label >Tentative Mapping :</label>
+                <input type="text" class="form-control" name="tentative_mapping" placeholder="Enter Tentative Mapping" required>
               </div>
+
               <div class="form-group">
                 <label for="certCategory">Current Status : </label> 
-                <select class="form-control" name="status" id="demand_status">
+                <select class="form-control" name="status" id="demand_status" required>
                     <option value="On Track">On Track</option>
                     <option value="Dropped">Dropped</option>
                     <option value="Backfill">Backfill</option>
@@ -277,21 +284,20 @@ if(!isset($_SESSION['emp_code'])){
                 </select>
               </div>
               <div class="form-group" id="backfill_div" style="display: none;">
-                <label for="usr">Backfill Employee Name :</label>
+                <label >Backfill Employee Name :</label>
                 <select class="form-control" name="backfill_id" id="backfill_select">
                 </select>
               </div>
               <div class="form-group">
-                <label for="usr">Attach Job Description :</label>
+                <label >Attach Job Description :</label>
                 <input type="file" class="form-control" name="jd_attach" style="align-items: right;" placeholder="Attach Job Description" required>
               </div>
               <div class="form-group">
-                <label for="usr">Attach CV of Candidate:</label>
-                <input type="file" class="form-control" name="cv_attach" style="align-items: right;" required placeholder="Attach CV Description">
+                <label >Attach CV of Candidate:</label>
+                <input type="file" class="form-control" name="cv_attach" style="align-items: right;" placeholder="Attach CV Description">
               </div>
           </div>
             <div id="msg" class="wrap-input50">
-                    
             </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-success">Add Demand</button>

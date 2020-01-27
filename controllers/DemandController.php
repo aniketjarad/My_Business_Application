@@ -10,11 +10,21 @@ class DemandController extends Controller {
 
 	public function add() {
 		$data = $_POST;
+		echo "<pre>";
+		print_r($data);
+		echo "</pre>";
+		exit(0);
 		$files = $_FILES;
 		$obj = $this->loadModel('DemandModel');
 		$response = $obj->addDemand($data,$files);
-		
+		if($response) {
+		  	$result = ['status' => 'success' , 'data' => $response];
+		}else{
+			$result = ['status' => 'error','data' => ""];
+		}
 		exit(0);
+		header('Content-Type: application/json');
+		echo json_encode($result);
 	}
 	public function getInActiveEmployee(){
 		$obj = $this->loadModel('EmployeeModel');
@@ -27,7 +37,7 @@ class DemandController extends Controller {
 		header('Content-Type: application/json');
 		echo json_encode($result);
 	}
-	
+
 	public function getDemandCount(){
 		$obj = $this->loadModel('DemandModel');
 		$response = $obj->getDemandCount();

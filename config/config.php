@@ -12,5 +12,4 @@ define('DB_HOST', 'localhost');
 define('DB_NAME', 'mybusinessapplication');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('FILE_PATH', "C:/wamp64/www/My_Business_Application/files/");
-
+define('FILE_PATH', $_SERVER['DOCUMENT_ROOT']."/files/");
