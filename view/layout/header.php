@@ -29,7 +29,9 @@
     <link rel="stylesheet" href="/public/vendor/datatables/css/fixedHeader.dataTables.min.css">
     <link rel="stylesheet" href="/public/vendor/datatables/css/colReorder.dataTables.min.css">  
     
+    
     <link rel="stylesheet" href="/public/vendor/datatables/css/buttons.dataTables.min.css">  
+    <link rel="stylesheet" href="/public/vendor/select2/select2.min.css">  
     
     
     
@@ -44,21 +46,22 @@
     <!-- Bootstrap 4 -->
     <script src="/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/public/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="/public/vendor/select2/select2.min.js"> </script>
     <script src="/public/vendor/datatables/js/dataTables.fixedHeader.min.js"></script>
     <script src="/public/vendor/datatables/js/dataTables.colReorder.min.js"></script>
     <script src="/public/vendor/datatables/js/custom_datatable-js.js"></script>
     <script src="/public/vendor/datatables/js/dataTables.buttons.min.js"></script>
-     <script src="/public/vendor/datatables/js/buttons.flash.min.js"></script>
-      <script src="/public/vendor/datatables/js/jszip.min.js"></script>
-      <script src="/public/vendor/datatables/js/pdfmake.min.js"></script>
-      <script src="/public/vendor/datatables/js/vfs_fonts.js"></script>
-      
-      <script src="/public/vendor/datatables/js/buttons.print.min.js"></script>
-
+    <script src="/public/vendor/datatables/js/buttons.flash.min.js"></script>
+    <script src="/public/vendor/datatables/js/jszip.min.js"></script>
+    <script src="/public/vendor/datatables/js/pdfmake.min.js"></script>
+    <script src="/public/vendor/datatables/js/vfs_fonts.js"></script>
+    <script src="/public/vendor/datatables/js/buttons.print.min.js"></script>
     <script src="/public/vendor/datatables/js/buttons.html5.min.js"></script>
+
     <script src="/public/js/widget.js"></script>
      <script src="/public/vendor/chartjs/Chart.js"> </script>
-
+      <script src="/public/vendor/html2canvas/html2canvas.js"></script>
+     
     <link rel="icon" type="image/png" href="/favicon.png"/>
 </head>
 <body class="hold-transition sidebar-mini "><!-- sidebar-collapse-->
