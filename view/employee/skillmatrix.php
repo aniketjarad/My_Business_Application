@@ -28,142 +28,170 @@
     
   </div><!-- /.content-header -->
     <div align="left" style="margin-left:2%;">
-      <button type="button" name="add" class="btn btn-info fa fa-plus" style="color: white;padding: 10px;" data-toggle="modal" data-target="#addCertiModal"> <b>Skill</b></button>
-      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#importCertiModal"><b>Import</b></button>
+      <button type="button" name="add" id="addskill_btn" class="btn btn-info " style="color: white;" data-toggle="modal" data-target="#addSkillModal"> Add Skill</button>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#importCertiModal">Import</button>
     </div>
   <center>
-       
+       <div class="table-responsive">       
+      <table id="example" class="table table-bordred display dataTable" style="width:100%">
+            <thead style="font-size: 13px;text-align:center;">
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Primary Skill</th>                
+                    <th>Secondary Skill</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody style="font-size: 11px;text-align:center;">
+                <?php 
+            $data = $this->getAllSkill();
+            $count = 1;
+            foreach($data as $key => $emp_data)
+            {
+               $e_code = explode("|",$key)[0];
+               $e_name = explode("|",$key)[1];
+            ?>      
+          <tr>
+            <td><?php echo $e_code; ?></td>
+            <td><?php echo $e_name; ?></td>
+            <td><?php echo $emp_data[$count]['primary_skill']; ?></td>           
+            <td><?php echo $emp_data[$count]['secondary_skill']; ?></td>            
+            <td>
+              <input type="button" name="edit" value="Edit" id="<?php echo $row["id"]; ?>" class="btn btn-info btn-xs edit_data" data-title="Edit" data-toggle="modal" data-target="#addSkillModal" onclick = "Update_Skill_Element(<?php echo $e_code; ?>);"/>
+              <input type="button" name="delete" value="Delete" id="<?php echo $row["id"]; ?>" class="btn btn-info btn-xs edit_data" data-title="Delete"  onclick = "Delete_Skill_Element(<?php echo $e_code; ?>);"/>
 
-
-  <table id="certiTable" class="table table-bordred display dataTable" >
-    <thead style="font-size: 13px;text-align: center;">
-      <tr>
-        <th style="width: 20px;"> # </th>
-        <th></th>
-        <th>Emp Code</th>
-        <th>Emp Name</th>
-      </tr>
-    </thead>
-    <tbody style="font-size: 13px;text-align: center;">
-    <?php 
-      $i = 0 ;
-      $data = $this->getAllSkill();
-      foreach($data as $key => $emp_data)
-      {
-        $e_code = explode("|",$key)[0];
-        $e_name = explode("|",$key)[1];
-      ?>      
-      <tr class="clickable" data-toggle="collapse" data-target="#group-of-rows-<?php echo $i; ?>" aria-expanded="false" aria-controls="group-of-rows-<?php echo $i; ?>" style="font-size: 13px;text-align: center;">
-        <td style="width: 20px;">
-        <i class="fa fa-plus" ></i>
-        <i class="fa fa-minus"></i></td>
-        <td></td>
-        <td><?php echo $e_code; ?></td>
-        <td><?php echo $e_name; ?></td>  
-      </tr>
-    </tbody>
-    <tbody id="group-of-rows-<?php echo $i; ?>" class="collapse" style="font-size: 13px;text-align: center;">
-      <tr>
-        <td></td>
-        <td><b>Skill</b></td>
-        <td><b>Proficiency</b></td>
-        <td><b>Skill Category</b></td>
-      </tr> 
-      <?php  
-      foreach($data[$key] as $keys => $cert_arr)
-      {
-      ?>          
-      <tr>
-        <td><?php echo $keys; ?></td>
-        <td><?php echo $cert_arr['skill']; ?></td>
-        <td><?php echo $cert_arr['proficiency']; ?></td>  
-        <td><?php echo $cert_arr['skill_category']; ?></td> 
-      </tr>                
-      <?php
-      }
-      ?>
-    </tbody>
-    <?php $i= $i + 1 ;
-    }
-  ?>   
-  </tbody>
-  <tfoot style="font-size: 13px;text-align: center;">
-      <tr>
-        <th style="width: 20px;">#</th>
-        <th></th>
-        <th>Emp Code</th>
-        <th>Emp Name</th>
-       </tr>
-  </tfoot>
-  </table>
-
+            </td>   
+          </tr>
+            <?php
+            $count ++;
+            }
+          ?>   
+            </tbody>
+            <tfoot style="font-size: 13px;text-align:center;">
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Primary Skill</th>                
+                    <th>Secondary Skill</th>
+                    <th>Action</th>
+                </tr>
+            </tfoot>
+      </table>
+  </div>
 </center>
 
-  <!-- Modal -->
-<div class="modal fade" id="addCertiModal" tabindex="-1" role="dialog" aria-labelledby="addCertiModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="addCertiModalLongTitle">Add Employee Skill</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
+      <!-- Modal -->
+ <div class="modal fade" id="addSkillModal" tabindex="-1" role="dialog" aria-labelledby="addCertiModalCenterTitle"   aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addCertiModalLongTitle">Add Employee Skill</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="addskill-form" method="post" action="">        
+              <div class="form-group">
+                <label for="emp_Name">Employee Name : </label>
+                <select class="form-control" id="employee_Name"  name="emp_Name">
+                   <?php 
+                      $i = 0 ;
+                      $data = $this->getAll();
+                      
 
-        <form id="addskill-form" method="post" action="">        
-          <div class="form-group">
-            <label for="usr">Employee Code :</label>
-            <input type="text" class="form-control" name="emp_code" placeholder="Enter Employee Code" required>
-          </div>
-          <div class="form-group">
-            <label for="usr">Skill :</label>
-            <input type="text" class="form-control" name="emp_skill" placeholder="Enter Employee Skill" required="">
-          </div>
-
-          <div class="form-group">
-            <label for="certCategory">Proficiency : </label>
-            <select class="form-control" name="proficiency">
-              <option value="Basic">Basic</option>
-              <option value="Intermediate">Intermediate</option>
-              <option value="Advance">Advance</option>
-              <option value="Expert">Expert</option>
-            </select>
-          </div>
-      
-      <div class="form-group">
-            <label for="certCategory">Skill Category : </label>
-            <select class="form-control" name="skill_category">
-              <option value="Primary">Primary</option>
-              <option value="Secondary">Secondary</option>
+                      foreach($data as $key => $emp_data)
+                      {
+                        print_r($emp_data);
+                        $e_code = $emp_data['emp_code'];
+                        $e_name = $emp_data['emp_name'];
+                      ?>     
+                       <option value=<?php echo $e_code; ?>  ><?php echo $e_name; ?></option>
+                         <?php 
+                       }
+                       ?>
+                </select>
+              </div>
+              <div class="form-group"id="mulipleselectdiv_primary" >
+                <label >Primay Skills :</label>
+               <select class="js-example-placeholder-multiple form-control" data-placeholder="Select All The Skill Sets" style="width: 100%;" id="mulipleselect_primary" name="skill_list_primary[]" multiple="multiple">            
+               </select>
+              </div>
+              <div class="form-group"id="mulipleselectdiv_secondary" >
+                <label >Secondary Skills :</label>
+               <select class="js-example-placeholder-multiple form-control" data-placeholder="Select All The Skill Sets" style="width: 100%;" id="mulipleselect_secondary" name="skill_list_secondary[]" multiple="multiple">            
+               </select>
+            </div>
+            <div class="form-group"id="customskilldiv_secondary" >            
+               <button type="button" class="btn fa fa-plus" data-toggle="collapse" data-target="#secskillcolapse"></button> 
+               <label >Add New Skills</label>
+                <div id="secskillcolapse" class="collapse " style="padding-top: 15px;" >
+                  <input type="text" class="form-control"   name="skillNameCustom" id="IdskillNameCustom" placeholder="Add More Secondary Skill" style="width: 85%;">
+                   <button type="button" name="addnewskill_btn" id="addnewskill_btn" class="btn btn-info " style="color: white;float: right !important;margin-left: 3%;">Add Skill</button>
+                </div>
+            </div>
              
-            </select>
-          </div>       
+            <div class="modal-footer">        
+              <div id="hide_skillres" class="col-md-12 hide-div" style="padding-bottom: 45px;">
+                <!-- <span class="label-input50" >'+res.data+'</span> -->
+              </div>
+              <button type="submit" class="btn btn-success">Save</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="modal-footer">        
-        <button type="submit" class="btn btn-success">Save</button>
-      </div>
-      </form>
     </div>
-  </div>
 </div>
 
 <div class="modal fade" id="importCertiModal" tabindex="-1" role="dialog" aria-labelledby="importCertiModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="importCertiModalLongTitle">Import Excel</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="importCertiModalLongTitle">Import Excel</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save</button>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
+</div>
+<!--
+<div class="modal fade" id="editSkillModal" tabindex="-1" role="dialog" aria-labelledby="importCertiModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="importCertiModalLongTitle">Edit Certificate Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+             <div class="form-group"id="mulipleselectdiv_primary" >
+                <label >Primay Skills :</label>
+               <select class="js-example-placeholder-multiple form-control" data-placeholder="Select All The Skill Sets" style="width: 100%;" id="upddatePrimarySel" name="update_skill_primary[]" multiple="multiple">            
+               </select>
+              </div>
+              <div class="form-group"id="mulipleselectdiv_secondary" >
+                <label >Secondary Skills :</label>
+               <select class="js-example-placeholder-multiple form-control" data-placeholder="Select All The Skill Sets" style="width: 100%;" id="updateSecondarySel" name="update_skill_secondary[]" multiple="multiple">            
+               </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  -->
+
+

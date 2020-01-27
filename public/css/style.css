@@ -158,10 +158,23 @@ div.dt-buttons{
   padding-top: 10px;
 }
 
+
 #example_filter{
   display: none;
 }
 
 .hide-div{
   display: none;
+}
+
+
+#secskillcolapse.show
+{
+display: flex;
+}
+
+.greyOption{
+/*background: rgba(0,0,0,0.3);*/
+   background-color: #d6d1d1;
+    /*text-shadow:0 1px 0 rgba(0,0,0,0.4);*/
 }

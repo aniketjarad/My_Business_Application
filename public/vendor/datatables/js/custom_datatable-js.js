@@ -47,6 +47,7 @@ $(document).ready(function() {
 } );
 
     function Update_Element(id) {
+
         $.ajax({
         type: 'post',
         url: '/employee/get',
@@ -84,5 +85,90 @@ $(document).ready(function() {
             }
         }
       });
+
+
+    }
+//This is for the skill matrix delete and
+    function Delete_Skill_Element(id) {
+        // console.log("print" + id);
+        if (confirm('Are you sure you want to delete this record?')) {
+        $.ajax({
+        type: 'post',
+        url: '/employee/deleteSkill',
+        data: {"emp_code":id},
+        success: function (res) {
+            // console.log(res);
+            if (res.status == 'success') {
+                // alert("Record Deleted Successfully.");
+                // $('#hide_skillres').show();
+                // $('#hide_skillres').html('<span class="label-input50">'+res.data+'</span>');
+                // console.log("Success");
+                setTimeout(function() {
+                   // $('#hide_skillres').show();
+                   //  $('#hide_skillres').html('<span class="label-input50"">'+res.data+'</span>');
+                window.location.href = "/employee/skillmatrix";
+                }, 500);
+              }
+            else if (res.status == 'error') {
+                //  $('#hide_skillres').show();
+                // $('#hide_skillres').html('<span class="label-input50"  style="color:#ff0000;">'+res.data+'</span>');
+                 // console.log(res.response);
+                setTimeout(function() {
+                   // $('#hide_skillres').show();
+                   //  $('#hide_skillres').html('<span class="label-input50" style="color:#ff0000;">'+res.data+'</span>');
+                window.location.href = "/employee/skillmatrix";
+                }, 500);
+          }
+        }
+      });
+    
+    }
+    }
+     function Update_Skill_Element(id) {
+        // console.log("asdas");
+        // $("#updatePrimarySel").select2({
+        //     tags: false,
+        //     theme: "classic",
+        //     allowClear: true
+        // });
+        // $("#updateSecondarySel").select2({
+        //         tags: false,
+        //         theme: "classic",
+        //         allowClear: true
+        // });
+        $("#secskillcolapse").removeClass("show");
+        $("#IdskillNameCustom").val("");
+        $.ajax({
+        type: 'post',
+        url: '/employee/getEmpSkill',
+        data: {"emp_code":id},
+        success: function (res) {
+            console.log(res);
+            if (res) {                              
+                $('#employee_Name').attr("readonly",true);
+                $('#employee_Name').html('');
+                $('#employee_Name').append('<option value='+ res.data.emp_code +'>'+ res.data.emp_name +'</option>')
+                $('#mulipleselect_primary').html('');
+                 for(var j = 0; j < res.selectedVal.primary_skill_sel.result.length; j++) {
+                    if(res.selectedVal.primary_skill_sel.result[j].selected == false){
+                      $('#mulipleselect_primary').append('<option name='+ res.selectedVal.primary_skill_sel.result[j].text +' >'+ res.selectedVal.primary_skill_sel.result[j].text +'</option>');
+                    } 
+                    else if(res.selectedVal.primary_skill_sel.result[j].selected == true){
+                         $('#mulipleselect_primary').append('<option name='+ res.selectedVal.primary_skill_sel.result[j].text +' selected="selected" >'+ res.selectedVal.primary_skill_sel.result[j].text +'</option>');
+                    }
+                }
+                $('#mulipleselect_secondary').html('');
+                 for(var i = 0; i < res.selectedVal.secondary_skill_sel.result.length; i++) {
+                    if(res.selectedVal.secondary_skill_sel.result[i].selected == false){
+                      $('#mulipleselect_secondary').append('<option name='+ res.selectedVal.secondary_skill_sel.result[i].text +' >'+ res.selectedVal.secondary_skill_sel.result[i].text +'</option>');
+                    } 
+                    else if(res.selectedVal.secondary_skill_sel.result[i].selected == true){
+                         $('#mulipleselect_secondary').append('<option name='+ res.selectedVal.secondary_skill_sel.result[i].text +' selected="selected" >'+ res.selectedVal.secondary_skill_sel.result[i].text +'</option>');
+                    }
+                }               
+            }
+        }
+      });
+
 
     }

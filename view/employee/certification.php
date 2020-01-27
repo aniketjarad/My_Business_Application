@@ -129,7 +129,7 @@
 
                   foreach($data as $key => $emp_data)
                   {
-                    print_r($emp_data);
+                    //print_r($emp_data);
                     $e_code = $emp_data['emp_code'];
                     $e_name = $emp_data['emp_name'];
                   ?>     
@@ -144,7 +144,7 @@
           <div class="form-group">
             <label for="certCategory">Certificate Category : </label>
             <select class="form-control" id="certificateCategory"  name="certCategory">
-              <option value="None" >NONE</option>
+              <option value="None" >---Select Category---</option>
               <option value="Servicenow">Servicenow</option>
               <option value="ITIL">ITIL</option>
               <option value="Other">Other</option>
@@ -154,14 +154,14 @@
            <div class="form-group hide-div" id="certificateModulediv" >
             <label for="certModule" >Certificate Module : </label>
             <select class="form-control" id="certificateModule"  name="certModule">
-             
+            
             </select>
           </div>
 
            <div class="form-group hide-div" id="certificatediv" >
             <label for="certName" >Certificate Name : </label>
             <select class="form-control" id="certificateName"  name="certName">
-             
+              <option value="null" >---Select Certificate---</option>
             </select>
           </div>
           <div class="form-group hide-div" id="certificatedivCustomModule">

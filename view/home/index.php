@@ -62,26 +62,29 @@ $counts = $this->getAllCount();
 </center>
 <div class=" row col-md-12 container-fluid" style="padding: 15px;">
  
-  <div class="col-md-6" >
+  <div class="col-md-5" >
      
       <div class="card card-success" style="" id="CertificateChart" >
             <div class="card-header">
               <h3 class="card-title">Servicenow Chart</h3>
 
               <div class="card-tools">
+                <!-- <button type="button" id="saveServicenowChart" class="btn btn-info "> Add Skill</button> -->
+              
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fantom fa-minus"></i>
                 </button>
                 <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fa fantom fa-times"></i></button>
               </div>
             </div>
             <div class="card-body">
-              <div class="chart">
+
+              <div class="chart" id="servicenowPieChart">
                 <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand">
                   <div class="">
                     
                   </div>
                 </div>
-                <div class="chartjs-size-monitor-shrink">
+                <div class="chartjs-size-monitor-shrink" >
                     <div class=""></div></div></div>
                 <canvas id="barChart" width="387" height="287" class="chartjs-render-monitor"></canvas>
               </div>

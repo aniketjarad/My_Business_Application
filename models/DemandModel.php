@@ -97,6 +97,7 @@ class DemandModel {
 
         $jd_file = $files['jd_attach']['tmp_name'];
         $cv_file = $files['cv_attach']['tmp_name'];
+
         if(!empty($files['cv_attach']['tmp_name']) && !empty($files['jd_attach']['tmp_name'])){
 
             $file_path = FILE_PATH.$files['jd_attach']['name'];
@@ -104,6 +105,7 @@ class DemandModel {
             echo "\n====>".$return;
             exit(0);
             /*$content = file_get_contents($jd_file);
+
             //$content ="Hi hello";
             $stmt = $this->db_pdo->prepare("INSERT INTO `documents` VALUES (?,?,?,?)");
             //$stmt->bindParam('sssb',,,$jd_file_type,);

@@ -100,26 +100,102 @@ $(document).ready(function(){
   });
   
 /*Skill matrix add skill acitivy*/
+
+$("#mulipleselect_primary").select2({
+            tags: false,
+            theme: "classic",
+            allowClear: true
+          });
+$("#mulipleselect_secondary").select2({
+            tags: false,
+            theme: "classic",
+            allowClear: true
+          });
+
+  
+$('#addskill_btn').click( function (e) {
+  e.preventDefault();
+  $('#mulipleselect_primary').empty().trigger('change');
+  $('#mulipleselect_secondary').empty().trigger('change');
+  $('#employee_Name').attr("readonly",false);  
+  $("#secskillcolapse").removeClass("show");
+  $("#IdskillNameCustom").val("");
+  $.ajax({
+    type: 'get',
+    url: '/employee/getSkillList',
+    data:null,
+    success: function (res) {       
+      // console.log(res.data);
+      if (res.status == 'success') {
+         for(var j = 0; j < res.data.result.length; j++) {         
+           // console.log(res.data.result[j].text);
+          $('#mulipleselect_primary').append('<option name='+ res.data.result[j].text +' >'+ res.data.result[j].text +'</option>');
+          $('#mulipleselect_secondary').append('<option name='+ res.data.result[j].text +' >'+ res.data.result[j].text +'</option>');
+          }           
+      }
+      else if (res.status == 'error') {
+        console.log("Error");
+      }
+    }
+  });
+});
+
+
+
+$('#addnewskill_btn').click( function (e) {
+  e.preventDefault();
+  $.ajax({
+    type: 'post',
+    url: '/employee/addNewSkill',
+    data:$('#addskill-form').serialize(),
+    success: function (res) {
+      // console.log(res.status);
+      if (res.status == 'success') {
+        $('#hide_skillres').show();
+        $('#hide_skillres').html('<span class="label-input50">'+res.data+'</span>');
+        // console.log("Success");
+        // setTimeout(function() {
+        //    $('#hide_skillres').show();
+        //     $('#hide_skillres').html('<span class="label-input50"">'+res.data+'</span>');
+        // window.location.href = "/employee/skillmatrix";
+        // }, 1000);
+      }else if (res.status == 'error') {
+         $('#hide_skillres').show();
+        $('#hide_skillres').html('<span class="label-input50"  style="color:#ff0000;">'+res.data+'</span>');
+         // console.log(res.response);
+        // setTimeout(function() {
+        //    $('#hide_skillres').show();
+        //     $('#hide_skillres').html('<span class="label-input50" style="color:#ff0000;">'+res.data+'</span>');
+        // window.location.href = "/employee/skillmatrix";
+        // }, 1000);
+      }
+    }
+  });
+  
+
+});
+
+
 $('#addskill-form').on('submit', function (e) {
   e.preventDefault();
 
   $.ajax({
     type: 'post',
-    url: '/employee/add_certification',
+    url: '/employee/addSkillSets',
     data:$('#addskill-form').serialize(),
     success: function (res) {
       // console.log(res);
       if (res.status == 'success') {
-        // $('#hide').show();
-        // $('#hide').html('<span class="label-input50">'+res.data+'</span>');
-        console.log("Success");
-        // setTimeout(function() {
-        // window.location.href = "/employee/";
-        // }, 1000);
+        $('#hide_skillres').show();
+        $('#hide_skillres').html('<span class="label-input50">'+res.data+'</span>');
+        // console.log("Success");
+        setTimeout(function() {
+        window.location.href = "/employee/skillmatrix";
+        }, 1000);
       }else if (res.status == 'error') {
-        console.log("Error");
-        // $('#hide').show();
-        // $('#hide').html('<span class="label-input50">'+res.data+'</span>');
+        // console.log("Error");
+        $('#hide_skillres').show();
+        $('#hide_skillres').html('<span class="label-input50" style="color:#ff0000;"s>'+res.data+'</span>');
       }
     }
   });
@@ -280,6 +356,21 @@ $('#add_btn').on('click',function (e) {
     }
   });
 });
+//Chart Downloias
+// $('#saveServicenowChart').on('click',function (e) {
+//     console.log("asdad");
+   
+//       html2canvas(document.getElementById('barChart'), {
+//         onrendered: function(canvas) {
+//           var link = document.createElement('a');
+//           link.href = canvas.toDataURL('image/jpeg');
+//           link.download = 'myChart.jpeg';
+//             link.click();
+//         }
+//       })
+      
+
+// });
 /*Skill matrix add skill acitivy*/
 $('#add-demand-form').on('submit', function (e) {
   e.preventDefault();

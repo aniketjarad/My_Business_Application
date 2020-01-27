@@ -69,7 +69,7 @@ class EmployeeModel {
      */
     public function getAll()
     {
-        $sql = "select * from emp_master";
+        $sql = "select * from emp_master order by emp_name";
         $result = mysqli_query($this->db, $sql);
         $count = 1;
         while($array = mysqli_fetch_array($result,MYSQLI_ASSOC)){

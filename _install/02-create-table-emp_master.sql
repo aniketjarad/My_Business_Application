@@ -45,12 +45,12 @@ CREATE TABLE `certification` (
 
 
 CREATE TABLE `skill_matrix` (
-  `emp_code` int(11) NOT NULL,
-  `emp_name` varchar(50) default NULL,
-  `skill` varchar(60) NOT NULL,
-  `proficiency`  enum('Basic','Intermediate','Advance','Expert') DEFAULT 'Basic',
-  `skill_category` enum('Primary','Secondary') DEFAULT 'Secondary',
- FOREIGN KEY (emp_code) REFERENCES emp_master(emp_code) 
+ `emp_code` int(11) NOT NULL,
+ `emp_name` varchar(50) DEFAULT NULL,
+ `primary_skill` varchar(200) NOT NULL,
+ `secondary_skill` varchar(200) NOT NULL,
+ UNIQUE KEY `emp_code` (`emp_code`),
+ CONSTRAINT `skill_matrix_ibfk_1` FOREIGN KEY (`emp_code`) REFERENCES `emp_master` (`emp_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
 
@@ -62,3 +62,11 @@ CREATE TABLE `all_certificate` (
  `certificate_type` varchar(100) NOT NULL,
  PRIMARY KEY (`srno`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1
+
+
+CREATE TABLE `all_skills` (
+ `sr_no` int(11) NOT NULL AUTO_INCREMENT,
+ `skill` varchar(100) NOT NULL,
+ PRIMARY KEY (`skill`),
+ UNIQUE KEY `sr_no` (`sr_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1
