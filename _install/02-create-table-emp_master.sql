@@ -70,3 +70,31 @@ CREATE TABLE `all_skills` (
  PRIMARY KEY (`skill`),
  UNIQUE KEY `sr_no` (`sr_no`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1
+
+
+CREATE TABLE `demand` (
+ `demand_id` varchar(50) NOT NULL,
+ `candidate_name` varchar(50) DEFAULT NULL,
+ `position` varchar(100) NOT NULL,
+ `joining_date` date DEFAULT NULL,
+ `status` enum('On Track','Dropped','Backfill','Joined') DEFAULT NULL,
+ `tentative_mapping` varchar(50) DEFAULT NULL,
+ `backfill_emp_id` int(11) DEFAULT NULL,
+ `cv` varchar(100) DEFAULT NULL,
+ `jd` varchar(100) DEFAULT NULL,
+ PRIMARY KEY (`demand_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+
+CREATE TABLE `demand_archieve` (
+ `demand_id` varchar(50) NOT NULL,
+ `candidate_name` varchar(50) DEFAULT NULL,
+ `position` varchar(100) NOT NULL,
+ `joining_date` date DEFAULT NULL,
+ `status` enum('On Track','Dropped','Backfill','Joined') DEFAULT NULL,
+ `tentative_mapping` varchar(50) DEFAULT NULL,
+ `backfill_emp_id` int(11) DEFAULT NULL,
+ `cv` varchar(100) DEFAULT NULL,
+ `jd` varchar(100) DEFAULT NULL,
+ PRIMARY KEY (`demand_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1

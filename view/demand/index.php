@@ -5,12 +5,8 @@ if(!isset($_SESSION['emp_code'])){
 	header("Location: /home/login");
 	exit;
 }else{
-    $count = $this->getDemandCount();
-
-    // echo "<pre>";
-    //print_r($count);
-    // echo "</pre>";
-
+    $all = $this->getAll();
+    $data = $all['data'];
 }
 ?>
 <!-- Content Header (Page header) -->
@@ -36,45 +32,46 @@ if(!isset($_SESSION['emp_code'])){
         <button type="button" id="add_btn" name="add" class="btn btn-info fa fa-plus" style="color: white;padding: 10px;" data-toggle="modal" data-target="#addDemandModal"> New Demand</button>
         <div class="col-md-3" style="float: right;">
           <a href="#" title="Example tile shortcut" class="tile-box tile-box-shortcut btn-danger">
-             <span class="bs-badge badge-absolute"><?php echo $count['count']; ?></span>
+             <span class="bs-badge badge-absolute"><?php echo $all['count']['count']; ?></span>
              <div class="tile-header">Available Demand's Now</div>
              <div class="tile-content-wrapper"><i class="fa fa-user fafa-icon-css"></i></div>
           </a>
        </div>
     </div>
     
-    	<!--<table id="example" class="table table-bordred display" style="width:100%">
+    	<table id="demand_table" class="table table-bordred display" style="width:100%">
             <thead style="font-size: 13px;text-align:center;">
                 <tr>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Wiw Id</th>                
+                    <th>Demand Id</th>
+                    <th>Candidate Name</th>
+                    <th>Position</th>                
                     <th>Date Of Joining</th>
-                    <th>Reporting Manager</th>
-                    <th>Cost Center</th>
-                    <th>Designation</th>
-                    <th>Grade</th>
-                    <th>Factory</th>
-                    <th>Action</th>
+                    <th>Status</th>
+                    <th>Tentative Mapping</th>
+                    <th>BackFill Employee ID</th>
+                    <th>JD</th>
+                    <th>CV</th>
+                    <!-- <th>Action</th> -->
                 </tr>
             </thead>
             <tbody style="font-size: 11px;text-align:center;">
                 <?php 
-    				$data = $this->getAll();
+    				
+                    
     				foreach($data as $key => $emp_data)
     				{
     				?>			
 					<tr>
-						<td><?php echo $emp_data['emp_code']; ?></td>
-						<td><?php echo $emp_data['emp_name']; ?></td>
-						<td><?php echo $emp_data['wiw_id']; ?></td>						
-						<td><?php echo $emp_data['doj']; ?></td>
-						<td><?php echo $emp_data['manager']; ?></td>
-						<td><?php echo $emp_data['cost_center']; ?></td>
-						<td><?php echo $emp_data['designation']; ?></td>
-						<td><?php echo $emp_data['grade']; ?></td>
-						<td><?php echo $emp_data['department']; ?></td>
-                        <td><input type="button" name="edit" value="Edit" id="<?php echo $row["id"]; ?>" class="btn btn-info btn-xs edit_data" data-title="Edit" data-toggle="modal" data-target="#edit" onclick = "Update_Element(<?php echo $emp_data['emp_code']; ?>);"/></td>   
+						<td><?php echo $emp_data['demand_id']; ?></td>
+						<td><?php echo $emp_data['candidate_name']; ?></td>
+						<td><?php echo $emp_data['position']; ?></td>
+						<td><?php echo $emp_data['joining_date']; ?></td>
+						<td><?php echo $emp_data['status']; ?></td>
+						<td><?php echo $emp_data['tentative_mapping']; ?></td>
+						<td><?php echo $emp_data['backfill_emp_id']; ?></td>
+						<td><a download="<?php echo end(explode("/",$emp_data['jd'])); ?>" href='<?php echo $emp_data['jd']; ?>' class="fa fa-file"></a></td>
+						<td><a download="<?php echo end(explode("/",$emp_data['cv'])); ?>" href='<?php echo $emp_data['cv']; ?>' class="fa fa-file"></a></td>
+                        <!-- <td><input type="button" name="edit" value="Edit" id="<?php echo $row["id"]; ?>" class="btn btn-info btn-xs edit_data" data-title="Edit" data-toggle="modal" data-target="#edit" onclick = "Update_Element(<?php echo $emp_data['demand_id']; ?>);"/></td> -->
 					</tr>
     				<?php
     				}
@@ -82,19 +79,19 @@ if(!isset($_SESSION['emp_code'])){
             </tbody>
             <tfoot style="font-size: 13px;text-align:center;">
                 <tr>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Wiw Id</th>                
+                    <th>Demand Id</th>
+                    <th>Candidate Name</th>
+                    <th>Position</th>                
                     <th>Date Of Joining</th>
-                    <th>Reporting Manager</th>
-                    <th>Cost Center</th>
-                    <th>Designation</th>
-                    <th>Grade</th>
-                    <th>Factory</th>
-                    <th>Action</th>
+                    <th>Status</th>
+                    <th>Tentative Mapping</th>
+                    <th>BackFill Employee ID</th>
+                    <th>JD</th>
+                    <th>CV</th>
+                    <!-- <th>Action</th> -->
                 </tr>
             </tfoot>
-    	</table> -->
+    	</table> 
 	</div> 
     <!-- Modal Edit-->
     <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
@@ -256,7 +253,7 @@ if(!isset($_SESSION['emp_code'])){
               <div class="form-group" required>
                 <label >Demand Id :</label>
                 <input type="text" class="form-control" name="demand_id" id="demand_id_text" placeholder="Enter Demand Id" style="display: none;">
-                <select class="form-control" name="demand_id" id="demand_id_select" style="display: none;" >
+                <select class="form-control" name="demand_id_select" id="demand_id_select" style="display: none;" >
                 </select>
               </div>
               <div class="form-group">
@@ -268,8 +265,8 @@ if(!isset($_SESSION['emp_code'])){
                 <input type="text" class="form-control" name="position" placeholder="Enter the Position " required>
               </div>
               <div class="form-group">
-                <label >Joining Date :</label>
-                <input type="date" class="form-control" name="joining_date" placeholder="Enter Candidate Name">
+                <label >Expected Joining Date :</label>
+                <input type="date" class="form-control" name="joining_date" placeholder="Enter Candidate Name" required>
               </div>
               <div class="form-group">
                 <label >Tentative Mapping :</label>
@@ -287,7 +284,7 @@ if(!isset($_SESSION['emp_code'])){
               </div>
               <div class="form-group" id="backfill_div" style="display: none;">
                 <label >Backfill Employee Name :</label>
-                <select class="form-control" name="backfill_id" id="backfill_select">
+                <select class="form-control" name="backfill_emp_id" id="backfill_select">
                 </select>
               </div>
               <div class="form-group">

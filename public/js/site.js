@@ -387,19 +387,19 @@ $('#add-demand-form').on('submit', function (e) {
       $('#msg').html('<span class="label-input50">Uploading......!</span>');
       setTimeout(function() {
         $('#msg').hide();
-      }, 5000);
+      }, 2000);
     },
     success: function (res) {
       // console.log(res);
       if (res.status == 'success') {
-        // $('#msg').show();
-        // $('#msg').html('<span class="label-input50">'+res.data+'</span>');
-        console.log("Success");
-        // setTimeout(function() {
-        // window.location.href = "/demand/";
-        // }, 1000);
+        $('#msg').show();
+        $('#msg').html('<span class="label-input50">'+res.data+'</span>');
+        //console.log("Success");
+        setTimeout(function() {
+        window.location.href = "/demand/";
+        }, 1000);
       }else if (res.status == 'error') {
-        console.log("Error");
+        //console.log("Error");
         $('#msg').show();
         $('#msg').html('<span class="label-input50">'+res.data+'</span>');
       }

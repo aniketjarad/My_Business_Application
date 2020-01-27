@@ -13,3 +13,5 @@ define('DB_NAME', 'mybusinessapplication');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('FILE_PATH', $_SERVER['DOCUMENT_ROOT']."/files/");
+define('ABS_FILE_PATH', "/files/");
+

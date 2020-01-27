@@ -36,102 +36,126 @@ class DemandModel {
         }
         return $row;
     }
-    /**
-     * Get all data from URLs
-     */
-    public function getAllCertifications()
-    {
-        $sql = "SELECT * FROM `certification` ORDER BY `emp_code`";
-        $result = mysqli_query($this->db, $sql);
-        $count = 1;
-        while($array = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-            $row->{$count} = $array;
-            $count++;
-        }
 
-        $arrEMPDetails = array();
-        
-        foreach($row as $key => $emp_data)
-        {
-            if(!empty($arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key])){
-                $arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key] = array();    
-            }else{
-                $arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key]['cert_name'] = $emp_data['cert_name'];
-                $arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key]['cert_expiry'] = $emp_data['cert_expiry'];
-                $arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key]['category'] = $emp_data['category'];
-                 $arrEMPDetails[$emp_data['emp_code']."|".$emp_data['emp_name']][$key]['module'] = $emp_data['module'];
-            }
-        }
-        return $arrEMPDetails;
-    }
 
     /**
      * Insert record in URLs table
     */
     public function addDemand($data,$files)
     {
+        //print_r($files);
         $return = array();
-        /*
-        Array
-        (
-            [demand_id] => 1000
-            [candidate_name] => Aniket
-            [position] => Developer
-            [joining_date] => 2020-01-29
-            [tentative_mapping] => Smart TC
-            [status] => On Track
-        )
-        */
-        if(empty($data['demand_id'])){
+        $demand_id = "";
+        $backfill = NULL;
+        if(!empty($data['backfill_emp_id'])){
+            $backfill = $data['backfill_emp_id'];
+        }
+        if(!empty($data['demand_id_select'])){
+            $demand_id = $data['demand_id_select'];
+            if(!empty($files['jd_attach']['tmp_name']) && !empty($files['cv_attach']['tmp_name']) && !empty($data['candidate_name'])){
+
+                $jd_file = $files['jd_attach']['tmp_name'];
+                $cv_file = $files['cv_attach']['tmp_name'];
+                $jd_file_type = end(explode(".",$files['jd_attach']['name']));
+                $cv_file_type = end(explode(".",$files['cv_attach']['name']));
+                $jd_file_path = FILE_PATH."Demand_".$demand_id."_JD.".$jd_file_type;
+                $abs_jd_path = ABS_FILE_PATH."Demand_".$demand_id."_JD.".$jd_file_type;
+                
+                $cv_file_path = FILE_PATH."Demand_".str_replace(" ","_", $data['candidate_name'])."_".$demand_id."_CV.".$cv_file_type;
+                $abs_cv_path = ABS_FILE_PATH."Demand_".str_replace(" ","_", $data['candidate_name'])."_".$demand_id."_CV.".$cv_file_type;
+
+                $status_jd = move_uploaded_file($jd_file,$jd_file_path);
+                $status_cv = move_uploaded_file($cv_file,$cv_file_path);
+
+                if($status_jd !=1 && $status_cv!=1){
+                    $return['status'] = "error";
+                    $return['data'] = "File Upload Failed. Try Again..!";
+                }else{
+                    $sql = "UPDATE `demand` SET `candidate_name`='".$data['candidate_name']."',`position`='".$data['position']."',`joining_date`='".$data['joining_date']."',`tentative_mapping`='".$data['tentative_mapping']."',`status`='".$data['status']."',`backfill_emp_id`='".$backfill."',`jd`='".$abs_jd_path."',`cv`='".$abs_cv_path."' WHERE `demand_id`='".$demand_id."'";
+                    mysqli_query($this->db, $sql);
+                    //echo $sql;
+                    $return['status'] = "success";
+                    $return['data'] = "Demand Added Successfully...!";
+                }
+            }else if(!empty($files['jd_attach']['tmp_name'])){
+                $jd_file = $files['jd_attach']['tmp_name'];
+                $file_type = end(explode(".",$files['jd_attach']['name']));
+                $file_path = FILE_PATH."Demand_".$demand_id."_JD.".$file_type;
+                $abs_path = ABS_FILE_PATH."Demand_".$demand_id."_JD.".$file_type;
+                $status = move_uploaded_file($jd_file,$file_path);
+                if($status!=1){
+                    $return['status'] = "error";
+                    $return['data'] = "File Upload Failed. Try Again..!";
+                }else{
+                   $sql = "UPDATE `demand` SET `candidate_name`='".$data['candidate_name']."',`position`='".$data['position']."',`joining_date`='".$data['joining_date']."',`tentative_mapping`='".$data['tentative_mapping']."',`status`='".$data['status']."',`backfill_emp_id`='".$backfill."',`jd`='".$abs_path."' WHERE `demand_id`='".$demand_id."'";
+                    mysqli_query($this->db, $sql);
+                    //echo $sql;
+                    $return['status'] = "success";
+                    $return['data'] = "Demand Added Successfully...!";
+                }
+            }
+        }else if (!empty($data['demand_id'])) {
+            $demand_id = $data['demand_id'];
+            if(!empty($files['jd_attach']['tmp_name']) && !empty($files['cv_attach']['tmp_name']) && !empty($data['candidate_name'])){
+                $jd_file = $files['jd_attach']['tmp_name'];
+                $cv_file = $files['cv_attach']['tmp_name'];
+                $jd_file_type = end(explode(".",$files['jd_attach']['name']));
+                $cv_file_type = end(explode(".",$files['cv_attach']['name']));
+                $jd_file_path = FILE_PATH."Demand_".$demand_id."_JD.".$jd_file_type;
+                $abs_jd_path = ABS_FILE_PATH."Demand_".$demand_id."_JD.".$jd_file_type;
+                
+                $cv_file_path = FILE_PATH."Demand_".str_replace(" ","_", $data['candidate_name'])."_".$demand_id."_CV.".$cv_file_type;
+                $abs_cv_path = ABS_FILE_PATH."Demand_".str_replace(" ","_", $data['candidate_name'])."_".$demand_id."_CV.".$cv_file_type;
+
+                $status_jd = move_uploaded_file($jd_file,$jd_file_path);
+                $status_cv = move_uploaded_file($cv_file,$cv_file_path);
+                if($status_jd !=1 && $status_cv!=1){
+                    $return['status'] = "error";
+                    $return['data'] = "File Upload Failed. Try Again..!";
+                }else{
+                    $sql = "INSERT INTO `demand` (`demand_id`, `candidate_name`, `position`, `joining_date`,`tentative_mapping`,`status`,`backfill_emp_id`,`jd`,`cv`) VALUES ('".$demand_id."','".$data['candidate_name']."','".$data['position']."','".$data['joining_date']."','".$data['tentative_mapping']."','".$data['status']."','".$backfill."','". $abs_jd_path."','". $abs_cv_path."')";
+                    //echo $sql;
+                    mysqli_query($this->db, $sql);
+                    $return['status'] = "success";
+                    $return['data'] = "Demand Added Successfully...!";
+                }
+            }else if(!empty($files['jd_attach']['tmp_name'])){
+                $jd_file = $files['jd_attach']['tmp_name'];
+                $file_type = end(explode(".",$files['jd_attach']['name']));
+                $file_path = FILE_PATH."Demand_".$demand_id."_JD.".$file_type;
+                $abs_path = ABS_FILE_PATH."Demand_".$demand_id."_JD.".$file_type;
+                $status = move_uploaded_file($jd_file,$file_path);
+                if($status!=1){
+                    $return['status'] = "error";
+                    $return['data'] = "File Upload Failed. Try Again..!";
+                }else{
+                    $sql = "INSERT INTO `demand` (`demand_id`, `candidate_name`, `position`, `joining_date`,`tentative_mapping`,`status`,`backfill_emp_id`,`jd`) VALUES ('".$demand_id."','".$data['candidate_name']."','".$data['position']."','".$data['joining_date']."','".$data['tentative_mapping']."','".$data['status']."','".$backfill."','". $file_path."')";
+                    //echo $sql;
+                    mysqli_query($this->db, $sql);
+                    $return['status'] = "success";
+                    $return['data'] = "Demand Added Successfully...!";
+                }
+            }
+        }else if(empty($data['demand_id_select']) && empty($data['demand_id'])){
             $return['status'] = "error";
             $return['data'] = "Demand ID Cannot be Empty ..!";
-        }else{
-            $sql = "INSERT INTO `demand` (`demand_id`, `candidate_name`, `position`, `joining_date`,`tentative_mapping`,`status`,`jd`) VALUES ('".$data['demand_id']."','".$data['candidate_name']."','".$data['position']."','".$data['joining_date']."','".$data['tentative_mapping']."','".$data['status']."','".$data['jd']."')";
-            mysqli_query($this->db, $sql);
         }
-
-
-
-        $jd_file_type = $files['jd_attach']['type'];
-        $cv_file_type = $files['cv_attach']['type'];
-
-        $jd_file = $files['jd_attach']['tmp_name'];
-        $cv_file = $files['cv_attach']['tmp_name'];
-
-        if(!empty($files['cv_attach']['tmp_name']) && !empty($files['jd_attach']['tmp_name'])){
-
-            $file_path = FILE_PATH.$files['jd_attach']['name'];
-            $status = move_uploaded_file($jd_file,$file_path);
-            echo "\n====>".$return;
-            exit(0);
-            /*$content = file_get_contents($jd_file);
-
-            //$content ="Hi hello";
-            $stmt = $this->db_pdo->prepare("INSERT INTO `documents` VALUES (?,?,?,?)");
-            //$stmt->bindParam('sssb',,,$jd_file_type,);
-            //$stmt->bindParam('sssb',$data['demand_id'],$files['jd_attach']['name'],$jd_file_type,$content);
-            $stmt->bindParam(1,$data['demand_id']);
-            $stmt->bindParam(2,$files['jd_attach']['name']);
-            $stmt->bindParam(3,$jd_file_type);
-            $stmt->bindParam(4,$content);
-            $stmt->execute();
-            // $sql_jd = "INSERT INTO `documents` (`demand_id`, `doc_name`, `doc_type`, `content`) VALUES ('".$data['demand_id']."','".$files['jd_attach']['name']."','".$jd_file_type."','".$content ."')";
-            //echo "====>".$sql_jd;
-
-                //mysqli_query($this->db, $sql_jd);
-                echo "Query successfull";
-                exit(0);
-            $sql_cv = "INSERT INTO `documents` (`demand_id`, `doc_name`, `doc_type`, `content`) VALUES ('".$data['demand_id']."','".$data['demand_id']."_CV.".$cv_file_type."','".$cv_file_type."','".$cv_file."')";
-
-                mysqli_query($this->db, $sql_cv);*/
-
-                
-        }else{
-
-        }
-        exit(0);
+        //exit(0);
+        return $return; 
     }
 
-
-
+    /**
+     * Get all data from Employees
+     */
+    public function getAll()
+    {
+        $sql = "select * from demand order by demand_id";
+        $result = mysqli_query($this->db, $sql);
+        $count = 1;
+        while($array = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+            $row->{$count} = $array;
+            $count++;
+        }
+        return $row;
+    }
 }
