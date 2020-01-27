@@ -81,6 +81,10 @@ class DemandModel {
         $jd_file = $files['jd_attach']['tmp_name'];
         $cv_file = $files['cv_attach']['tmp_name'];
         if(!empty($jd_file) && !empty($cv_file)){
+            $file_path = $_SERVER['DOCUMENT_ROOT']."/files/".$files['jd_attach']['name'];
+            $return = move_uploaded_file($jd_file,$file_path);
+            echo "\n====>".$return;
+            exit(0);
             $content = file_get_contents($jd_file);
             //$content ="Hi hello";
             $stmt = $this->db_pdo->prepare("INSERT INTO `documents` VALUES (?,?,?,?)");

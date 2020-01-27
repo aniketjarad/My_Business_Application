@@ -6,7 +6,7 @@ if(!isset($_SESSION['emp_code'])){
 	exit;
 }else{
     $count = $this->getDemandCount();
-    print_r($_SERVER);
+    //print_r($_SERVER);
 }
 ?>
 <!-- Content Header (Page header) -->

@@ -129,7 +129,7 @@
 
                   foreach($data as $key => $emp_data)
                   {
-                    print_r($emp_data);
+                    //print_r($emp_data);
                     $e_code = $emp_data['emp_code'];
                     $e_name = $emp_data['emp_name'];
                   ?>     

@@ -32,7 +32,7 @@
 
         var ctx = document.getElementById("barChart"); 
               var data = new Chart(ctx, { 
-                type: 'bar', 
+                type: 'pie', 
                 data: { 
                   labels: res.certiModLabels, 
                   datasets: [ 
@@ -66,7 +66,7 @@
   });
   
 
-  $.ajax({
+  /*$.ajax({
     type: 'get',
     url: '/home/getModulesChart',
     data:'',
@@ -128,7 +128,7 @@
         // $('#hide').html('<span class="label-input50">'+res.data+'</span>');
       }
     }
-  });
+  });*/
   
 
 
