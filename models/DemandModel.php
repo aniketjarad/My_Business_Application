@@ -46,7 +46,7 @@ class DemandModel {
         //print_r($files);
         $return = array();
         $demand_id = "";
-        $backfill = NULL;
+        $backfill = "";
         if(!empty($data['backfill_emp_id'])){
             $backfill = $data['backfill_emp_id'];
         }

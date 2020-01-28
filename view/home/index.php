@@ -59,7 +59,6 @@ $counts = $this->getAllCount();
 </div>
 
 
-</center>
 <div class=" row col-md-12 container-fluid" style="padding: 15px;">
  
   <div class="col-md-5" >
@@ -121,10 +120,8 @@ $counts = $this->getAllCount();
       </div>
 </div>
 
+</center>
 
 
-  </div>
 
-
-</div>
-
+ 

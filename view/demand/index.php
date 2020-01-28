@@ -256,6 +256,10 @@ if(!isset($_SESSION['emp_code'])){
                 <select class="form-control" name="demand_id_select" id="demand_id_select" style="display: none;" >
                 </select>
               </div>
+               <div class="form-group">
+                <label >BOS Id :</label>
+                <input type="text" class="form-control" name="bos_id" placeholder="Enter BOS ID" >
+              </div>
               <div class="form-group">
                 <label >Candidate Name :</label>
                 <input type="text" class="form-control" name="candidate_name" placeholder="Enter Candidate Name">
@@ -270,7 +274,7 @@ if(!isset($_SESSION['emp_code'])){
               </div>
               <div class="form-group">
                 <label >Tentative Mapping :</label>
-                <input type="text" class="form-control" name="tentative_mapping" placeholder="Enter Tentative Mapping" required>
+                <input type="text" class="form-control" name="tentative_mapping" placeholder="Enter Tentative Mapping" >
               </div>
 
               <div class="form-group">
