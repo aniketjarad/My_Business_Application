@@ -29,7 +29,7 @@
   </div><!-- /.content-header -->
     <div align="left" style="margin-left:2%;">
       <button type="button" name="add" class="btn btn-info " data-toggle="modal" data-target="#addCertiModal">Add Certification</button>
-      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#importCertiModal">Import</button>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#newCertiModal">New Category</button>
     </div>
   <center>
        
@@ -43,6 +43,7 @@
         <th>Emp Code</th>
         <th>Emp Name</th>
         <th></th>
+        <th>Emp Action</th>
       </tr>
     </thead>
     <tbody style="font-size: 13px;text-align: center;" class="table-bordred">
@@ -51,8 +52,10 @@
       $data = $this->getAllCertification();
       foreach($data as $key => $emp_data)
       {
+        $cert_count = 1;
         $e_code = explode("|",$key)[0];
         $e_name = explode("|",$key)[1];
+        $e_code_btn = "buttonId".$e_code;
       ?>      
       <tr class="clickable" data-toggle="collapse" class="table-bordred"data-target="#group-of-rows-<?php echo $i; ?>" aria-expanded="false" aria-controls="group-of-rows-<?php echo $i; ?>" style="font-size: 13px;text-align: center; ">
         <td style="width: 20px;">
@@ -62,6 +65,10 @@
         <td><?php echo $e_code; ?></td>
         <td><?php echo $e_name; ?></td>  
         <td></td>
+        <td>
+           <input type="button" name="delete" value="Delete" id="<?php echo $e_code_btn; ?>" class="btn btn-info btn-xs edit_data" data-title="Delete"  onclick = "deleteCompEmp(<?php echo $e_code; ?>);"/>
+        </td>
+
       </tr>
     </tbody>
     <tbody id="group-of-rows-<?php echo $i; ?>" class="table-bordred collapse" style="font-size: 13px;text-align: center;">
@@ -71,19 +78,26 @@
         <td><b>Name</b></td>
         <td><b>Module</b></td>        
         <td><b>Expiry</b></td>
+        <td><b>Action</b></td>
       </tr> 
       <?php  
       foreach($data[$key] as $keys => $cert_arr)
       {
+        $cert_name= strval($e_code)."|".$cert_arr['cert_name']; 
+        // echo $cert_name;
       ?>          
       <tr style="background-color:  #faf1d9;">
-        <td><?php echo $keys; ?></td>
+        <td><?php echo $cert_count; ?></td>
         <td><?php echo $cert_arr['category']; ?></td> 
         <td><?php echo $cert_arr['cert_name']; ?></td>
         <td><?php echo $cert_arr['module']; ?></td>           
         <td><?php echo $cert_arr['cert_expiry']; ?></td> 
+        <td>        
+          <input type="button" name="delete" value="X" id="<?php echo $cert_name; ?>" class="btn btn-info btn-xs edit_data" data-title="Delete"  onclick = "deleteCertiElement(id);"/>
+        </td>
       </tr>                
       <?php
+      $cert_count++;
       }
       ?>
     </tbody>
@@ -99,6 +113,7 @@
         <th>Emp Code</th>
         <th>Emp Name</th>
         <th></th>
+        <th>Emp Action</th>
        </tr>
   </tfoot>
   </table>
@@ -144,39 +159,28 @@
           <div class="form-group">
             <label for="certCategory">Certificate Category : </label>
             <select class="form-control" id="certificateCategory"  name="certCategory">
-              <option value="None" >---Select Category---</option>
-              <option value="Servicenow">Servicenow</option>
-              <option value="ITIL">ITIL</option>
-              <option value="Other">Other</option>
             </select>
           </div>
 
-           <div class="form-group hide-div" id="certificateModulediv" >
+           <div class="form-group " id="certificateModulediv" >
             <label for="certModule" >Certificate Module : </label>
             <select class="form-control" id="certificateModule"  name="certModule">
+
             
             </select>
           </div>
 
-           <div class="form-group hide-div" id="certificatediv" >
+           <div class="form-group" id="certificatediv" >
             <label for="certName" >Certificate Name : </label>
             <select class="form-control" id="certificateName"  name="certName">
-              <option value="null" >---Select Certificate---</option>
+              
             </select>
           </div>
-          <div class="form-group hide-div" id="certificatedivCustomModule">
-            <label for="certNameCustom" id="certificateCustomMOD"  >Certificate Module :</label>
-            <input type="text" class="form-control"  name="certModuleCustom" id="IdcertModuleCustom" placeholder="Enter Certificate Name">
-          </div>
-
-           <div class="form-group hide-div" id="certificatedivCustomName">      
-            <label for="certNameCustom" id="certificateNameCustom" >Certificate Name :</label>
-            <input type="text" class="form-control"  name="certNameCustom" id="certificatedivCustomNameId" placeholder="Enter Certificate Name">
-          </div>
+         
 
            <div class="form-group" id="certificateExpDateDiv">
             <label for="certNameCustom" id="certificateExpDat" >Expiry Date :</label>
-            <input type="date" class="form-control"  name="certExpDatename" id="certificateExpDateId" placeholder="Expiry Date">
+            <input type="date" class="form-control"  name="certExpDatename" id="certificateExpDateId" placeholder="Expiry Date" required>
           </div>
 
        
@@ -193,6 +197,56 @@
          </form>
     </div>
 
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="newCertiModal" tabindex="-1" role="dialog" aria-labelledby="addCertiModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addCertiModalLongTitle">Add New Category</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form id="newCertificate-form" method="post" action="">  
+                 
+          <div class="form-group" id="divNewCertCategory">
+            <label for="certNameCustom" id="lebelNewCertCategory">Certificate Category :</label>
+            <input type="text" class="form-control"  name="nameNewCertCategory" id="idNewCertCategory" placeholder="Enter Certificate Category" >
+          </div>
+          
+          <div class="form-group" id="divNewCertModule">
+            <label for="certNameCustom" id="labelNewCertModule">Certificate Module :</label>
+            <input type="text" class="form-control"  name="nameNewCertModule" id="idNewCertModule" placeholder="Enter Certificate Module" >
+          </div>
+
+           <div class="form-group" id="divNewCertName">      
+            <label for="certNameCustom" id="labelNewCertName" >Certificate Name :</label>
+            <input type="text" class="form-control"  name="nameNewCertName" id="idNewCertName" placeholder="Enter Certificate Name" >
+          </div>
+          <div class="form-group" id="divNewCertType" >
+            <label for="certName" >Certificate type : </label>
+            <select class="form-control" id="idNewCertType"  name="nameselNewCertType">
+              <option name="MainLine">MainLine</option>
+              <option name="Micro">Micro</option>
+            </select>
+          </div>
+                
+      </div>      
+      <div class="modal-footer">        
+        <div id="hide_result_new" class="col-md-12 hide-div" style="padding-bottom: 45px;">
+          <!-- <span class="label-input50" >'+res.data+'</span> -->
+        </div>
+        <button  type="submit" class="btn btn-success">Save</button>
+      </div>
+         </form>
+    </div>
+
+    </div>
   </div>
 </div>
 

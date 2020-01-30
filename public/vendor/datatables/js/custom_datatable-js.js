@@ -172,3 +172,68 @@ $(document).ready(function() {
 
 
     }
+
+    /*Certification Actions delete
+    */
+    function deleteCertiElement(id) {
+        
+        var POST = id.split('|');
+        // console.log(POST);
+        if (confirm('Are you sure you want to delete this record?')) {
+                $.ajax({
+                type: 'post',
+                url: '/employee/deleteCertification',
+                data: {POST},
+                success: function (res) {
+                    // console.log(res);
+                    if (res.status = "success") {                              
+                         setTimeout(function() {                      
+                            window.location.href = "/employee/certification";
+                            }, 500);
+
+                        }
+                      else{
+                        console.log("There was some error in deleting the record.");
+
+                        setTimeout(function() {                      
+                            window.location.href = "/employee/certification";
+                            }, 500);
+
+                      }
+                  }
+              });
+
+        }
+
+    }
+     function deleteCompEmp(id) {
+        
+        // var POST = id.split('|');
+        // console.log(id);
+        if (confirm('This will delete all the Certification Record of the Employee.')) {
+                $.ajax({
+                type: 'post',
+                url: '/employee/deleteEmpCert',
+                data: {'emp_code': id},
+                success: function (res) {
+                    // console.log(res);
+                    if (res.status = "success") {                              
+                         // setTimeout(function() {                      
+                         //    window.location.href = "/employee/certification";
+                         //    }, 500);
+
+                        }
+                      else{
+                        // console.log("There was some error in deleting the record.");
+
+                        // setTimeout(function() {                      
+                        //     window.location.href = "/employee/certification";
+                        //     }, 500);
+
+                      }
+                  }
+              });
+
+        }
+        
+    }

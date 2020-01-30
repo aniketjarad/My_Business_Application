@@ -182,6 +182,35 @@ class EmployeeController extends Controller {
 	// 	$data = $obj->getAllCertificationList();
 	// 	return $data;
 	// }
+	//Add new certificaton Category
+	public function add_new_certi_category() {
+		$data = $_POST;
+		$model = $this->loadModel('CertificationCategoryModel');
+		$response = $model->addNewCertCatMod($data);
+		// print_r($response);
+		if($response['status'] == 'success') {
+		  	$result = ['status' => 'success' , 'data' =>$response['response']];
+		}else{
+			$result = ['status' => 'error','data' => 'Please Contact Admin'];
+		}
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+	//Get the certification Category on Page Load
+	public function getCertCategory() {
+		
+		$model = $this->loadModel('CertificationCategoryModel');
+		$response = $model->getUniqueCertCategory();
+		// print_r($response);
+		// exit(0);
+		if($response) {
+		  	$result = ['status' => 'success' , 'data' =>$response];
+		}else{
+			$result = ['status' => 'error','data' => 'Please Contact Admin'];
+		}
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
 
 	public function certification_category() {
 		$data = $_POST;		
@@ -219,5 +248,39 @@ class EmployeeController extends Controller {
 		header('Content-Type: application/json');
 		echo json_encode($result);
 	}
+	public function deleteCertification() {
+		$data = $_POST['POST'];
+		
+		
+		$model = $this->loadModel('CertificationCategoryModel');
+		$response = $model->delteEmployeeCertificate($data);
+		// print_r($response);
+		// exit(0);
+		if($response['status'] == 'success') {
+		  	$result = ['status' => 'success' , 'data' =>$response['response']];
+		}else{
+			$result = ['status' => 'error','data' => 'Please Contact Admin'];
+		}
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+	public function deleteEmpCert() {
+		$data = $_POST['emp_code'];
+		// print_r($data);
+		// exit(0);
+		
+		$model = $this->loadModel('CertificationCategoryModel');
+		$response = $model->delteEmpCertRec($data);
+		// print_r($response);
+		// exit(0);
+		if($response['status'] == 'success') {
+		  	$result = ['status' => 'success' , 'data' =>$response['response']];
+		}else{
+			$result = ['status' => 'error','data' => 'Please Contact Admin'];
+		}
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+
 
 }

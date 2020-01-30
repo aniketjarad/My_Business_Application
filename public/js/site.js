@@ -102,6 +102,7 @@ $(document).ready(function(){
 /*Skill matrix add skill acitivy*/
 
 $("#mulipleselect_primary").select2({
+            maximumSelectionLength: 1,
             tags: false,
             theme: "classic",
             allowClear: true
@@ -202,67 +203,47 @@ $('#addskill-form').on('submit', function (e) {
   
   
 });
-
-
-
+//On page load get the Certificate Category.
+$.ajax({
+    type: 'get',
+    url: '/employee/getCertCategory',
+    data: null,
+    success: function (res){
+       // console.log(res.data.length);
+      if (res.status == 'success') {
+        $('#certificateCategory').append('<option name="None">---Select Category---</option>');
+        for (var i = Object.keys(res.data).length - 1; i >= 0; i--) {
+          $('#certificateCategory').append('<option name='+ res.data[i] +' >'+ res.data[i] +'</option>');
+        }
+        // $('#certificateCategory').append('<option name="Other">Other</option>');
+      }
+      else if (res.status == 'error') {
+         // console.log("Error");
+          $('#certificateCategory').append('<option name="None">---Select Category---</option>');
+          // $('#certificateCategory').append('<option name="Other">Other</option>');
+      }   
+      } 
+    });
+//This variable stores the complete data of all the certificates and the modules
+var data_val;
 // This is for the certification details
 $('#certificateCategory').on('change', function (e) {
   e.preventDefault();
-
-  // console.log($('#certificateCategory').val());
-  if ($('#certificateCategory').val() == "None") {
-     $('#certificatediv').hide();
-     $('#certificateModulediv').hide();
-     $('#certificatedivCustomModule').hide();
-     $('#certificatedivCustomName').hide();
-     $('#IdcertModuleCustom').val('');
-     $('#certificatedivCustomNameId').val('');
-     $('#certificateExpDateId').val('');
-   
-  }
-  else if( $('#certificateCategory').val() =="Other")
-    {
-      $('#certificatediv').hide();
-     $('#certificateModulediv').hide();
-     $('#IdcertModuleCustom').val('');
-     $('#certificatedivCustomNameId').val('');
-     $('#certificateExpDateId').val('');
-     
-
-     $('#certificatedivCustomModule').show();
-     $('#certificatedivCustomName').show();
-     $('#IdcertModuleCustom').val('');
-     $('#certificatedivCustomNameId').val('');
-     $('#certificateExpDateId').val('');
-   }
-   else{
-      $('#certificatediv').show();
-     $('#certificateModulediv').show();
-     $('#certificatedivCustomModule').hide();
-     $('#certificatedivCustomName').hide();
-     $('#certificateExpDateId').val('');
-   }  
-   // $('#certificatedivCustom').hide();
- $('#certificateModule ').find('option') .remove(); 
-
   $.ajax({
     type: 'post',
     url: '/employee/certification_category',
     data: $('#addCertificate-form').serialize(),
     success: function (res){
-       console.log(res);
+       console.log(res.data);
+       data_val = res.data;
       if (res.status == 'success') {
-        $('#certificateModule').val('');
+       $('#certificateName').html('');
+       $('#certificateModule').html('');
+        $('#certificateModule').append('<option name="SelectModule" >----Select Module----</option>');
         for (var i = Object.keys(res.data).length - 1; i >= 0; i--) {
           $('#certificateModule').append('<option name='+ Object.keys(res.data)[i] +' >'+Object.keys(res.data)[i]+'</option>');
         }
-        $('#certificateModule').on('change', function (e) {
-          $('#certificateName').html("");
-          var key = $('#certificateModule').val();
-          for (var j = 0; j < res.data[key].length; j++) {
-            $('#certificateName').append('<option name='+  res.data[key][j] +' >'+ res.data[key][j]+'</option>');
-          }            
-        });
+        
       }else if (res.status == 'error') {
          // console.log("Error");
          // $('#certificatediv').hide();
@@ -274,6 +255,19 @@ $('#certificateCategory').on('change', function (e) {
   });
 });
 
+
+$('#certificateModule').on('change', function (e) {
+            
+          var key = $('#certificateModule').val();
+          console.log(data_val);
+
+          
+           $('#certificateName').html('');
+          for (var j = 0; j < data_val[key].length; j++) {
+            // console.log(data_val[key][j]);
+            $('#certificateName').append('<option name='+  data_val[key][j] +' >'+ data_val[key][j]+'</option>');
+          }            
+        });
 // Add Certification details
 $('#addCertificate-form').on('submit', function (e) {
   e.preventDefault();
@@ -306,6 +300,36 @@ $('#addCertificate-form').on('submit', function (e) {
   
 });
 
+//Creates New Certificate Category Module in all certificates table
+$('#newCertificate-form').on('submit', function (e) {
+  e.preventDefault();
+  // console.log("step asdadhere");
+  $.ajax({
+    type: 'post',
+    url: '/employee/add_new_certi_category',
+    data:$('#newCertificate-form').serialize(),
+    success: function (res) {
+      // console.log(res);
+      if (res.status == 'success') {
+        // $('#hide').show();
+        // $('#hide').html('<span class="label-input50">'+res.data+'</span>');
+        // console.log("Success");
+
+        setTimeout(function() {
+           $('#hide_result_new').show();
+            $('#hide_result_new').html('<span class="label-input50">'+res.data+'</span>');
+        window.location.href = "/employee/certification";
+        }, 1000);
+      }else if (res.status == 'error') {
+        // console.log("Error");
+        // $('#hide').show();
+        // $('#hide').html('<span class="label-input50">'+res.data+'</span>');
+      }
+    }
+  });
+  
+  
+});
 
 
 
