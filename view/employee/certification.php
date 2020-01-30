@@ -24,8 +24,7 @@
     </ol>
   </div><!-- /.col -->
   </div><!-- /.row -->
-  </div><!-- /.container-fluid -->
-    
+  </div><!-- /.container-fluid -->    
   </div><!-- /.content-header -->
     <div align="left" style="margin-left:2%;">
       <button type="button" name="add" class="btn btn-info " data-toggle="modal" data-target="#addCertiModal">Add Certification</button>
@@ -129,70 +128,59 @@
       </div>
       <div class="modal-body">
 
-        <form id="addCertificate-form" method="post" action="">  
+            <form id="addCertificate-form" method="post" action="">  
+                    <div class="form-group">
+                        <label for="emp_Name">Employee Name : </label>
+                        <select class="form-control" id="employee_Name"  name="emp_Name">
+                           <?php 
+                              $i = 0 ;
+                              $data = $this->getAll();
+                              
 
-          <div class="form-group">
-            <label for="emp_Name">Employee Name : </label>
-            <select class="form-control" id="employee_Name"  name="emp_Name">
-               <?php 
-                  $i = 0 ;
-                  $data = $this->getAll();
-                  
+                              foreach($data as $key => $emp_data)
+                              {
+                                //print_r($emp_data);
+                                $e_code = $emp_data['emp_code'];
+                                $e_name = $emp_data['emp_name'];
+                              ?>     
+                               <option value=<?php echo $e_code; ?>  ><?php echo $e_name; ?></option>
+                                 <?php 
+                               }
+                               ?>
+                        </select>
+                      </div>                     
 
-                  foreach($data as $key => $emp_data)
-                  {
-                    //print_r($emp_data);
-                    $e_code = $emp_data['emp_code'];
-                    $e_name = $emp_data['emp_name'];
-                  ?>     
-                   <option value=<?php echo $e_code; ?>  ><?php echo $e_name; ?></option>
-                     <?php 
-                   }
-                   ?>
-            </select>
-          </div>
-         
+                      <div class="form-group">
+                        <label for="certCategory">Certificate Category : </label><span class="required">*</span>
+                        <select class="form-control" id="certificateCategory"  name="certCategory" required="required">
+                        </select>
+                      </div>
 
-          <div class="form-group">
-            <label for="certCategory">Certificate Category : </label><span class="required">*</span>
-            <select class="form-control" id="certificateCategory"  name="certCategory" required="required">
-            </select>
-          </div>
+                       <div class="form-group " id="certificateModulediv" >
+                        <label for="certModule" >Certificate Module : </label><span class="required">*</span>
+                        <select class="form-control" id="certificateModule"  name="certModule" required="required">
+                        </select>
+                      </div>
 
-           <div class="form-group " id="certificateModulediv" >
-            <label for="certModule" >Certificate Module : </label><span class="required">*</span>
-            <select class="form-control" id="certificateModule"  name="certModule" required="required">
+                       <div class="form-group" id="certificatediv" >
+                        <label for="certName" >Certificate Name : </label><span class="required">*</span>
+                        <select class="form-control" id="certificateName"  name="certName" required="required">
+                        </select>
+                      </div>
+                     
 
-            
-            </select>
-          </div>
-
-           <div class="form-group" id="certificatediv" >
-            <label for="certName" >Certificate Name : </label><span class="required">*</span>
-            <select class="form-control" id="certificateName"  name="certName" required="required">
+                       <div class="form-group" id="certificateExpDateDiv">
+                        <label for="certNameCustom" id="certificateExpDat" >Expiry Date :</label><span class="required">*</span>
+                        <input type="date" class="form-control"  name="certExpDatename" id="certificateExpDateId" placeholder="Expiry Date" required="required">
+                      </div>
+                  </div>
               
-            </select>
-          </div>
-         
-
-           <div class="form-group" id="certificateExpDateDiv">
-            <label for="certNameCustom" id="certificateExpDat" >Expiry Date :</label><span class="required">*</span>
-            <input type="date" class="form-control"  name="certExpDatename" id="certificateExpDateId" placeholder="Expiry Date" required="required">
-          </div>
-
-       
+                  <div class="modal-footer">        
+                    <div id="hide_result" class="col-md-12 hide-div" style="padding-bottom: 45px;"></div>
+                    <button  type="submit" class="btn btn-success">Save</button>
+                  </div>
+        </form>
       </div>
-      
-      <div class="modal-footer">
-        
-        <div id="hide_result" class="col-md-12 hide-div" style="padding-bottom: 45px;">
-          <!-- <span class="label-input50" >'+res.data+'</span> -->
-        </div>
-        <button  type="submit" class="btn btn-success">Save</button>
-
-      </div>
-         </form>
-    </div>
 
     </div>
   </div>
@@ -228,7 +216,7 @@
           <div class="form-group" id="divNewCertType" >
             <label for="certName" >Certificate type : </label>
             <select class="form-control" id="idNewCertType"  name="nameselNewCertType">
-              <option name="MainLine">MainLine</option>
+              <option name="Main Line">Main Line</option>
               <option name="Micro">Micro</option>
             </select>
           </div>

@@ -159,7 +159,7 @@ div.dt-buttons{
 }
 
 
-#example_filter{
+#example_filter,#certiTable_filter{
   display: none;
 }
 
@@ -192,5 +192,5 @@ form select[required=required]:after,
 form textarea[required=required]:after
 {
     color: red;
-    
+      
 }

@@ -45,16 +45,16 @@ $(document).ready(function() {
     });
     
     var certification_table = $('#certiTable').DataTable({
-        fixedHeader: true,
+        fixedHeader: false,
         //colReorder: true,
-         "order":[["1","asc"]],
+        "order":[["3","desc"]],
        "paging": false
 
         //"scrollX": true
     });
 
     
-} );
+});
 
     function Update_Element(id) {
 
