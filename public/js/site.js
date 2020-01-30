@@ -234,7 +234,7 @@ $('#certificateCategory').on('change', function (e) {
     url: '/employee/certification_category',
     data: $('#addCertificate-form').serialize(),
     success: function (res){
-       console.log(res.data);
+       // console.log(res.data);
        data_val = res.data;
       if (res.status == 'success') {
        $('#certificateName').html('');
@@ -259,10 +259,11 @@ $('#certificateCategory').on('change', function (e) {
 $('#certificateModule').on('change', function (e) {
             
           var key = $('#certificateModule').val();
-          console.log(data_val);
+          // console.log(data_val);
 
           
            $('#certificateName').html('');
+            $('#certificateName').append('<option name="SelectName" >----Select Name----</option>');
           for (var j = 0; j < data_val[key].length; j++) {
             // console.log(data_val[key][j]);
             $('#certificateName').append('<option name='+  data_val[key][j] +' >'+ data_val[key][j]+'</option>');

@@ -32,10 +32,8 @@
       <button type="button" class="btn btn-info" data-toggle="modal" data-target="#newCertiModal">New Category</button>
     </div>
   <center>
-       
-
-
-  <table id="certiTable" class="table table-bordred display dataTable" >
+   
+  <table id="certiTable" class="table table-bordred display dataTable" style="margin-top: 25px;" >
     <thead style="font-size: 13px;text-align: center; ">
       <tr>
         <th style="width: 20px;"> # </th>
@@ -118,11 +116,10 @@
   </tfoot>
   </table>
 
-</center>
 
   <!-- Modal -->
 <div class="modal fade" id="addCertiModal" tabindex="-1" role="dialog" aria-labelledby="addCertiModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="addCertiModalLongTitle">Add Employee Certificate</h5>
@@ -157,30 +154,30 @@
          
 
           <div class="form-group">
-            <label for="certCategory">Certificate Category : </label>
-            <select class="form-control" id="certificateCategory"  name="certCategory">
+            <label for="certCategory">Certificate Category : </label><span class="required">*</span>
+            <select class="form-control" id="certificateCategory"  name="certCategory" required="required">
             </select>
           </div>
 
            <div class="form-group " id="certificateModulediv" >
-            <label for="certModule" >Certificate Module : </label>
-            <select class="form-control" id="certificateModule"  name="certModule">
+            <label for="certModule" >Certificate Module : </label><span class="required">*</span>
+            <select class="form-control" id="certificateModule"  name="certModule" required="required">
 
             
             </select>
           </div>
 
            <div class="form-group" id="certificatediv" >
-            <label for="certName" >Certificate Name : </label>
-            <select class="form-control" id="certificateName"  name="certName">
+            <label for="certName" >Certificate Name : </label><span class="required">*</span>
+            <select class="form-control" id="certificateName"  name="certName" required="required">
               
             </select>
           </div>
          
 
            <div class="form-group" id="certificateExpDateDiv">
-            <label for="certNameCustom" id="certificateExpDat" >Expiry Date :</label>
-            <input type="date" class="form-control"  name="certExpDatename" id="certificateExpDateId" placeholder="Expiry Date" required>
+            <label for="certNameCustom" id="certificateExpDat" >Expiry Date :</label><span class="required">*</span>
+            <input type="date" class="form-control"  name="certExpDatename" id="certificateExpDateId" placeholder="Expiry Date" required="required">
           </div>
 
        
@@ -202,7 +199,7 @@
 </div>
 
 <div class="modal fade" id="newCertiModal" tabindex="-1" role="dialog" aria-labelledby="addCertiModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="addCertiModalLongTitle">Add New Category</h5>
@@ -215,18 +212,18 @@
         <form id="newCertificate-form" method="post" action="">  
                  
           <div class="form-group" id="divNewCertCategory">
-            <label for="certNameCustom" id="lebelNewCertCategory">Certificate Category :</label>
-            <input type="text" class="form-control"  name="nameNewCertCategory" id="idNewCertCategory" placeholder="Enter Certificate Category" >
+            <label for="certNameCustom" id="lebelNewCertCategory">Certificate Category :</label><span class="required">*</span>
+            <input type="text" class="form-control"  name="nameNewCertCategory" id="idNewCertCategory" placeholder="Enter Certificate Category" required="required">
           </div>
           
           <div class="form-group" id="divNewCertModule">
-            <label for="certNameCustom" id="labelNewCertModule">Certificate Module :</label>
-            <input type="text" class="form-control"  name="nameNewCertModule" id="idNewCertModule" placeholder="Enter Certificate Module" >
+            <label for="certNameCustom" id="labelNewCertModule">Certificate Module :</label><span class="required">*</span>
+            <input type="text" class="form-control"  name="nameNewCertModule" id="idNewCertModule" placeholder="Enter Certificate Module" required="required">
           </div>
 
            <div class="form-group" id="divNewCertName">      
-            <label for="certNameCustom" id="labelNewCertName" >Certificate Name :</label>
-            <input type="text" class="form-control"  name="nameNewCertName" id="idNewCertName" placeholder="Enter Certificate Name" >
+            <label for="certNameCustom" id="labelNewCertName" >Certificate Name :</label><span class="required">*</span>
+            <input type="text" class="form-control"  name="nameNewCertName" id="idNewCertName" placeholder="Enter Certificate Name" required="required">
           </div>
           <div class="form-group" id="divNewCertType" >
             <label for="certName" >Certificate type : </label>
@@ -269,3 +266,5 @@
     </div>
   </div>
 </div>
+
+</center>

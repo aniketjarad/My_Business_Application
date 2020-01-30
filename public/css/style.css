@@ -178,3 +178,19 @@ display: flex;
    background-color: #d6d1d1;
     /*text-shadow:0 1px 0 rgba(0,0,0,0.4);*/
 }
+
+.required
+{
+  float: right;
+  font-weight: bolder;
+  font-size: 25px;
+  color: red;
+}
+
+form input[required=required]:after,
+form select[required=required]:after,
+form textarea[required=required]:after
+{
+    color: red;
+    
+}

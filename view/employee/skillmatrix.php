@@ -29,11 +29,11 @@
   </div><!-- /.content-header -->
     <div align="left" style="margin-left:2%;">
       <button type="button" name="add" id="addskill_btn" class="btn btn-info " style="color: white;" data-toggle="modal" data-target="#addSkillModal"> Add Skill</button>
-      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#importCertiModal">Import</button>
+      <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#importCertiModal">Import</button> -->
     </div>
   <center>
        <div class="table-responsive">       
-      <table id="example" class="table table-bordred display dataTable" style="width:100%">
+      <table id="skillmatrix_table" class="table table-bordred display dataTable" style="width:100%">
             <thead style="font-size: 13px;text-align:center;">
                 <tr>
                     <th>Code</th>
@@ -114,21 +114,21 @@
                 </select>
               </div>
               <div class="form-group"id="mulipleselectdiv_primary" >
-                <label >Primay Skills :</label>
-               <select class="js-example-placeholder-multiple form-control" data-placeholder="Select All The Skill Sets" style="width: 100%;" id="mulipleselect_primary" name="skill_list_primary[]" multiple="multiple">            
+                <label >Primay Skills :</label><span class="required">*</span>
+               <select class="js-example-placeholder-multiple form-control" data-placeholder="Select All The Skill Sets" style="width: 100%;" id="mulipleselect_primary" name="skill_list_primary[]" multiple="multiple" required="required">            
                </select>
               </div>
               <div class="form-group"id="mulipleselectdiv_secondary" >
-                <label >Secondary Skills :</label>
-               <select class="js-example-placeholder-multiple form-control" data-placeholder="Select All The Skill Sets" style="width: 100%;" id="mulipleselect_secondary" name="skill_list_secondary[]" multiple="multiple">            
+                <label >Secondary Skills :</label><span class="required">*</span>
+               <select class="js-example-placeholder-multiple form-control" data-placeholder="Select All The Skill Sets" style="width: 100%;" id="mulipleselect_secondary" name="skill_list_secondary[]" multiple="multiple" required="required">            
                </select>
             </div>
             <div class="form-group"id="customskilldiv_secondary" >            
                <button type="button" class="btn fa fa-plus" data-toggle="collapse" data-target="#secskillcolapse"></button> 
                <label >Add New Skills</label>
                 <div id="secskillcolapse" class="collapse " style="padding-top: 15px;" >
-                  <input type="text" class="form-control"   name="skillNameCustom" id="IdskillNameCustom" placeholder="Add More Secondary Skill" style="width: 85%;">
-                   <button type="button" name="addnewskill_btn" id="addnewskill_btn" class="btn btn-info " style="color: white;float: right !important;margin-left: 3%;">Add Skill</button>
+                  <input type="text" class="form-control"   name="skillNameCustom" id="IdskillNameCustom" placeholder="Add New Skills Comma Separated" style="width: 95%;">
+                   <button type="button" name="addnewskill_btn" id="addnewskill_btn" class="btn btn-info " style="color: white;float: right !important;margin-left: 3%;"><b>+</b></button>
                 </div>
             </div>
              

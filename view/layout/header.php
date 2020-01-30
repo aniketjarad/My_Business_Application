@@ -9,7 +9,7 @@
     
     <!--<script type="text/javascript" src="/public/js/jquery-3.3.1.js"></script> -->
     <!-- css -->
-    <link href="/public/css/style.css" rel="stylesheet">
+    <link href="/public/css/style.css" type="text/css" rel="stylesheet">
 <!--===============================================================================================
     <link rel="stylesheet" type="text/css" href="/public/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/public/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">

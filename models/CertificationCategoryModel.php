@@ -113,6 +113,7 @@ class CertificationCategoryModel {
         
         // print_r("sample");
             $sql=" INSERT INTO `certification` (`emp_code`, `emp_name`,`cert_name`, `cert_expiry`,`category`,`module`)VALUES ('".$data['emp_Name']."','".$emp_name_res['emp_name']."','".$data['certName']."','".$data['certExpDatename']."','".$data['certCategory']."','".$data['certModule']."')";
+            // print_r($sql);
                 mysqli_query($this->db, $sql);
                 $result['status'] = "success";
                 $result['response'] = "Record Inserted Successfully.";
@@ -144,7 +145,7 @@ class CertificationCategoryModel {
         // exit(0);
             $sql = "DELETE FROM `certification` WHERE `emp_code`= '".$data[0]."' AND`cert_name`='".$data[1]."'";
             $sql_result=  mysqli_query($this->db, $sql);
-
+            $result = array();
             $result['status'] = "success";
             $result['response'] = "Record Deleted Successfully.";
         // print_r($result);
