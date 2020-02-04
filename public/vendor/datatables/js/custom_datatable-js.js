@@ -74,48 +74,109 @@ $(document).ready(function() {
     
 });
 
-    function Update_Element(id) {
+function Update_Element(id) {
 
-        $.ajax({
-        type: 'post',
-        url: '/employee/get',
-        data: {"emp_code":id},
-        success: function (res) {
-            if (res) {
-                $('#manager').html("");
-                var length = Object.keys(res.managers).length;
-                for (var i = 1; i <= length; i++) {
-                    $('#manager').append('<option value="'+res.managers[i]+'">'+res.managers[i]+'</option>');
-                }  
-                $('#contact_no').val(res.contact_no);  
-                $('#cost_center').val(res.cost_center);  
-                $('#department').val(res.department);  
-                $('#designation').val(res.designation);  
-                $('#doj').val(res.doj);  
-                $('#email_id').val(res.email_id);  
-                $('#emea_id').val(res.emea_id);  
-                $('#emp_code').val(res.emp_code);  
-                $('#emp_name').val(res.emp_name);  
-                $('#grade').val(res.grade);  
-                $('#wiw_id').val(res.wiw_id);
-                if(res.active=='1'){
-                    $('#active').attr("checked",true);
-                }else{
-                    $('#active').attr("checked",false);
-                }
-                if(res.is_manager=='1'){
-                    $('#is_manager').attr("checked",true);
-                }else{
-                    $('#is_manager').attr("checked",false);
-                }
-
-                $('#manager').val(res.manager).attr("selected",true);
+    $.ajax({
+    type: 'post',
+    url: '/employee/get',
+    data: {"emp_code":id},
+    success: function (res) {
+        if (res){
+            $('#manager').html("");
+            var length = Object.keys(res.managers).length;
+            for (var i = 1; i <= length; i++) {
+                $('#manager').append('<option value="'+res.managers[i]+'">'+res.managers[i]+'</option>');
             }
+            $('#contact_no').val(res.contact_no);  
+            $('#cost_center').val(res.cost_center);  
+            $('#department').val(res.department);  
+            $('#designation').val(res.designation);  
+            $('#doj').val(res.doj);  
+            $('#email_id').val(res.email_id);  
+            $('#emea_id').val(res.emea_id);  
+            $('#emp_code').val(res.emp_code);  
+            $('#emp_name').val(res.emp_name);  
+            $('#grade').val(res.grade);  
+            $('#wiw_id').val(res.wiw_id);
+            if(res.active=='1'){
+                $('#active').attr("checked",true);
+            }else{
+                $('#active').attr("checked",false);
+            }
+            if(res.is_manager=='1'){
+                $('#is_manager').attr("checked",true);
+            }else{
+                $('#is_manager').attr("checked",false);
+            }
+            $('#manager').val(res.manager).attr("selected",true);
         }
-      });
-
-
     }
+  });
+}
+
+function Update_Demand(id){
+    $('#DemandTitle').html("Edit Demand");
+    $('#btn_demand').html("Update Demand");
+    $('#action').val("update");
+    $('#jd_div').show();
+    $('#cv_div').show();
+    $("#jd").html("");
+    $("#cv").html("");
+    $.ajax({
+    type: 'post',
+    url: '/demand/get',
+    data: {"demand_id":id},
+    success: function (res) {
+        //console.log(res);
+        if (res){
+            $('#demand_id_text').val(res.data.demand_id);  
+            $('#bos_id').val(res.data.bos_id);  
+            $('#candidate_name').val(res.data.candidate_name);  
+            $('#position').val(res.data.position);  
+            $('#joining_date').val(res.data.joining_date);  
+            $('#tentative_mapping').val(res.data.tentative_mapping); 
+            if(res.data.jd){
+                $("#jd_attach").removeAttr("required");
+                $("#jd").html("<a download="+res.data.jd.split("/").pop()+" href="+res.data.jd+" class='fa fa-file'>"+res.data.jd.split("/").pop()+"</a>");
+                //$('#jd_attach').val(res.data.jd);
+                //$('#jd_div').hide();
+            }
+            if(res.data.cv){
+                $("#cv").html("<a download="+res.data.cv.split("/").pop()+" href="+res.data.cv+" class='fa fa-file'>"+res.data.cv.split("/").pop()+"</a>");
+                //$('#cv_div').hide();
+            }
+            if(res.data.status=="Backfill"){
+                $.ajax({
+                    type: 'post',
+                    url: '/demand/getInActiveEmployee',
+                    data: null,
+                    success: function (res) {
+                    // console.log(res);
+                    // console.log(res.data[1].emp_code);
+                    // console.log(res.data[1].emp_name);
+                    if(res.status == 'success'){
+                      $('#backfill_div').show();
+                      $('#backfill_select').show();
+                      $('#backfill_select').html("");
+                      //console.log(Object.keys(res.data)[1].emp_code);
+                      for (var i=1; i<= Object.keys(res.data).length ; i++) {
+                        $('#backfill_select').append('<option value='+ res.data[i].emp_code +' >'+res.data[i].emp_name+'</option>');
+                      }
+                    }
+                  }
+                });
+                $('#backfill_select').val(res.data.backfill_select).attr("selected",true);
+            }else{
+                $('#backfill_div').hide();
+            }
+            $('#demand_status').val(res.data.status).attr("selected",true);
+            $('#backfill_select').val(res.data.backfill_select).attr("selected",true);
+        }
+    }
+    });
+
+}
+
 //This is for the skill matrix delete and
     function Delete_Skill_Element(id) {
         // console.log("print" + id);

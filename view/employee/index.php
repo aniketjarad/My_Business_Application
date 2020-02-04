@@ -1,10 +1,9 @@
 <?php
-
-if(!isset($_SESSION['emp_code'])){
-	header("Location: /home/login");
-	exit;
+if(!isset($_SESSION['emp_code']) || count($_SESSION)== 0){
+	//header("Location: /home/login");
+	echo "<script>window.location.href='/home/login';</script>";
+    exit;
 }else{
-    
 	//$manager = $this->getAllManagers();
     //print_r($manager);
 }
