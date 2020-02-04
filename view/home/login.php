@@ -28,7 +28,7 @@ if(isset($_SESSION['emp_code'])){
 
 				<div class="flex-sb-m w-full p-t-3 p-b-32">
 					<div>
-						<a href="#" class="txt1">
+						<a href="/home/forgotpassword/" class="txt1">
 							Forgot Password ?
 						</a>
 					</div>

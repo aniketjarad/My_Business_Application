@@ -12,7 +12,9 @@ class HomeController extends Controller {
 	public function login() {
 	  $this->render('home/login');
 	}
-
+	public function forgotpassword() {
+	  $this->render('home/forgotpassword');
+	}
 
 	     
    public function getAllCount() {

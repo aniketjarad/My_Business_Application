@@ -145,4 +145,62 @@ class UserModel {
         return $result;
     }
 
+     public function checkUserForgot($data) {
+        // print_r($data);
+       
+            
+        $sql ="SELECT COUNT(*) FROM `emp_master` WHERE emp_code = '".$data['emp_code_forgot_name']."' AND emea_id='".$data['emeaid_forgot_name']."' AND email_id='".$data['emailid_forgot_name']."' ";
+        $result = mysqli_query($this->db, $sql);
+        // print_r($result['field_count']);
+        // exit(0);
+        $count = 1;
+        $countArr = array();
+        while($array = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+            $row->{$count} = $array;
+            $countArr[] = $array['COUNT(*)'];
+            $count++;
+        }
+        // print_r($countArr);
+        // exit(0);
+
+        if($countArr[0] == 1){
+            //  print_r("expression");
+            $sql ="SELECT COUNT(*) FROM `users` WHERE email_id='".$data['emailid_forgot_name']."' ";
+            $result_user = mysqli_query($this->db, $sql);
+            // print_r($result['field_count']);
+            // exit(0);
+            $count = 1;
+            $countArrUser = array();
+            while($array = mysqli_fetch_array($result_user,MYSQLI_ASSOC)){
+                $row->{$count} = $array;
+                $countArrUser[] = $array['COUNT(*)'];
+                $count++;
+            }
+
+            if($countArrUser[0] == 1){
+
+                $sql ="DELETE FROM `users` WHERE `email_id`='".$data['emailid_forgot_name']."' ";
+                $result = mysqli_query($this->db, $sql);
+                // print_r($result['field_count']);
+                // exit(0);
+           
+                $response['status'] = "success";
+                $response['response'] = "User Record Deleted Please Register Again.";
+            }
+            else{
+
+                $response['status'] = "error";
+                $response['response'] = "Cannot Reset Password User Not Signed In.";
+
+            }      
+        }
+        else{
+            $response['status'] = "error";
+            $response['response'] = "Enter Correct Details.";
+        }
+        // print_r($response);
+        // exit(0);
+        return $response;
+    }
+
 }

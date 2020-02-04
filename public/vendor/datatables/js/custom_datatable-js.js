@@ -32,6 +32,20 @@ $(document).ready(function() {
         "paging": false
     });
 
+    $('#skillmatrix_table thead tr').clone(true).appendTo('#skillmatrix_table thead');
+    $('#skillmatrix_table thead tr:eq(1) th').each( function (i) {
+        var title_skill = $(this).text();
+        $(this).html( '<input type="text" style="width:60px;text-align:center;" placeholder="Search"/>' );   
+        $( 'input',this).on('keyup change', function () {
+            if ( skill_table_ser.column(i).search() !== this.value ) {
+                skill_table_ser
+                    .column(i)
+                    .search( this.value )
+                    .draw();
+            }
+        });
+    });
+
     var skill_table = $('#skillmatrix_table').DataTable({
         //fixedHeader: true,
         //colReorder: true,
@@ -44,6 +58,10 @@ $(document).ready(function() {
         "paging": false
     });
     
+
+     
+
+
     var certification_table = $('#certiTable').DataTable({
         fixedHeader: false,
         //colReorder: true,

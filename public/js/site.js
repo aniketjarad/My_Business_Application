@@ -56,6 +56,38 @@ $(document).ready(function(){
       });
     }
   });
+  //Forgot Password
+  $('#forgot_password_form').on('submit', function (e) {
+    e.preventDefault();   
+   
+      
+    $.ajax({
+      type: 'post',
+      url: '/user/checkForgotUser',
+      data: $('#forgot_password_form').serialize(),
+      success: function (res) {
+        // console.log(res); 
+        if (res.status == 'success') {
+          // alert("Register Again");
+          $('#hide').show();
+          $('#hide').html('<span class="label-input50">'+res.response+'</span>');
+          setTimeout(function() {
+            window.location.href = "/user/signup";
+          }, 1000);
+        }else if (res.status == 'error') {
+          $('#email_id_div').addClass('alert-validate');
+          $('#forgot_emp_code_div').addClass('alert-validate');
+          $('#forgot_emeaid_div').addClass('alert-validate');
+          $('#hide').show();
+          $('#hide').html('<span class="label-input50">'+res.response+'</span>');
+          // setTimeout(function() {
+          //   window.location.href = "/home/signup";
+          // }, 2000);
+        }
+      }
+    });
+    
+  });
 
   $('#logout').on('click', function (e) {
     e.preventDefault();
