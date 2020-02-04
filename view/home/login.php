@@ -1,8 +1,8 @@
 <?php
 //session_start();
 if(isset($_SESSION['emp_code'])){
-	print_r($_SESSION['emp_code']);
 	header("Location: /home/");
+	exit;
 }
 ?>
 <div class="limiter">
