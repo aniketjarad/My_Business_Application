@@ -527,16 +527,16 @@ $('#demand_status').on('change', function (e) {
       url: '/demand/getInActiveEmployee',
       data: null,
       success: function (res) {
-        console.log(res);
-        console.log(res.data[1].emp_code);
-        console.log(res.data[1].emp_name);
+        // console.log(res);
+        // console.log(res.data[1].emp_code);
+        // console.log(res.data[1].emp_name);
         if(res.status == 'success'){
           $('#backfill_div').show();
           $('#backfill_select').show();
           $('#backfill_select').html("");
           //console.log(Object.keys(res.data)[1].emp_code);
           for (var i=1; i<= Object.keys(res.data).length ; i++) {
-            $('#backfill_select').append('<option value='+ res.data[i].emp_code +' >'+res.data[i].emp_name+'</option>');
+            $('#backfill_select').append('<option value="'+ res.data[i].emp_name +'" >'+res.data[i].emp_name+'</option>');
           }
         }
       }
@@ -549,7 +549,7 @@ $('#demand_status').on('change', function (e) {
 
 
 });
-var url = window.location;
+/*var url = window.location;
 if(url == "http://www.mybusinessapplication.local.com/home/"){
   $("#home-link").addClass('active');
   $("#home-menu-link").addClass('active');
@@ -578,7 +578,7 @@ else if(url == "http://www.mybusinessapplication.local.com/employee/skillmatrix"
   $("#skill-link").addClass('active');
   $("#employee-tab").addClass('active');
   $("#employee-menu-link").addClass('active');
-}/*
+}
 else if(url == "http://www.mybusinessapplication.local.com/home/"){
   
 }

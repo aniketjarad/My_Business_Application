@@ -161,7 +161,7 @@
           </li> -->
           <li class="nav-item has-treeview menu-open">
             <a id="home-link" href="/home/" class="nav-link ">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Home/Dashboard
                 <i class="right fas fa-angle-left"></i>
@@ -170,19 +170,19 @@
             <ul class="nav nav-treeview ">
               <li class="nav-item" style="background-color: #343a40;">
                 <a id="snow-link" href="/home/snowhome" class="nav-link">
-                  <i class="far fa-address-book nav-icon"></i>
+                  <i class="fas fa-newspaper nav-icon"></i>
                   <p>ServiceNow</p>
                 </a>
               </li>
               <li class="nav-item" style="background-color: #343a40;">
                 <a id="hp-link"href="/home/infra" class="nav-link">
-                  <i class="far fa-bookmark nav-icon"></i>
-                  <p>Infra</p>
+                  <i class="fas fa-building nav-icon"></i>
+                  <p>Infra-Automation</p>
                 </a>
               </li>
               <li class="nav-item " style="background-color: #343a40;">
                 <a id="rpa-link" href="/home/rpa" class="nav-link">
-                  <i class="far fa-bookmark nav-icon"></i>
+                  <i class="fas fa-robot nav-icon"></i>
                   <p>RPA</p>
                 </a>
               </li>
@@ -205,13 +205,13 @@
               </li>
               <li class="nav-item" style="background-color: #343a40;">
                 <a id="cert-link"href="/employee/certification" class="nav-link">
-                  <i class="far fa-bookmark nav-icon"></i>
+                  <i class="fas fa-certificate nav-icon"></i>
                   <p>Certification</p>
                 </a>
               </li>
               <li class="nav-item " style="background-color: #343a40;">
                 <a id="skill-link" href="/employee/skillmatrix" class="nav-link">
-                  <i class="far fa-bookmark nav-icon"></i>
+                  <i class="fas fa-chalkboard-teacher nav-icon"></i>
                   <p>Skill Matrix</p>
                 </a>
               </li>
@@ -219,16 +219,14 @@
           </li>
           <li class="nav-item has-treeview menu-open">
             <a id="demand-tab" href="/demand/" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Demand Management
-                <i class="right fas fa-angle-left"></i>
+              <i class="fas fa-user-cog nav-icon "></i>
+              <p>Demand Management<i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item" style="background-color: #343a40;">
                 <a id="demand-manage-link" href="/demand/" class="nav-link">
-                  <i class="far fa-address-book nav-icon"></i>
+                  <i class="fas fa-portrait nav-icon"></i>
                   <p>Manage</p>
                 </a>
               </li>
