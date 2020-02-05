@@ -83,7 +83,7 @@
 
       <!-- Modal -->
  <div class="modal fade" id="addSkillModal" tabindex="-1" role="dialog" aria-labelledby="addCertiModalCenterTitle"   aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="addCertiModalLongTitle">Add Employee Skill</h5>
@@ -127,8 +127,10 @@
                <button type="button" class="btn fa fa-plus" data-toggle="collapse" data-target="#secskillcolapse"></button> 
                <label >Add New Skills</label>
                 <div id="secskillcolapse" class="collapse " style="padding-top: 15px;" >
+                  <div style="display: flex;width: 100%;">
                   <input type="text" class="form-control"   name="skillNameCustom" id="IdskillNameCustom" placeholder="Add New Skills Comma Separated" style="width: 95%;">
                    <button type="button" name="addnewskill_btn" id="addnewskill_btn" class="btn btn-info " style="color: white;float: right !important;margin-left: 3%;"><b>+</b></button>
+                 </div>
                 </div>
             </div>
              

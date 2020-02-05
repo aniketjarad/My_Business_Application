@@ -29,7 +29,7 @@ if(!isset($_SESSION['emp_code'])){
 <center>
 	<div class="">
         <div align="left" style="margin-left:2%;">
-        <button type="button" id="add_btn" name="add" class="btn btn-info fa fa-plus" style="color: white;padding: 10px;" data-toggle="modal" data-target="#addDemandModal"> New Demand</button>
+        <button type="button" id="add_btn" name="add" class="btn btn-info " style="color: white;/*padding: 10px;*/" data-toggle="modal" data-target="#addDemandModal">New Demand</button>
         <!-- <div class="col-md-3" style="float: right;">
           <a href="#" title="Example tile shortcut" class="tile-box tile-box-shortcut btn-danger">
              <span class="bs-badge badge-absolute"><?php echo $all['count']['count']; ?></span>

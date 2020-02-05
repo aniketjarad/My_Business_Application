@@ -4,13 +4,7 @@ if(!isset($_SESSION['emp_code'])){
 	header("Location: /home/login");
 	exit;
 }else{
-       
-  $to_email = 'aniketjarad73@gmail.com';
-  $subject = 'Testing PHP Mail';
-  $message = 'This mail is sent using the PHP mail function';
-  //$headers = 'From: aniketjarad73@gmail.com';
-  $status = mail($to_email,$subject,$message);
-  echo "mail sent==>".$status;
+
 }
 
 $counts = $this->getAllCount();
@@ -51,7 +45,7 @@ $counts = $this->getAllCount();
       </a>
    </div>
    <div class="col-md-3">
-      <a href="#" title="Example tile shortcut" class="tile-box tile-box-shortcut btn-info">
+      <a href="#" title="Example tile shortcut" class="tile-box tile-box-shortcut btn-primary">
          <span class="bs-badge badge-absolute">2</span>
          <div class="tile-header">##########</div>
          <div class="tile-content-wrapper"><i class="fa fa-address-book fafa-icon-css"></i></div>
@@ -66,9 +60,9 @@ $counts = $this->getAllCount();
 </div>
 
 
-<div class=" row col-md-12 container-fluid" style="padding: 15px;">
+<div class="row" >
  
-  <div class="col-md-5" >
+  <div class="col-md-6" >
      
       <div class="card card-success" style="" id="CertificateChart" >
             <div class="card-header">
@@ -97,36 +91,35 @@ $counts = $this->getAllCount();
             </div>
             <!-- /.card-body -->             
         </div>
-    </div>
-    <div class="col-md-6">
-            <div class="card card-success"  id="CertificateChart" >
-              <div class="card-header">
-                <h3 class="card-title">Servicenow Chart</h3>
+  </div>
+  <div class="col-md-6">
+          <div class="card card-success"  id="CertificateChart" >
+            <div class="card-header">
+              <h3 class="card-title">Servicenow Chart</h3>
 
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fantom fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fa fantom fa-times"></i></button>
-                </div>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fantom fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fa fantom fa-times"></i></button>
               </div>
-              <div class="card-body">
-                <div class="chart">
-                  <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand">
-                    <div class="">
-                      
-                    </div>
-                  </div>
-                  <div class="chartjs-size-monitor-shrink">
-                      <div class=""></div></div></div>
-                  <canvas id="barChart"  width="387" height="287" class="chartjs-render-monitor"></canvas>
-                </div>
-              </div>
-              <!-- /.card-body -->
             </div>
-      <!-- /.box-body -->
-      </div>
+            <div class="card-body">
+              <div class="chart">
+                <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand">
+                  <div class="">
+                    
+                  </div>
+                </div>
+                <div class="chartjs-size-monitor-shrink">
+                    <div class=""></div></div></div>
+                <canvas id="barChart"  width="387" height="287" class="chartjs-render-monitor"></canvas>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+    <!-- /.box-body -->
+  </div>
 </div>
-
 </center>
 
 

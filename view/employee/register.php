@@ -78,7 +78,7 @@
 						<option value="L4">L4</option>
 						<option value="L5">L5</option>
 					</select>
-					<span class="label-input1000" style="float:left;margin-left: 20%;"><p>Is a Manager ..?</p></span>
+					<span class="label-input1000" style="float:left;margin-left: 20%;"><p style="color:#999999;">Is a Manager ..?</p></span>
 					
 					<div  style="margin-left:80%;">
 						<!-- Material switch -->

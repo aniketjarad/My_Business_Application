@@ -28,7 +28,7 @@ if(!isset($_SESSION['emp_code']) || count($_SESSION)== 0){
 <center>
 	<div class="table-responsive">
         <div align="left" style="margin-left:2%;">  
-            <button type="button" name="add" class="btn btn-info"><a href="/employee/register" style="color: white;">Add Employee</a></button>
+            <button type="button" name="add" id="add_emp" class="btn btn-info"><!--<a href="/employee/register" class="btn" style="color: white;">Add Employee</a>-->Add Employee</button>
          </div>
     	<table id="example" class="table table-bordred display dataTable" style="width:100%">
             <thead style="font-size: 13px;text-align:center;">
@@ -85,7 +85,7 @@ if(!isset($_SESSION['emp_code']) || count($_SESSION)== 0){
 	</div>
 
     <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-md">
         <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
