@@ -64,5 +64,5 @@
      
     <link rel="icon" type="image/png" href="/favicon.png"/>
 </head>
-<body class="hold-transition sidebar-mini "><!-- sidebar-collapse-->
+<body class="hold-transition sidebar-mini  sidebar-collapse"><!-- sidebar-collapse-->
   <div class="wrapper">

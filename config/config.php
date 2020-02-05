@@ -14,4 +14,6 @@ define('DB_USER', 'root');
 define('DB_PASS', '');
 define('FILE_PATH', $_SERVER['DOCUMENT_ROOT']."/files/");
 define('ABS_FILE_PATH', "/files/");
+define('ARC_FILE_PATH', $_SERVER['DOCUMENT_ROOT']."/files/archieve/");
+define('ARC_ABS_FILE_PATH', "/files/archieve/");
 

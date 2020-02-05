@@ -53,4 +53,17 @@ class DemandController extends Controller {
 		echo json_encode($result);
 	}
 
+	public function get() {
+		$demand_id = $_POST['demand_id'];
+		$result = array();
+		$obj = $this->loadModel('DemandModel');
+		$response = $obj->get($demand_id);
+		if($response) {
+		  	$result = ['status' => 'success' , 'data' => $response];
+		}else{
+			$result = ['status' => 'error','data' => ""];
+		}
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
 }

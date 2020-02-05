@@ -3,7 +3,14 @@
 if(!isset($_SESSION['emp_code'])){
 	header("Location: /home/login");
 	exit;
-
+}else{
+       
+  $to_email = 'aniketjarad73@gmail.com';
+  $subject = 'Testing PHP Mail';
+  $message = 'This mail is sent using the PHP mail function';
+  //$headers = 'From: aniketjarad73@gmail.com';
+  $status = mail($to_email,$subject,$message);
+  echo "mail sent==>".$status;
 }
 
 $counts = $this->getAllCount();

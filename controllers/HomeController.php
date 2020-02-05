@@ -13,6 +13,7 @@ class HomeController extends Controller {
 	  $this->render('home/login');
 	}
 
+
 	public function snowhome() {
 	  $this->render('home/snowhome');
 	}
@@ -21,6 +22,10 @@ class HomeController extends Controller {
 	}
 	public function infra() {
 	  $this->render('home/infra');
+
+	public function forgotpassword() {
+	  $this->render('home/forgotpassword');
+
 	}
 
 	public function getAllCount() {

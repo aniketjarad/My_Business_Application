@@ -53,4 +53,24 @@ class UserController extends Controller {
 		header('Content-Type: application/json');
 		echo json_encode($result);
 	}
+
+
+
+
+	//Forgot Password Function
+	public function checkForgotUser() {
+		// print_r("expression");
+		// exit(0);
+		$data = $_POST;
+		$model = $this->loadModel('UserModel');
+		$response = $model->checkUserForgot($data);
+		if($response) {
+		  	$result = $response;
+		}else{
+			$result = ['status' => 'error', 'response' => 'Error...! Please Check with Admin.'];
+		}
+		header('Content-Type: application/json');
+		echo json_encode($result);
+		
+	}
 }

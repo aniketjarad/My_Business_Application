@@ -56,6 +56,38 @@ $(document).ready(function(){
       });
     }
   });
+  //Forgot Password
+  $('#forgot_password_form').on('submit', function (e) {
+    e.preventDefault();   
+   
+      
+    $.ajax({
+      type: 'post',
+      url: '/user/checkForgotUser',
+      data: $('#forgot_password_form').serialize(),
+      success: function (res) {
+        // console.log(res); 
+        if (res.status == 'success') {
+          // alert("Register Again");
+          $('#hide').show();
+          $('#hide').html('<span class="label-input50">'+res.response+'</span>');
+          setTimeout(function() {
+            window.location.href = "/user/signup";
+          }, 1000);
+        }else if (res.status == 'error') {
+          $('#email_id_div').addClass('alert-validate');
+          $('#forgot_emp_code_div').addClass('alert-validate');
+          $('#forgot_emeaid_div').addClass('alert-validate');
+          $('#hide').show();
+          $('#hide').html('<span class="label-input50">'+res.response+'</span>');
+          // setTimeout(function() {
+          //   window.location.href = "/home/signup";
+          // }, 2000);
+        }
+      }
+    });
+    
+  });
 
   $('#logout').on('click', function (e) {
     e.preventDefault();
@@ -102,16 +134,16 @@ $(document).ready(function(){
 /*Skill matrix add skill acitivy*/
 
 $("#mulipleselect_primary").select2({
-            maximumSelectionLength: 1,
-            tags: false,
-            theme: "classic",
-            allowClear: true
-          });
+  maximumSelectionLength: 1,
+  tags: false,
+  theme: "classic",
+  allowClear: true
+});
 $("#mulipleselect_secondary").select2({
-            tags: false,
-            theme: "classic",
-            allowClear: true
-          });
+  tags: false,
+  theme: "classic",
+  allowClear: true
+});
 
   
 $('#addskill_btn').click( function (e) {
@@ -258,17 +290,17 @@ $('#certificateCategory').on('change', function (e) {
 
 $('#certificateModule').on('change', function (e) {
             
-          var key = $('#certificateModule').val();
-          // console.log(data_val);
+  var key = $('#certificateModule').val();
+  // console.log(data_val);
 
-          
-           $('#certificateName').html('');
-            $('#certificateName').append('<option name="SelectName" >----Select Name----</option>');
-          for (var j = 0; j < data_val[key].length; j++) {
-            // console.log(data_val[key][j]);
-            $('#certificateName').append('<option name='+  data_val[key][j] +' >'+ data_val[key][j]+'</option>');
-          }            
-        });
+  
+   $('#certificateName').html('');
+    $('#certificateName').append('<option name="SelectName" >----Select Name----</option>');
+  for (var j = 0; j < data_val[key].length; j++) {
+    // console.log(data_val[key][j]);
+    $('#certificateName').append('<option name='+  data_val[key][j] +' >'+ data_val[key][j]+'</option>');
+  }            
+});
 // Add Certification details
 $('#addCertificate-form').on('submit', function (e) {
   e.preventDefault();
@@ -361,6 +393,20 @@ $('#update-form').on('submit', function (e) {
 });
 
 $('#add_btn').on('click',function (e) {
+  $('#DemandTitle').html("Add Demand");
+  $('#btn_demand').html("Add Demand");
+  $('#action').val("add");
+  $('#demand_id_text').val("");  
+  $('#bos_id').val("");  
+  $('#candidate_name').val("");  
+  $('#position').val("");  
+  $('#joining_date').val("");  
+  $('#tentative_mapping').val(""); 
+  $('#jd_div').show();
+  $('#cv_div').show();
+  $("#jd").html("");
+  $("#cv").html("");
+  $("#jd_attach").attr("required",true);
   e.preventDefault();
   $.ajax({
     type: 'post',
@@ -368,15 +414,15 @@ $('#add_btn').on('click',function (e) {
     data: null,
     success: function (res) {
       if(res.status == 'success'){
-        $('#demand_id_text').hide();
-        $('#demand_id_select').show();
-        $('#demand_id_select').html("");
-        for (var j = 0; j < res.data.length; j++) {
-          $('#demand_id_select').append('<option value='+  res.data[j] +' >'+ res.data[j]+'</option>');
-        }
+        //$('#demand_id_text').hide();
+        //$('#demand_id_select').show();
+        $('#demand_id_text').val(res.data[0]);
+        // for (var j = 0; j < res.data.length; j++) {
+        //   $('#demand_id_select').append('<option value='+  res.data[j] +' >'+ res.data[j]+'</option>');
+        // }
       }else{
-        $('#demand_id_select').hide();
-        $('#demand_id_text').show();
+        //$('#demand_id_select').hide();
+        //$('#demand_id_text').show();
       }
     }
   });
@@ -398,6 +444,7 @@ $('#add_btn').on('click',function (e) {
 // });
 /*Skill matrix add skill acitivy*/
 $('#add-demand-form').on('submit', function (e) {
+
   e.preventDefault();
   $.ajax({
     type: 'post',
@@ -433,7 +480,45 @@ $('#add-demand-form').on('submit', function (e) {
     }
   });
 });
-
+/*
+$('#btn_demand').on('click', function (e) {
+  console.log("called");
+  e.preventDefault();
+  $.ajax({
+    type: 'post',
+    url: '/demand/add',
+    data:  new FormData(this),
+    contentType: false,
+    cache: false,
+    processData:false,
+    beforeSend:function(){
+      console.log("we are here");
+      $('#msg').show();
+      $('#msg').html('<span class="label-input50">Uploading......!</span>');
+      setTimeout(function() {
+        $('#msg').hide();
+      }, 2000);
+    },
+    success: function (res) {
+      // console.log(res);
+      if (res.status == 'success') {
+        $('#msg').show();
+        $('#msg').html('<span class="label-input50">'+res.data+'</span>');
+        //console.log("Success");
+        setTimeout(function() {
+        window.location.href = "/demand/";
+        }, 1000);
+      }else if (res.status == 'error') {
+        //console.log("Error");
+        $('#msg').show();
+        $('#msg').html('<span class="label-input50">'+res.data+'</span>');
+      }
+    },error: function(xhr, ajaxOptions, thrownError) {
+      console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+    }
+  });
+});
+*/
 $('#demand_status').on('change', function (e) {
   var val = $('#demand_status').val();
   if(val =="Backfill"){
