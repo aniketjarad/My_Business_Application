@@ -159,14 +159,34 @@
               </p>
             </a>
           </li> -->
-          <li class="nav-item" >
+          <li class="nav-item has-treeview menu-open">
             <a id="home-link" href="/home/" class="nav-link ">
-              <i class="nav-icon fas fa-home"></i>
+              <i class="nav-icon fas fa-users"></i>
               <p>
-                Home / Dashboard
-                <span class="right badge badge-danger"></span>
+                Home/Dashboard
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview ">
+              <li class="nav-item" style="background-color: #343a40;">
+                <a id="snow-link" href="/home/snowhome" class="nav-link">
+                  <i class="far fa-address-book nav-icon"></i>
+                  <p>ServiceNow</p>
+                </a>
+              </li>
+              <li class="nav-item" style="background-color: #343a40;">
+                <a id="hp-link"href="/home/infra" class="nav-link">
+                  <i class="far fa-bookmark nav-icon"></i>
+                  <p>Infra</p>
+                </a>
+              </li>
+              <li class="nav-item " style="background-color: #343a40;">
+                <a id="rpa-link" href="/home/rpa" class="nav-link">
+                  <i class="far fa-bookmark nav-icon"></i>
+                  <p>RPA</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item has-treeview menu-open">
             <a id="employee-tab" href="/employee/" class="nav-link ">

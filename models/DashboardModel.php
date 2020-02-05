@@ -37,8 +37,21 @@ class DashboardModel {
          return $arrAllCount;
 
     }
-
+    //All employee count
     public function getEmpCount()
+    {
+        
+        $sql = "select count(*) from emp_master";
+        // print_r($sql_no_emp);
+        $result = mysqli_query($this->db, $sql);
+        $response = mysqli_fetch_array($result,MYSQLI_ASSOC);
+       
+        // print_r($emp_name_res['count(*)']);
+        // exit(0);
+        return $response['count(*)'];
+    }
+    //Infra employee count
+    public function getEmpCountinfra()
     {
         
         $sql = "select count(*) from emp_master";
@@ -62,6 +75,28 @@ class DashboardModel {
         // print_r($emp_name_res['count(*)']);
         // exit(0);
         return $response['count(*)'];
+    }
+
+     public function getAllCountsinfra()
+    {
+        // print_r("expression");
+        $arrAllCount = array();
+        
+        $emp_count = $this->getEmpCountinfra();
+
+        $arrAllCount['emp_count'] = $emp_count;
+
+        $certificate_count = $this->getCertificateCount();
+
+        $arrAllCount['certificate_count'] = $certificate_count;
+
+        // $module_details = $this->getModulesChartDetails();
+
+        //  $arrAllCount['CertificateChart'] = $module_details;
+
+         // print_r($arrAllCount);
+         return $arrAllCount;
+
     }
 
      public function getModulesChartDetails()

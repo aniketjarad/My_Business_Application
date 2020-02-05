@@ -472,8 +472,19 @@ if(url == "http://www.mybusinessapplication.local.com/home/"){
   $("#all_emp-link").addClass('active');
   $("#employee-tab").addClass('active');
   $("#employee-menu-link").addClass('active');
-}
-else if(url == "http://www.mybusinessapplication.local.com/employee/certification"){
+}else if(url == "http://www.mybusinessapplication.local.com/home/snowhome"){
+  $("#snow-link").addClass('active');
+  $("#home-link").addClass('active');
+  $("#home-menu-link").addClass('active');
+}else if(url == "http://www.mybusinessapplication.local.com/home/infra"){
+  $("#hp-link").addClass('active');
+  $("#home-link").addClass('active');
+  $("#home-menu-link").addClass('active');
+}else if(url == "http://www.mybusinessapplication.local.com/home/rpa"){
+  $("#rpa-link").addClass('active');
+  $("#home-link").addClass('active');
+  $("#home-menu-link").addClass('active');
+}else if(url == "http://www.mybusinessapplication.local.com/employee/certification"){
   $("#cert-link").addClass('active');
   $("#employee-tab").addClass('active');
   $("#employee-menu-link").addClass('active');
