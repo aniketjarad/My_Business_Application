@@ -32,16 +32,18 @@
         
         var ctx = document.getElementById("barChart"); 
               var data = new Chart(ctx, { 
-                type: 'pie', 
+                type: 'bar', 
                 data: { 
                   labels: res.certiModLabels, 
                   datasets: [ 
                     { label: res.certiModLabels, 
                       data: res.certiModCount, 
-                      backgroundColor : colors, 
+                      backgroundColor: "rgb(253,252,242,1)" ,
+
+                      borderColor: 'rgb(244,17,158)',
                 
-              borderColor: border_colors, 
-              borderWidth : 3 
+               
+              borderWidth : 2 
                     } 
                   ] 
                 }, 

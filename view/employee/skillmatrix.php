@@ -33,7 +33,7 @@
     </div>
   <center>
        <div class="table-responsive">       
-      <table id="skillmatrix_table" class="table table-bordred display dataTable" style="width:100%">
+      <table id="skillmatrix_table" class="skill_width table table-bordred display dataTable" style="width:100%">
             <thead style="font-size: 13px;text-align:center;">
                 <tr>
                     <th>Code</th>
@@ -56,7 +56,7 @@
             <td><?php echo $e_code; ?></td>
             <td><?php echo $e_name; ?></td>
             <td><?php echo $emp_data[$count]['primary_skill']; ?></td>           
-            <td><?php echo $emp_data[$count]['secondary_skill']; ?></td>            
+            <td style="word-wrap:break-word;"><?php echo $emp_data[$count]['secondary_skill']; ?></td>            
             <td>
               <input type="button" name="edit" value="Edit" id="<?php echo $row["id"]; ?>" class="btn btn-info btn-xs edit_data" data-title="Edit" data-toggle="modal" data-target="#addSkillModal" onclick = "Update_Skill_Element(<?php echo $e_code; ?>);"/>
               <input type="button" name="delete" value="Delete" id="<?php echo $row["id"]; ?>" class="btn btn-info btn-xs edit_data" data-title="Delete"  onclick = "Delete_Skill_Element(<?php echo $e_code; ?>);"/>

@@ -22,7 +22,7 @@ class HomeController extends Controller {
 	}
 	public function infra() {
 	  $this->render('home/infra');
-
+	 }
 	public function forgotpassword() {
 	  $this->render('home/forgotpassword');
 

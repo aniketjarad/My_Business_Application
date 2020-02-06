@@ -194,3 +194,13 @@ form textarea[required=required]:after
     color: red;
       
 }
+
+.skill_width{
+
+  
+  
+  
+  table-layout: fixed; // ***********add this
+  word-wrap:break-word; // ***********and this
+
+}

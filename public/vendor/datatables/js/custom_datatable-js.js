@@ -49,13 +49,24 @@ $(document).ready(function() {
     var skill_table = $('#skillmatrix_table').DataTable({
         //fixedHeader: true,
         //colReorder: true,
+         "columns": [
+                    null,
+                    null,
+                    null,
+                    { "width": "200px" },
+                    null
+                  ],
+        "autoWidth": false,
         "order":[["1","asc"]],
         dom: 'Bfrtip',
         buttons: [
             'copy','excel', 'pdf', 'print'
         ],
+
         "scrollX": true,
-        "paging": false
+        "paging": false,
+
+       
     });
     
 
