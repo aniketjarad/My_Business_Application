@@ -1,4 +1,12 @@
 $(document).ready(function(){
+  
+  $('.dt-button').addClass('button button2').removeClass('dt-button');
+  
+  $('#add_emp').on('click', function (e) {
+    e.preventDefault();
+    window.location.href = "/employee/register";
+  });
+
 
   $('#signup-form').on('submit', function (e) {
     e.preventDefault();
@@ -527,16 +535,16 @@ $('#demand_status').on('change', function (e) {
       url: '/demand/getInActiveEmployee',
       data: null,
       success: function (res) {
-        console.log(res);
-        console.log(res.data[1].emp_code);
-        console.log(res.data[1].emp_name);
+        // console.log(res);
+        // console.log(res.data[1].emp_code);
+        // console.log(res.data[1].emp_name);
         if(res.status == 'success'){
           $('#backfill_div').show();
           $('#backfill_select').show();
           $('#backfill_select').html("");
           //console.log(Object.keys(res.data)[1].emp_code);
           for (var i=1; i<= Object.keys(res.data).length ; i++) {
-            $('#backfill_select').append('<option value='+ res.data[i].emp_code +' >'+res.data[i].emp_name+'</option>');
+            $('#backfill_select').append('<option value="'+ res.data[i].emp_name +'" >'+res.data[i].emp_name+'</option>');
           }
         }
       }
@@ -546,44 +554,16 @@ $('#demand_status').on('change', function (e) {
     $('#backfill_div').hide();
   }
 });
-
-
 });
-var url = window.location;
-if(url == "http://www.mybusinessapplication.local.com/home/"){
-  $("#home-link").addClass('active');
-  $("#home-menu-link").addClass('active');
-}else if(url == "http://www.mybusinessapplication.local.com/employee/"){
-  $("#all_emp-link").addClass('active');
-  $("#employee-tab").addClass('active');
-  $("#employee-menu-link").addClass('active');
-}else if(url == "http://www.mybusinessapplication.local.com/home/snowhome"){
-  $("#snow-link").addClass('active');
-  $("#home-link").addClass('active');
-  $("#home-menu-link").addClass('active');
-}else if(url == "http://www.mybusinessapplication.local.com/home/infra"){
-  $("#hp-link").addClass('active');
-  $("#home-link").addClass('active');
-  $("#home-menu-link").addClass('active');
-}else if(url == "http://www.mybusinessapplication.local.com/home/rpa"){
-  $("#rpa-link").addClass('active');
-  $("#home-link").addClass('active');
-  $("#home-menu-link").addClass('active');
-}else if(url == "http://www.mybusinessapplication.local.com/employee/certification"){
-  $("#cert-link").addClass('active');
-  $("#employee-tab").addClass('active');
-  $("#employee-menu-link").addClass('active');
+
+var val = location.pathname.split("/").slice(1);
+if(val[1] == ""){
+  val = val.slice(0,-1);
 }
-else if(url == "http://www.mybusinessapplication.local.com/employee/skillmatrix"){
-  $("#skill-link").addClass('active');
-  $("#employee-tab").addClass('active');
-  $("#employee-menu-link").addClass('active');
-}/*
-else if(url == "http://www.mybusinessapplication.local.com/home/"){
-  
+if(val.length == 2){
+  $('nav a[href^="/'+location.pathname.split("/")[1]+'/'+location.pathname.split("/")[2]+'"]').addClass('active');  
+}else if(val.length == 1){
+  $('nav a[href="/'+location.pathname.split("/")[1]+'/"]').addClass('active');
 }
-else if(url == "http://www.mybusinessapplication.local.com/home/"){
-  
-}*/
 
 

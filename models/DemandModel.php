@@ -61,6 +61,7 @@ class DemandModel {
             $backfill = $data['backfill_emp_id'];
         }
         if($data['action']=="update"){
+            $timestamp = time();
             $sql = "select jd,cv from demand where demand_id=".$data['demand_id'].";";
             $result = mysqli_query($this->db, $sql);
             $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -72,19 +73,25 @@ class DemandModel {
                 $cv_file_type = end(explode(".",$files['cv_attach']['name']));
                 $status_jd = $status_cv = $arc_jd_file_path = $arc_abs_jd_path = $arc_cv_file_path = $arc_abs_cv_path = $abs_cv_path = $jd_file_path = $abs_jd_path = $cv_file_path = "";
                 if($data['status']=="Dropped" || $data['status']=="Joined"){
-                    $arc_jd_file_path = ARC_FILE_PATH."Demand_".$demand_id."_JD.".$jd_file_type;
-                    $arc_abs_jd_path = ARC_ABS_FILE_PATH."Demand_".$demand_id."_JD.".$jd_file_type;
-                    $arc_cv_file_path = ARC_FILE_PATH."Demand_".str_replace(" ","_", $data['candidate_name'])."_".$demand_id."_CV.".$cv_file_type;
-                    $arc_abs_cv_path = ARC_ABS_FILE_PATH."Demand_".str_replace(" ","_", $data['candidate_name'])."_".$demand_id."_CV.".$cv_file_type;
+                    $arc_jd_file_path = ARC_FILE_PATH."Demand_".$demand_id."_".$timestamp."_JD.".$jd_file_type;
+                    $arc_abs_jd_path = ARC_ABS_FILE_PATH."Demand_".$demand_id."_".$timestamp."_JD.".$jd_file_type;
+                    $arc_cv_file_path = ARC_FILE_PATH."Demand_".$demand_id."_".$timestamp."_CV.".$cv_file_type;
+                    $arc_abs_cv_path = ARC_ABS_FILE_PATH."Demand_".$demand_id."_".$timestamp."_CV.".$cv_file_type;
                     $status_jd = move_uploaded_file($jd_file,$arc_jd_file_path);
                     $status_cv = move_uploaded_file($cv_file,$arc_cv_file_path);
+
+                    //unlink(FILE_PATH.$row['cv']);
+                    //unlink(FILE_PATH.$row['jd']);
                 }else{
-                    $jd_file_path = FILE_PATH."Demand_".$demand_id."_JD.".$jd_file_type;
-                    $abs_jd_path = ABS_FILE_PATH."Demand_".$demand_id."_JD.".$jd_file_type;
-                    $cv_file_path = FILE_PATH."Demand_".str_replace(" ","_", $data['candidate_name'])."_".$demand_id."_CV.".$cv_file_type;
-                    $abs_cv_path = ABS_FILE_PATH."Demand_".str_replace(" ","_", $data['candidate_name'])."_".$demand_id."_CV.".$cv_file_type;
+                    $jd_file_path = FILE_PATH."Demand_".$demand_id."_".$timestamp."_JD.".$jd_file_type;
+                    $abs_jd_path = ABS_FILE_PATH."Demand_".$demand_id."_".$timestamp."_JD.".$jd_file_type;
+                    $cv_file_path = FILE_PATH."Demand_".$demand_id."_".$timestamp."_CV.".$cv_file_type;
+                    $abs_cv_path = ABS_FILE_PATH."Demand_".$demand_id."_".$timestamp."_CV.".$cv_file_type;
                     $status_jd = move_uploaded_file($jd_file,$jd_file_path);
                     $status_cv = move_uploaded_file($cv_file,$cv_file_path);
+
+                    unlink(FILE_PATH.end(explode("/",$row['cv'])));
+                    unlink(FILE_PATH.end(explode("/",$row['jd'])));
                 }
 
                 if($status_jd !=1 && $status_cv!=1){
@@ -102,7 +109,7 @@ class DemandModel {
                         //echo "\n==33==>".$sql;
                         mysqli_query($this->db, $sql);
                     }else if($data['status']=="Joined") {
-                        $sql = "delete from table demand where demand_id=".$demand_id.";";
+                        $sql = "delete from demand where demand_id=".$demand_id.";";
                         mysqli_query($this->db, $sql);
                         $sql = "INSERT INTO `demand_archieve` (`demand_id`, `candidate_name`, `position`, `joining_date`,`tentative_mapping`,`status`,`backfill_emp_id`,`jd`,`cv`,`bos_id`) VALUES ('".$demand_id."','".$data['candidate_name']."','".$data['position']."','".$data['joining_date']."','".$data['tentative_mapping']."','".$data['status']."','".$backfill."','". $arc_abs_jd_path."','". $arc_abs_cv_path."','".$data['bos_id']."')";
                         mysqli_query($this->db, $sql);
@@ -115,17 +122,21 @@ class DemandModel {
                     $return['data'] = "Demand Updated Successfully...!";
                 }
             }else if(!empty($files['jd_attach']['tmp_name'])){
+                
                 $jd_file = $files['jd_attach']['tmp_name'];
                 $jd_file_type = end(explode(".",$files['jd_attach']['name']));
                 $status = $arc_jd_file_path = $arc_abs_jd_path = $jd_file_path = $abs_jd_path= "";
                 if($data['status']=="Dropped" || $data['status']=="Joined"){
-                    $arc_jd_file_path = ARC_FILE_PATH."Demand_".$demand_id."_JD.".$jd_file_type;
-                    $arc_abs_jd_path = ARC_ABS_FILE_PATH."Demand_".$demand_id."_JD.".$jd_file_type;
+                    $arc_jd_file_path = ARC_FILE_PATH."Demand_".$demand_id."_".$timestamp."_JD.".$jd_file_type;
+                    $arc_abs_jd_path = ARC_ABS_FILE_PATH."Demand_".$demand_id."_".$timestamp."_JD.".$jd_file_type;
                     $status = move_uploaded_file($jd_file,$arc_jd_file_path);
+                    //unlink(FILE_PATH.$row['jd']);
                 }else{
-                    $jd_file_path = FILE_PATH."Demand_".$demand_id."_JD.".$jd_file_type;
-                    $abs_jd_path = ABS_FILE_PATH."Demand_".$demand_id."_JD.".$jd_file_type;
+                    $jd_file_path = FILE_PATH."Demand_".$demand_id."_".$timestamp."_JD.".$jd_file_type;
+                    $abs_jd_path = ABS_FILE_PATH."Demand_".$demand_id."_".$timestamp."_JD.".$jd_file_type;
                     $status = move_uploaded_file($jd_file,$jd_file_path);
+                    
+                    unlink(FILE_PATH.end(explode("/",$row['jd'])));
                 }
 
                 if($status!=1){
@@ -133,8 +144,9 @@ class DemandModel {
                     $return['data'] = "File Upload Failed. Try Again..!";
                 }else{
                     if($data['status']=="Dropped"){
-                        $arc_abs_cv_path = ARC_FILE_PATH.end(explode("/",$row['cv']));
-                        rename($row['cv'], $arc_abs_cv_path);
+                        $arc_abs_cv_path = ABS_FILE_PATH.end(explode("/",$row['cv']));
+                        $arc_cv_path = ARC_FILE_PATH.end(explode("/",$row['cv']));
+                        rename(FILE_PATH.end(explode("/",$row['cv'])), $arc_cv_path);
 
                         $sql = "UPDATE `demand` SET `candidate_name`='',`position`='".$data['position']."',`joining_date`='',`tentative_mapping`='',`status`='',`backfill_emp_id`='',`jd`='',`cv`='',`bos_id`='".$data['bos_id']."' WHERE `demand_id`='".$demand_id."'";
                         mysqli_query($this->db, $sql);
@@ -145,12 +157,13 @@ class DemandModel {
                     }else if($data['status']=="Joined") {
                         $arc_abs_cv_path = ARC_FILE_PATH.end(explode("/",$row['cv']));
                         rename($row['cv'], $arc_abs_cv_path);
-                        $sql = "delete from table demand where demand_id=".$demand_id.";";
+                        $sql = "delete from demand where demand_id=".$demand_id.";";
                         mysqli_query($this->db, $sql);
                         $sql = "INSERT INTO `demand_archieve` (`demand_id`, `candidate_name`, `position`, `joining_date`,`tentative_mapping`,`status`,`backfill_emp_id`,`jd`,`cv`,`bos_id`) VALUES ('".$demand_id."','".$data['candidate_name']."','".$data['position']."','".$data['joining_date']."','".$data['tentative_mapping']."','".$data['status']."','".$backfill."','". $arc_abs_jd_path."','". $arc_abs_cv_path."','".$data['bos_id']."')";
                         mysqli_query($this->db, $sql);
                     }else{
-                        $sql = "UPDATE `demand` SET `candidate_name`='".$data['candidate_name']."',`position`='".$data['position']."',`joining_date`='".$data['joining_date']."',`tentative_mapping`='".$data['tentative_mapping']."',`status`='".$data['status']."',`backfill_emp_id`='".$backfill."',`jd`='".$arc_abs_jd_path."',`bos_id`='".$data['bos_id']."' WHERE `demand_id`='".$demand_id."'";
+
+                        $sql = "UPDATE `demand` SET `candidate_name`='".$data['candidate_name']."',`position`='".$data['position']."',`joining_date`='".$data['joining_date']."',`tentative_mapping`='".$data['tentative_mapping']."',`status`='".$data['status']."',`backfill_emp_id`='".$backfill."',`jd`='".$abs_jd_path."',`bos_id`='".$data['bos_id']."' WHERE `demand_id`='".$demand_id."'";
                         mysqli_query($this->db, $sql);
                     }
                     
@@ -163,13 +176,14 @@ class DemandModel {
                 $file_type = end(explode(".",$files['cv_attach']['name']));
                 $status = $arc_cv_file_path = $arc_abs_cv_path = $file_path = $abs_path = "";
                 if($data['status']=="Dropped" || $data['status']=="Joined"){
-                    $arc_cv_file_path = ARC_FILE_PATH."Demand_".$demand_id."_CV.".$file_type;
-                    $arc_abs_cv_path = ARC_ABS_FILE_PATH."Demand_".$demand_id."_CV.".$file_type;
-                    $status = move_uploaded_file($jd_file,$arc_cv_file_path);
+                    $arc_cv_file_path = ARC_FILE_PATH."Demand_".$demand_id."_".$timestamp."_CV.".$file_type;
+                    $arc_abs_cv_path = ARC_ABS_FILE_PATH."Demand_".$demand_id."_".$timestamp."_CV.".$file_type;
+                    $status = move_uploaded_file($cv_file,$arc_cv_file_path);
                 }else{
-                    $file_path = FILE_PATH."Demand_".$demand_id."_CV.".$file_type;
-                    $abs_path = ABS_FILE_PATH."Demand_".$demand_id."_CV.".$file_type;
+                    $file_path = FILE_PATH."Demand_".$demand_id."_".$timestamp."_CV.".$file_type;
+                    $abs_path = ABS_FILE_PATH."Demand_".$demand_id."_".$timestamp."_CV.".$file_type;
                     $status = move_uploaded_file($cv_file,$file_path);
+                    unlink(FILE_PATH.end(explode("/",$row['cv'])));
                 }
 
                 if($status!=1){
@@ -178,11 +192,13 @@ class DemandModel {
                 }else{
                     if($data['status']=="Dropped"){
                         // $status_jd = rename($row['jd'], ARC_FILE_PATH.end(explode("/",$row['jd'])));
-                        $arc_abs_jd_path = ARC_FILE_PATH.end(explode("/",$row['jd']));
-                        $file = FILE_PATH.end(explode("/",$row['jd']));
-                        $status1 = rename($file, $arc_abs_jd_path);
-                        echo "\nFile Moved with status=>".$status1;
-                        exit(0);
+                        $arc_abs_jd_path = ABS_FILE_PATH.end(explode("/",$row['jd']));
+
+                        $arc_jd_path = ARC_FILE_PATH.end(explode("/",$row['jd']));
+                        rename(FILE_PATH.end(explode("/",$row['jd'])), $arc_jd_path);
+
+                        // echo "\nFile Moved with status=>".$status1;
+                        // exit(0);
                         $sql = "UPDATE `demand` SET `candidate_name`='',`position`='".$data['position']."',`joining_date`='',`tentative_mapping`='',`status`='',`backfill_emp_id`='',`jd`='',`cv`='',`bos_id`='".$data['bos_id']."' WHERE `demand_id`='".$demand_id."'";
                         mysqli_query($this->db, $sql);
 
@@ -190,9 +206,12 @@ class DemandModel {
                         //echo "\n==33==>".$sql;
                         mysqli_query($this->db, $sql);
                     }else if($data['status']=="Joined") {
-                        $arc_abs_jd_path = ARC_FILE_PATH.end(explode("/",$row['jd']));
-                        rename($row['jd'], $arc_abs_jd_path);
-                        $sql = "delete from table demand where demand_id=".$demand_id.";";
+                        $arc_abs_jd_path = ABS_FILE_PATH.end(explode("/",$row['jd']));
+
+                        $arc_jd_path = ARC_FILE_PATH.end(explode("/",$row['jd']));
+                        rename(FILE_PATH.end(explode("/",$row['jd'])), $arc_jd_path);
+
+                        $sql = "delete from demand where demand_id=".$demand_id.";";
                         mysqli_query($this->db, $sql);
                         $sql = "INSERT INTO `demand_archieve` (`demand_id`, `candidate_name`, `position`, `joining_date`,`tentative_mapping`,`status`,`backfill_emp_id`,`jd`,`cv`,`bos_id`) VALUES ('".$demand_id."','".$data['candidate_name']."','".$data['position']."','".$data['joining_date']."','".$data['tentative_mapping']."','".$data['status']."','".$backfill."','". $arc_abs_jd_path."','". $arc_abs_cv_path."','".$data['bos_id']."')";
                         mysqli_query($this->db, $sql);
@@ -207,16 +226,14 @@ class DemandModel {
             }else if(empty($files['jd_attach']['tmp_name']) && empty($files['cv_attach']['tmp_name'])){
 
                 if($data['status']=="Dropped"){
-                    // $arc_abs_jd_path = ARC_FILE_PATH.end(explode("/",$row['jd']));
-                    // $file = FILE_PATH.end(explode("/",$row['jd']));
-                    // $status1 = rename($file, $arc_abs_jd_path);
-                    // echo "\nFile Moved with status=>".$status1;
-                    // exit(0);
-                    $arc_abs_jd_path = ARC_FILE_PATH.end(explode("/",$row['jd']));
-                    $a = rename(FILE_PATH.end(explode("/",$row['jd'])), $arc_abs_jd_path);
+                    $arc_abs_jd_path = ABS_FILE_PATH.end(explode("/",$row['jd']));
+                    $arc_abs_cv_path = ABS_FILE_PATH.end(explode("/",$row['cv']));
 
-                    $arc_abs_cv_path = ARC_FILE_PATH.end(explode("/",$row['cv']));
-                    $b = rename(FILE_PATH.end(explode("/",$row['cv'])), $arc_abs_cv_path);
+                    $arc_jd_path = ARC_FILE_PATH.end(explode("/",$row['jd']));
+                    rename(FILE_PATH.end(explode("/",$row['jd'])), $arc_jd_path);
+
+                    $arc_cv_path = ARC_FILE_PATH.end(explode("/",$row['cv']));
+                    rename(FILE_PATH.end(explode("/",$row['cv'])), $arc_cv_path);
                     //echo "\n=>".$a."==".$b;exit(0);
 
                     $sql = "UPDATE `demand` SET `candidate_name`='',`position`='".$data['position']."',`joining_date`=NULL,`tentative_mapping`='',`status`=NULL,`backfill_emp_id`='',`jd`='',`cv`='',`bos_id`='".$data['bos_id']."' WHERE `demand_id`='".$demand_id."'";
@@ -228,12 +245,20 @@ class DemandModel {
                     //exit(0);
                     mysqli_query($this->db, $sql);
                 }else if($data['status']=="Joined") {
-                    $arc_abs_jd_path = ARC_FILE_PATH.end(explode("/",$row['jd']));
-                    rename($row['jd'], $arc_abs_jd_path);
-                    $arc_abs_cv_path = ARC_FILE_PATH.end(explode("/",$row['cv']));
-                    rename($row['cv'], $arc_abs_cv_path);
-                    $sql = "delete from table demand where demand_id=".$demand_id.";";
+
+                    $arc_abs_jd_path = ABS_FILE_PATH.end(explode("/",$row['jd']));
+                    $arc_abs_cv_path = ABS_FILE_PATH.end(explode("/",$row['cv']));
+
+                    $arc_jd_path = ARC_FILE_PATH.end(explode("/",$row['jd']));
+                    rename(FILE_PATH.end(explode("/",$row['jd'])), $arc_jd_path);
+
+                    $arc_cv_path = ARC_FILE_PATH.end(explode("/",$row['cv']));
+                    rename(FILE_PATH.end(explode("/",$row['cv'])), $arc_cv_path);
+
+                    $sql = "delete from demand where demand_id=".$demand_id.";";
+                    //echo "===>".$sql;exit(0);
                     mysqli_query($this->db, $sql);
+
                     $sql = "INSERT INTO `demand_archieve` (`demand_id`, `candidate_name`, `position`, `joining_date`,`tentative_mapping`,`status`,`backfill_emp_id`,`jd`,`cv`,`bos_id`) VALUES ('".$demand_id."','".$data['candidate_name']."','".$data['position']."','".$data['joining_date']."','".$data['tentative_mapping']."','".$data['status']."','".$backfill."','". $arc_abs_jd_path."','". $arc_abs_cv_path."','".$data['bos_id']."')";
                     mysqli_query($this->db, $sql);
                 }
@@ -245,18 +270,19 @@ class DemandModel {
                 $return['status'] = "success";
                 $return['data'] = "Demand Updated Successfully...!";
             }
-        }else if ($data['demand_id']=="add") {
+        }else if ($data['action']=="add") {
+            $timestamp = time();
             $demand_id = $data['demand_id'];
             if(!empty($files['jd_attach']['tmp_name']) && !empty($files['cv_attach']['tmp_name']) && !empty($data['candidate_name'])){
                 $jd_file = $files['jd_attach']['tmp_name'];
                 $cv_file = $files['cv_attach']['tmp_name'];
                 $jd_file_type = end(explode(".",$files['jd_attach']['name']));
                 $cv_file_type = end(explode(".",$files['cv_attach']['name']));
-                $jd_file_path = FILE_PATH."Demand_".$demand_id."_JD.".$jd_file_type;
-                $abs_jd_path = ABS_FILE_PATH."Demand_".$demand_id."_JD.".$jd_file_type;
+                $jd_file_path = FILE_PATH."Demand_".$demand_id."_".$timestamp."_JD.".$jd_file_type;
+                $abs_jd_path = ABS_FILE_PATH."Demand_".$demand_id."_".$timestamp."_JD.".$jd_file_type;
                 
-                $cv_file_path = FILE_PATH."Demand_".str_replace(" ","_", $data['candidate_name'])."_".$demand_id."_CV.".$cv_file_type;
-                $abs_cv_path = ABS_FILE_PATH."Demand_".str_replace(" ","_", $data['candidate_name'])."_".$demand_id."_CV.".$cv_file_type;
+                $cv_file_path = FILE_PATH."Demand_".$demand_id."_".$timestamp."_CV.".$cv_file_type;
+                $abs_cv_path = ABS_FILE_PATH."Demand_".$demand_id."_".$timestamp."_CV.".$cv_file_type;
 
                 $status_jd = move_uploaded_file($jd_file,$jd_file_path);
                 $status_cv = move_uploaded_file($cv_file,$cv_file_path);
@@ -273,8 +299,8 @@ class DemandModel {
             }else if(!empty($files['jd_attach']['tmp_name'])){
                 $jd_file = $files['jd_attach']['tmp_name'];
                 $file_type = end(explode(".",$files['jd_attach']['name']));
-                $file_path = FILE_PATH."Demand_".$demand_id."_JD.".$file_type;
-                $abs_path = ABS_FILE_PATH."Demand_".$demand_id."_JD.".$file_type;
+                $file_path = FILE_PATH."Demand_".$demand_id."_".$timestamp."_JD.".$file_type;
+                $abs_path = ABS_FILE_PATH."Demand_".$demand_id."_".$timestamp."_JD.".$file_type;
                 $status = move_uploaded_file($jd_file,$file_path);
                 if($status!=1){
                     $return['status'] = "error";
@@ -287,16 +313,10 @@ class DemandModel {
                     $return['data'] = "Demand Added Successfully...!";
                 }
             }
-        }else if(empty($data['demand_id_select']) && empty($data['demand_id'])){
+        }else if(empty($data['demand_id'])){
             $return['status'] = "error";
             $return['data'] = "Demand ID Cannot be Empty ..!";
         }
-            $to_email = 'aniketjarad73@gmail.com';
-          $subject = 'Testing PHP Mail';
-          $message = 'This mail is sent using the PHP mail function';
-          //$headers = 'From: aniketjarad73@gmail.com';
-          $status = mail($to_email,$subject,$message);
-          //echo "mail sent==>".$status;
         return $return; 
     }
 

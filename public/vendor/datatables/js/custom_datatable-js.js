@@ -4,7 +4,7 @@ $(document).ready(function() {
     $('#example thead tr').clone(true).appendTo('#example thead');
     $('#example thead tr:eq(1) th').each( function (i) {
         var title = $(this).text();
-        $(this).html( '<input type="text" style="width:60px;text-align:center;" placeholder="Search"/>' );   
+        $(this).html( '<input type="text" style="background-color:#f2f4f6;border: 1px;width:80px;text-align:center;" placeholder="Search"/>' );   
         $( 'input',this).on('keyup change', function () {
             if ( employee_table.column(i).search() !== this.value ) {
                 employee_table
@@ -24,6 +24,18 @@ $(document).ready(function() {
         //fixedHeader: true,
         //colReorder: true,
         "order":[["1","asc"]],
+        dom: 'Bfrtip',
+        buttons: [
+            'copy','excel', 'pdf', 'print'
+        ],
+        "scrollX": true,
+        "paging": false
+    });
+
+    var demand_table = $('#demand_table').DataTable({
+        //fixedHeader: true,
+        //colReorder: true,
+        "order":[["4","asc"]],
         dom: 'Bfrtip',
         buttons: [
             'copy','excel', 'pdf', 'print'
@@ -337,3 +349,4 @@ function Update_Demand(id){
         }
         
     }
+

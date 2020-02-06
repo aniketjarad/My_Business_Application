@@ -29,10 +29,11 @@
 			if(isset($_SESSION['emp_code']) && $c =='login'){
 				//echo "\n====>".$c;
 				$this->_method = 'index';
-			}elseif(count($_SESSION)== 0 && $this->_controller=="Home"){
-				//echo "\n====>".$c;
-				$this->_method = 'login';
-			}				
+			}
+			// elseif(count($_SESSION)== 0 && $this->_controller=="Home"){
+			// 	//echo "\n====>".$c;
+			// 	$this->_method = 'login';
+			// }				
 			$this->_args = (isset($parts[0])) ? $parts : array();
 			//echo " \n ===>".$this->_controller."===".$this->_method."===".print_r($this->_args);
 		}

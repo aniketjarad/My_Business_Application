@@ -1,19 +1,25 @@
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background: #E20074;">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" href="#" style="color: white;"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a id="home-menu-link" href="/home/" class="nav-link">Home</a>
+        <a id="home-menu-link" href="/home/" class="nav-link" style="color: white;">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a id="employee-menu-link" href="/employee/" class="nav-link">Employee</a>
+        <a id="employee-menu-link" href="/employee/" class="nav-link" style="color: white;">Employee</a>
       </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a id="demand-menu-link" href="/demand/" class="nav-link" style="color: white;">Demand</a>
+      </li>
+      <!-- <li class="nav-item d-none d-sm-inline-block" style="float: right;">
+        <img src="/public/img/TSY_Logo_Small-White.png" style="height: 28px;width: 160px;" />
+      </li> -->
     </ul>
 
-    <!-- SEARCH FORM -->
+    <!-- SEARCH FORM 
     <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
@@ -23,19 +29,19 @@
           </button>
         </div>
       </div>
-    </form>
+    </form>-->
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
+    <!-- Right navbar links 
+    <ul class="navbar-nav ml-auto"> -->
+      <!-- Messages Dropdown Menu 
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-comments"></i>
           <span class="badge badge-danger navbar-badge">3</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
+          <a href="#" class="dropdown-item">-->
+            <!-- Message Start 
             <div class="media">
               <img src="/public/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
@@ -46,12 +52,12 @@
                 <p class="text-sm">Call me whenever you can...</p>
                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
               </div>
-            </div>
-            <!-- Message End -->
+            </div>-->
+            <!-- Message End 
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
+          <a href="#" class="dropdown-item">-->
+            <!-- Message Start 
             <div class="media">
               <img src="/public/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
@@ -62,12 +68,12 @@
                 <p class="text-sm">I got your message bro</p>
                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
               </div>
-            </div>
-            <!-- Message End -->
+            </div>-->
+            <!-- Message End 
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
+          <a href="#" class="dropdown-item">-->
+            <!-- Message Start 
             <div class="media">
               <img src="/public/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
@@ -78,14 +84,14 @@
                 <p class="text-sm">The subject goes here</p>
                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
               </div>
-            </div>
-            <!-- Message End -->
+            </div>-->
+            <!-- Message End 
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
         </div>
-      </li>
-      <!-- Notifications Dropdown Menu -->
+      </li>-->
+      <!-- Notifications Dropdown Menu 
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
@@ -115,6 +121,11 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
             class="fas fa-th-large"></i></a>
+      </li>
+    </ul>-->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item d-none d-sm-inline-block" style="float: right;">
+        <img src="/public/img/TSY_Logo_Small-White.png" style="height: 28px;width: 160px;" />
       </li>
     </ul>
   </nav>
@@ -161,35 +172,35 @@
           </li> -->
           <li class="nav-item has-treeview menu-open">
             <a id="home-link" href="/home/" class="nav-link ">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Home/Dashboard
+                Home | Dashboard
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview ">
               <li class="nav-item" style="background-color: #343a40;">
                 <a id="snow-link" href="/home/snowhome" class="nav-link">
-                  <i class="far fa-address-book nav-icon"></i>
+                  <i class="fas fa-newspaper nav-icon"></i>
                   <p>ServiceNow</p>
                 </a>
               </li>
               <li class="nav-item" style="background-color: #343a40;">
                 <a id="hp-link"href="/home/infra" class="nav-link">
-                  <i class="far fa-bookmark nav-icon"></i>
-                  <p>Infra</p>
+                  <i class="fas fa-building nav-icon"></i>
+                  <p>Infra - Automation</p>
                 </a>
               </li>
               <li class="nav-item " style="background-color: #343a40;">
                 <a id="rpa-link" href="/home/rpa" class="nav-link">
-                  <i class="far fa-bookmark nav-icon"></i>
+                  <i class="fas fa-robot nav-icon"></i>
                   <p>RPA</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item has-treeview menu-open">
-            <a id="employee-tab" href="/employee/" class="nav-link ">
+            <a id="employee-tab" href="#" class="nav-link ">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Employee
@@ -205,30 +216,28 @@
               </li>
               <li class="nav-item" style="background-color: #343a40;">
                 <a id="cert-link"href="/employee/certification" class="nav-link">
-                  <i class="far fa-bookmark nav-icon"></i>
+                  <i class="fas fa-certificate nav-icon"></i>
                   <p>Certification</p>
                 </a>
               </li>
               <li class="nav-item " style="background-color: #343a40;">
                 <a id="skill-link" href="/employee/skillmatrix" class="nav-link">
-                  <i class="far fa-bookmark nav-icon"></i>
+                  <i class="fas fa-chalkboard-teacher nav-icon"></i>
                   <p>Skill Matrix</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item has-treeview menu-open">
-            <a id="demand-tab" href="/demand/" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Demand Management
-                <i class="right fas fa-angle-left"></i>
+            <a id="demand-tab" href="#" class="nav-link">
+              <i class="fas fa-user-cog nav-icon "></i>
+              <p>Demand Management<i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item" style="background-color: #343a40;">
                 <a id="demand-manage-link" href="/demand/" class="nav-link">
-                  <i class="far fa-address-book nav-icon"></i>
+                  <i class="fas fa-portrait nav-icon"></i>
                   <p>Manage</p>
                 </a>
               </li>

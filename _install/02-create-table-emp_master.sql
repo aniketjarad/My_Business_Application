@@ -61,7 +61,7 @@ CREATE TABLE `all_certificate` (
  `certificate_module` varchar(100) NOT NULL,
  `certificate_type` varchar(100) NOT NULL,
  PRIMARY KEY (`srno`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1
 
 
 CREATE TABLE `all_skills` (
@@ -69,32 +69,35 @@ CREATE TABLE `all_skills` (
  `skill` varchar(100) NOT NULL,
  PRIMARY KEY (`skill`),
  UNIQUE KEY `sr_no` (`sr_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1
 
 
 CREATE TABLE `demand` (
- `demand_id` varchar(50) NOT NULL,
+ `demand_id` int(11) NOT NULL AUTO_INCREMENT,
+ `bos_id` varchar(50) DEFAULT NULL,
  `candidate_name` varchar(50) DEFAULT NULL,
  `position` varchar(100) NOT NULL,
  `joining_date` date DEFAULT NULL,
  `status` enum('On Track','Dropped','Backfill','Joined') DEFAULT NULL,
  `tentative_mapping` varchar(50) DEFAULT NULL,
- `backfill_emp_id` int(11) DEFAULT NULL,
+ `backfill_emp_id` varchar(100) DEFAULT NULL,
  `cv` varchar(100) DEFAULT NULL,
  `jd` varchar(100) DEFAULT NULL,
  PRIMARY KEY (`demand_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1
 
 
 CREATE TABLE `demand_archieve` (
- `demand_id` varchar(50) NOT NULL,
+ `Sr No` int(11) NOT NULL AUTO_INCREMENT,
+ `demand_id` int(11) NOT NULL,
+ `bos_id` varchar(50) DEFAULT NULL,
  `candidate_name` varchar(50) DEFAULT NULL,
  `position` varchar(100) NOT NULL,
  `joining_date` date DEFAULT NULL,
  `status` enum('On Track','Dropped','Backfill','Joined') DEFAULT NULL,
  `tentative_mapping` varchar(50) DEFAULT NULL,
- `backfill_emp_id` int(11) DEFAULT NULL,
+ `backfill_emp_id` varchar(100) DEFAULT NULL,
  `cv` varchar(100) DEFAULT NULL,
  `jd` varchar(100) DEFAULT NULL,
- PRIMARY KEY (`demand_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+ PRIMARY KEY (`Sr No`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1
