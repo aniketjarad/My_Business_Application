@@ -8,6 +8,10 @@ class DemandController extends Controller {
 	  $this->render('demand/index');
 	}
 
+	public function archieve() {
+	  $this->render('demand/archieve');
+	}
+
 	public function add() {
 		$data = $_POST;
 		$files = $_FILES;
@@ -37,6 +41,13 @@ class DemandController extends Controller {
 		$obj = $this->loadModel('DemandModel');
 		$response['count'] = $obj->getDemandCount();
 		$response['data'] = $obj->getAll();
+		return $response;
+	}
+
+	public function getAllArchieve(){
+		$obj = $this->loadModel('DemandModel');
+		//$response['count'] = $obj->getDemandCount();
+		$response['data'] = $obj->getAllArchieve();
 		return $response;
 	}
 

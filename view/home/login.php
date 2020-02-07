@@ -8,7 +8,7 @@ if(isset($_SESSION['emp_code'])){
 <div class="limiter">
 	<div class="container-login100">
 		<div class="wrap-login100">
-			<form id="login-form" class="login100-form validate-form" action="" method="post">
+			<form id="login-form" class="login100-form validate-form" action="" method="post" style="padding:120px 55px 55px 55px;">
 				<span class="login100-form-title p-b-43">
 					Login to continue
 				</span>

@@ -323,9 +323,22 @@ class DemandModel {
     /**
      * Get all data from Employees
      */
+    
     public function getAll()
     {
         $sql = "select * from demand order by joining_date";
+        $result = mysqli_query($this->db, $sql);
+        $count = 1;
+        while($array = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+            $row->{$count} = $array;
+            $count++;
+        }
+        return $row;
+    }
+
+    public function getAllArchieve()
+    {
+        $sql = "select * from demand_archieve order by demand_id";
         $result = mysqli_query($this->db, $sql);
         $count = 1;
         while($array = mysqli_fetch_array($result,MYSQLI_ASSOC)){

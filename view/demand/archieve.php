@@ -1,11 +1,10 @@
 <?php
 
 if(!isset($_SESSION['emp_code'])){
-
 	header("Location: /home/login");
 	exit;
 }else{
-    $all = $this->getAll();
+    $all = $this->getAllArchieve();
     $data = $all['data'];
 }
 ?>
@@ -14,12 +13,13 @@ if(!isset($_SESSION['emp_code'])){
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h4 class="m-0 text-dark">Demand</h4>
+        <h4 class="m-0 text-dark">Demand Archieve</h4>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="/home/">Home</a></li>
-          <li class="breadcrumb-item active">Demand</li>
+          <li class="breadcrumb-item"><a href="/home/demand/">Demand</a></li>
+          <li class="breadcrumb-item active">Archieve</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -27,19 +27,8 @@ if(!isset($_SESSION['emp_code'])){
 </div>
   <!-- /.content-header -->
 <center>
-	<div class="">
-        <div align="left" style="margin-left:2%;">
-        <button type="button" id="add_btn" name="add" class="btn btn-info " style="color: white;/*padding: 10px;*/" data-toggle="modal" data-target="#addDemandModal">New Demand</button>
-        <!-- <div class="col-md-3" style="float: right;">
-          <a href="#" title="Example tile shortcut" class="tile-box tile-box-shortcut btn-danger">
-             <span class="bs-badge badge-absolute"><?php echo $all['count']['count']; ?></span>
-             <div class="tile-header">Available Demand's Now</div>
-             <div class="tile-content-wrapper"><i class="fa fa-user fafa-icon-css"></i></div>
-          </a>
-       </div> -->
-    </div>
-    
-	<table id="demand_table" class="table table-bordred display" style="width:100%;margin-top:15px;">
+  <div>
+	<table id="demand_archieve_table" class="table table-bordred display" style="width:100%;margin-top:15px;">
         <thead style="font-size: 13px;text-align:center;">
             <tr>
                 <th>Demand Id</th>
@@ -52,7 +41,7 @@ if(!isset($_SESSION['emp_code'])){
                 <th>BackFill Employee ID</th>
                 <th>JD</th>
                 <th>CV</th>
-                <th>Action</th>
+                <!-- <th>Action</th> -->
             </tr>
         </thead>
         <tbody style="font-size: 11px;text-align:center;">
@@ -75,7 +64,7 @@ if(!isset($_SESSION['emp_code'])){
                     </td>
 					<td><?php if(!empty($emp_data['cv'])) {echo "<a download=".end(explode("/",$emp_data['cv']))." href=".$emp_data['cv']." class='fa fa-file-alt' style='color: #E20074;'></a>";} else echo "---";?>                  
                     </td>
-                    <td><input type="button" name="edit" value="Edit" id="<?php echo $row["id"]; ?>" class="btn btn-info btn-xs edit_data" data-title="Edit" data-toggle="modal" data-target="#addDemandModal" onclick = "Update_Demand(<?php echo $emp_data['demand_id']; ?>);"/></td>
+                    <!--<td><input type="button" name="edit" value="Edit" id="<?php echo $row["id"]; ?>" class="btn btn-info btn-xs edit_data" data-title="Edit" data-toggle="modal" data-target="#addDemandModal" onclick = "Update_Demand(<?php echo $emp_data['demand_id']; ?>);"/></td> -->
 				</tr>
 				<?php
 				}
@@ -93,13 +82,12 @@ if(!isset($_SESSION['emp_code'])){
                 <th>BackFill Employee ID</th>
                 <th>JD</th>
                 <th>CV</th>
-                <th>Action</th>
             </tr>
         </tfoot>
 	</table>
-
+</div>
     <!-- Modal Add new -->
-    <div class="modal fade" id="addDemandModal" tabindex="-1" role="dialog" aria-labelledby="addDemandModalCenterTitle" aria-hidden="true">
+    <!--<div class="modal fade" id="addDemandModal" tabindex="-1" role="dialog" aria-labelledby="addDemandModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-md" role="dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -169,6 +157,6 @@ if(!isset($_SESSION['emp_code'])){
             </div>
         </form>
       </div>
-    </div>
+    </div> -->
     <!-- End of Modal Add new -->
 </center>

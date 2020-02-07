@@ -26,7 +26,10 @@ $(document).ready(function() {
         "order":[["1","asc"]],
         dom: 'Bfrtip',
         buttons: [
-            'copy','excel', 'pdf', 'print'
+            { extend: 'copyHtml5', footer: true },
+            { extend: 'excelHtml5', footer: true },
+            { extend: 'csvHtml5', footer: true },
+            { extend: 'pdfHtml5', footer: true }
         ],
         "scrollX": true,
         "paging": false
@@ -36,6 +39,18 @@ $(document).ready(function() {
         //fixedHeader: true,
         //colReorder: true,
         "order":[["4","asc"]],
+        dom: 'Bfrtip',
+        buttons: [
+            'copy','excel', 'pdf', 'print'
+        ],
+        "scrollX": true,
+        "paging": false
+    });
+
+    var demand_arc_table = $('#demand_archieve_table').DataTable({
+        //fixedHeader: true,
+        //colReorder: true,
+        "order":[["0","asc"]],
         dom: 'Bfrtip',
         buttons: [
             'copy','excel', 'pdf', 'print'

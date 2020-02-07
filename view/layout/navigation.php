@@ -241,6 +241,12 @@
                   <p>Manage</p>
                 </a>
               </li>
+              <li class="nav-item" style="background-color: #343a40;">
+                <a id="demand-archieve-link" href="/demand/archieve" class="nav-link">
+                  <i class="fas fa-archive nav-icon"></i>
+                  <p>Archieve</p>
+                </a>
+              </li>
             </ul>
           </li>
           <!--<li class="nav-item">
@@ -251,7 +257,7 @@
                 <span class="right badge badge-danger"></span>
               </p>
             </a>
-          </li>-->
+          </li>--> 
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

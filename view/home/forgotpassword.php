@@ -1,7 +1,7 @@
 <div class="limiter">
 	<div class="container-login100">
 		<div class="wrap-login100">
-			<form id="forgot_password_form" class="login100-form validate-form" style="padding:150px 55px 55px 55px" method="post" action="">
+			<form id="forgot_password_form" class="login100-form validate-form" style="padding:120px 55px 55px 55px;" method="post" action="">
 				<span class="login100-form-title p-b-43">
 					Forgot Password.
 				</span>

@@ -6,5 +6,5 @@
       <img src="/public/img/icons/favicon.ico" style="height: 30px;width: auto;">
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2019 <a href="">T-Systems</a>   .</strong> All rights reserved.
+    <strong>Copyright &copy; 2020 <a href="" style="color: #E20074;">T-Systems</a>   .</strong> All rights reserved.
   </footer>
