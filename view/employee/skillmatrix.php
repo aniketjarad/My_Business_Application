@@ -1,9 +1,9 @@
   <?php
-
-  if(!isset($_SESSION['emp_code'])){
-  header("Location: /home/login");
-  exit;
-  }else{
+if(!isset($_SESSION['emp_code']) || count($_SESSION)== 0){
+  //header("Location: /home/login");
+  echo "<script>window.location.href='/home/login';</script>";
+    exit;
+}else{
   //$this->loadModel('EmployeeModel');
   }
   ?>

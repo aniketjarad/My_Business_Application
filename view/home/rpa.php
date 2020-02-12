@@ -1,9 +1,8 @@
 <?php
-//session_start();
-if(!isset($_SESSION['emp_code'])){
-	header("Location: /home/rpa");
-	exit;
-
+if(!isset($_SESSION['emp_code']) || count($_SESSION)== 0){
+  //header("Location: /home/login");
+  echo "<script>window.location.href='/home/login';</script>";
+    exit;
 }
 
 $counts = $this->getAllCount();

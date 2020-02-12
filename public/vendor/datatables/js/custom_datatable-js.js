@@ -61,17 +61,32 @@ $(document).ready(function() {
 
     $('#skillmatrix_table thead tr').clone(true).appendTo('#skillmatrix_table thead');
     $('#skillmatrix_table thead tr:eq(1) th').each( function (i) {
-        var title_skill = $(this).text();
+        var title = $(this).text();
         $(this).html( '<input type="text" style="width:60px;text-align:center;" placeholder="Search"/>' );   
         $( 'input',this).on('keyup change', function () {
-            if ( skill_table_ser.column(i).search() !== this.value ) {
-                skill_table_ser
+
+            if ( skill_table.column(i).search()!== this.value) {
+                skill_table
                     .column(i)
                     .search( this.value )
                     .draw();
             }
         });
     });
+
+    // $('#example thead tr').clone(true).appendTo('#example thead');
+    // $('#example thead tr:eq(1) th').each( function (i) {
+    //     var title = $(this).text();
+    //     $(this).html( '<input type="text" style="background-color:#f2f4f6;border: 1px;width:80px;text-align:center;" placeholder="Search"/>' );   
+    //     $( 'input',this).on('keyup change', function () {
+    //         if ( employee_table.column(i).search() !== this.value ) {
+    //             employee_table
+    //                 .column(i)
+    //                 .search( this.value )
+    //                 .draw();
+    //         }
+    //     });
+    // });
 
     var skill_table = $('#skillmatrix_table').DataTable({
         //fixedHeader: true,
@@ -92,8 +107,6 @@ $(document).ready(function() {
 
         "scrollX": true,
         "paging": false,
-
-       
     });
     
 
@@ -325,7 +338,6 @@ function Update_Demand(id){
                         setTimeout(function() {                      
                             window.location.href = "/employee/certification";
                             }, 500);
-
                       }
                   }
               });
