@@ -53,6 +53,7 @@ $counts = $this->getAllCount();
    </div>
    <div class="col-md-3">
       <a href="#" title="Example tile shortcut" class="tile-box tile-box-shortcut  btn-danger ">
+         <span class="bs-badge badge-absolute"><?php echo $counts['inactive_users']; ?></span>
          <div class="tile-header">InActive Users</div>
          <div class="tile-content-wrapper"><i class="fa fa-address-book fafa-icon-css"></i></div>
       </a>
@@ -61,12 +62,38 @@ $counts = $this->getAllCount();
 
 
 <div class="row" >
- 
-  <div class="col-md-6" >
+   <div class="col-md-4">
+          <div class="card card-success"  id="CertificateChart" >
+            <div class="card-header">
+              <h3 class="card-title">Resources Chart</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fantom fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fa fantom fa-times"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart">
+                <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand">
+                  <div class="">
+                    
+                  </div>
+                </div>
+                <div class="chartjs-size-monitor-shrink">
+                    <div class=""></div></div></div>
+                <canvas id="allSkillSetsChart"  width="200" height="168" class="chartjs-render-monitor"></canvas>
+              </div>
+            </div>
+          
+          </div>
+  
+  </div>
+  <div class="col-md-8" >
      
       <div class="card card-success" style="" id="CertificateChart" >
             <div class="card-header">
-              <h3 class="card-title">Servicenow Chart</h3>
+              <h3 class="card-title">All Certificates Chart</h3>
 
               <div class="card-tools">
                 <!-- <button type="button" id="saveServicenowChart" class="btn btn-info "> Add Skill</button> -->
@@ -86,16 +113,17 @@ $counts = $this->getAllCount();
                 </div>
                 <div class="chartjs-size-monitor-shrink" >
                     <div class=""></div></div></div>
-                <canvas id="barChart" width="387" height="287" class="chartjs-render-monitor"></canvas>
+                <canvas id="allBarChartHome" width="500" height="200" class="chartjs-render-monitor"></canvas>
               </div>
             </div>
             <!-- /.card-body -->             
         </div>
   </div>
-  <div class="col-md-6">
+
+<div class="col-md-4">
           <div class="card card-success"  id="CertificateChart" >
             <div class="card-header">
-              <h3 class="card-title">Servicenow Chart</h3>
+              <h3 class="card-title">Expertise Chart</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fantom fa-minus"></i>
@@ -112,12 +140,12 @@ $counts = $this->getAllCount();
                 </div>
                 <div class="chartjs-size-monitor-shrink">
                     <div class=""></div></div></div>
-                <canvas id="barChart"  width="387" height="287" class="chartjs-render-monitor"></canvas>
+                <canvas id="allExpertiseChart"  width="200" height="168" class="chartjs-render-monitor"></canvas>
               </div>
             </div>
-            <!-- /.card-body -->
+          
           </div>
-    <!-- /.box-body -->
+  
   </div>
 </div>
 </center>

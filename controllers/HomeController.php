@@ -40,15 +40,26 @@ class HomeController extends Controller {
 	
 	}   
 
-	public function getAllCountinfra() {
-	$obj = $this->loadModel('DashboardModel');
-	$data = $obj->getAllCountsinfra();
+	public function getAllCountGeneric($data) {
 	// print_r($data);
 	// exit(0);
+	$obj = $this->loadModel('DashboardModel');
+	$data = $obj->getAllGenericCount($data);
+	// print_r($data);
+	// exit();
 
 	return $data;
 	
 	} 
+	// public function getAllCountinfra() {
+	// $obj = $this->loadModel('DashboardModel');
+	// $data = $obj->getAllCountsinfra();
+	// // print_r($data);
+	// // exit(0);
+
+	// return $data;
+	
+	// } 
   /* public function getAllCount() {
 	$obj = $this->loadModel('DashboardModel');
 	$data = $obj->getAllCounts();
@@ -77,7 +88,38 @@ class HomeController extends Controller {
 		echo json_encode($data);
 	
 	}
+	public function getAllSkillSetChart() {
+	$obj = $this->loadModel('DashboardModel');
+	$data = $obj->getAllSkillSetChartDetails();
+	// return $data;
+	header('Content-Type: application/json');
+		echo json_encode($data);
 	
+	}
+	public function getAllExpertiseChart() {
 
+		$obj = $this->loadModel('DashboardModel');
+		$data = $obj->getAllExpertiseChartDetails();
+		// return $data;
+		header('Content-Type: application/json');
+			echo json_encode($data);
+	
+	}
+	public function getServicenowCertificateChart() {
+	$obj = $this->loadModel('DashboardModel');
+	$data = $obj->getServicenowCertificateChartDetails();
+	// return $data;
+	header('Content-Type: application/json');
+		echo json_encode($data);
+	
+	}
+	public function getRPACertificateChart() {
+	$obj = $this->loadModel('DashboardModel');
+	$data = $obj->getRPACertificateChartDetails();
+	// return $data;
+	header('Content-Type: application/json');
+		echo json_encode($data);
+	
+	}
 
 }

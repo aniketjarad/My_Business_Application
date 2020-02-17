@@ -58,7 +58,7 @@
     <script src="/public/vendor/datatables/js/buttons.print.min.js"></script>
     <script src="/public/vendor/datatables/js/buttons.html5.min.js"></script>
 
-    <!-- <script src="/public/js/widget.js"></script> -->
+    <script src="/public/js/widget.js"></script>
      <script src="/public/vendor/chartjs/Chart.js"> </script>
       <script src="/public/vendor/html2canvas/html2canvas.js"></script>
      
