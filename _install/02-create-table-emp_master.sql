@@ -101,3 +101,25 @@ CREATE TABLE `demand_archieve` (
  `jd` varchar(100) DEFAULT NULL,
  PRIMARY KEY (`Sr No`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1
+
+
+CREATE TABLE `purchase_order` (
+ `po_number` varchar(100) NOT NULL,
+ `start_date` date DEFAULT NULL,
+ `end_date` date DEFAULT NULL,
+ `project_name` varchar(100) DEFAULT NULL,
+ `active` tinyint(1) DEFAULT '1',
+ PRIMARY KEY (`po_number`),
+ KEY `project_name` (`project_name`),
+ CONSTRAINT `purchase_order_ibfk_1` FOREIGN KEY (`project_name`) REFERENCES `projects` (`project_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+CREATE TABLE `projects` (
+ `project_id` varchar(50) NOT NULL,
+ `project_name` varchar(100) NOT NULL,
+ `cost_center` int(100) NOT NULL,
+ `pos` varchar(100) DEFAULT NULL,
+ `active` tinyint(1) DEFAULT '1',
+ PRIMARY KEY (`project_id`),
+ UNIQUE KEY `project_name` (`project_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
