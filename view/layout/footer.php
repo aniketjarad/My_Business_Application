@@ -8,6 +8,7 @@
     <!-- our JavaScript -->
     <script src="/public/js/main.js"></script>
     <script src="/public/js/site.js"></script>
+     <!-- <script src="/public/js/project.js"></script> -->
   	
   	
 <!--===============================================================================================

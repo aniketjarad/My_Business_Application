@@ -59,6 +59,31 @@ $(document).ready(function() {
         "paging": false
     });
 
+    var project_table = $('#projectTable').DataTable({
+        //fixedHeader: true,
+        //colReorder: true,
+        "order":[["0","asc"]],
+        dom: 'Bfrtip',
+        buttons: [
+            'copy','excel', 'pdf', 'print'
+        ],
+        "scrollX": true,
+        "paging": false
+    });
+
+    var purchaseOrder_table = $('#purchaseOrderTable').DataTable({
+        //fixedHeader: true,
+        //colReorder: true,
+        "order":[["0","asc"]],
+        dom: 'Bfrtip',
+        buttons: [
+            'copy','excel', 'pdf', 'print'
+        ],
+        "scrollX": true,
+        "paging": false
+    });
+
+
     $('#skillmatrix_table thead tr').clone(true).appendTo('#skillmatrix_table thead');
     $('#skillmatrix_table thead tr:eq(1) th').each( function (i) {
         var title = $(this).text();
@@ -125,110 +150,110 @@ $(document).ready(function() {
     
 });
 
-function Update_Element(id) {
+    function Update_Element(id) {
 
-    $.ajax({
-    type: 'post',
-    url: '/employee/get',
-    data: {"emp_code":id},
-    success: function (res) {
-        if (res){
-            $('#manager').html("");
-            var length = Object.keys(res.managers).length;
-            for (var i = 1; i <= length; i++) {
-                $('#manager').append('<option value="'+res.managers[i]+'">'+res.managers[i]+'</option>');
+        $.ajax({
+        type: 'post',
+        url: '/employee/get',
+        data: {"emp_code":id},
+        success: function (res) {
+            if (res){
+                $('#manager').html("");
+                var length = Object.keys(res.managers).length;
+                for (var i = 1; i <= length; i++) {
+                    $('#manager').append('<option value="'+res.managers[i]+'">'+res.managers[i]+'</option>');
+                }
+                $('#contact_no').val(res.contact_no);  
+                $('#cost_center').val(res.cost_center);  
+                $('#department').val(res.department);  
+                $('#designation').val(res.designation);  
+                $('#doj').val(res.doj);  
+                $('#email_id').val(res.email_id);  
+                $('#emea_id').val(res.emea_id);  
+                $('#emp_code').val(res.emp_code);  
+                $('#emp_name').val(res.emp_name);  
+                $('#grade').val(res.grade);  
+                $('#wiw_id').val(res.wiw_id);
+                if(res.active=='1'){
+                    $('#active').attr("checked",true);
+                }else{
+                    $('#active').attr("checked",false);
+                }
+                if(res.is_manager=='1'){
+                    $('#is_manager').attr("checked",true);
+                }else{
+                    $('#is_manager').attr("checked",false);
+                }
+                $('#manager').val(res.manager).attr("selected",true);
             }
-            $('#contact_no').val(res.contact_no);  
-            $('#cost_center').val(res.cost_center);  
-            $('#department').val(res.department);  
-            $('#designation').val(res.designation);  
-            $('#doj').val(res.doj);  
-            $('#email_id').val(res.email_id);  
-            $('#emea_id').val(res.emea_id);  
-            $('#emp_code').val(res.emp_code);  
-            $('#emp_name').val(res.emp_name);  
-            $('#grade').val(res.grade);  
-            $('#wiw_id').val(res.wiw_id);
-            if(res.active=='1'){
-                $('#active').attr("checked",true);
-            }else{
-                $('#active').attr("checked",false);
-            }
-            if(res.is_manager=='1'){
-                $('#is_manager').attr("checked",true);
-            }else{
-                $('#is_manager').attr("checked",false);
-            }
-            $('#manager').val(res.manager).attr("selected",true);
         }
+      });
     }
-  });
-}
 
-function Update_Demand(id){
-    $('#DemandTitle').html("Edit Demand");
-    $('#btn_demand').html("Update Demand");
-    $('#action').val("update");
-    $('#jd_div').show();
-    $('#cv_div').show();
-    $("#jd").html("");
-    $("#cv").html("");
-    $.ajax({
-    type: 'post',
-    url: '/demand/get',
-    data: {"demand_id":id},
-    success: function (res) {
-        //console.log(res);
-        if (res){
-            $('#demand_id_text').val(res.data.demand_id);  
-            $('#bos_id').val(res.data.bos_id);  
-            $('#candidate_name').val(res.data.candidate_name);  
-            $('#position').val(res.data.position);  
-            $('#joining_date').val(res.data.joining_date);  
-            $('#tentative_mapping').val(res.data.tentative_mapping); 
-            if(res.data.jd){
-                $("#jd_attach").removeAttr("required");
-                $("#jd").html("<a download="+res.data.jd.split("/").pop()+" href="+res.data.jd+" class='fa fa-file'>"+res.data.jd.split("/").pop()+"</a>");
-                //$('#jd_attach').val(res.data.jd);
-                //$('#jd_div').hide();
-            }
-            if(res.data.cv){
-                $("#cv").html("<a download="+res.data.cv.split("/").pop()+" href="+res.data.cv+" class='fa fa-file'>"+res.data.cv.split("/").pop()+"</a>");
-                //$('#cv_div').hide();
-            }
-            if(res.data.status=="Backfill"){
-                $.ajax({
-                    type: 'post',
-                    url: '/demand/getInActiveEmployee',
-                    data: null,
-                    success: function (res) {
-                    // console.log(res);
-                    // console.log(res.data[1].emp_code);
-                    // console.log(res.data[1].emp_name);
-                    if(res.status == 'success'){
-                      $('#backfill_div').show();
-                      $('#backfill_select').show();
-                      $('#backfill_select').html("");
-                      //console.log(Object.keys(res.data)[1].emp_code);
-                      for (var i=1; i<= Object.keys(res.data).length ; i++) {
-                        $('#backfill_select').append('<option value='+ res.data[i].emp_code +' >'+res.data[i].emp_name+'</option>');
+    function Update_Demand(id){
+        $('#DemandTitle').html("Edit Demand");
+        $('#btn_demand').html("Update Demand");
+        $('#action').val("update");
+        $('#jd_div').show();
+        $('#cv_div').show();
+        $("#jd").html("");
+        $("#cv").html("");
+        $.ajax({
+        type: 'post',
+        url: '/demand/get',
+        data: {"demand_id":id},
+        success: function (res) {
+            //console.log(res);
+            if (res){
+                $('#demand_id_text').val(res.data.demand_id);  
+                $('#bos_id').val(res.data.bos_id);  
+                $('#candidate_name').val(res.data.candidate_name);  
+                $('#position').val(res.data.position);  
+                $('#joining_date').val(res.data.joining_date);  
+                $('#tentative_mapping').val(res.data.tentative_mapping); 
+                if(res.data.jd){
+                    $("#jd_attach").removeAttr("required");
+                    $("#jd").html("<a download="+res.data.jd.split("/").pop()+" href="+res.data.jd+" class='fa fa-file'>"+res.data.jd.split("/").pop()+"</a>");
+                    //$('#jd_attach').val(res.data.jd);
+                    //$('#jd_div').hide();
+                }
+                if(res.data.cv){
+                    $("#cv").html("<a download="+res.data.cv.split("/").pop()+" href="+res.data.cv+" class='fa fa-file'>"+res.data.cv.split("/").pop()+"</a>");
+                    //$('#cv_div').hide();
+                }
+                if(res.data.status=="Backfill"){
+                    $.ajax({
+                        type: 'post',
+                        url: '/demand/getInActiveEmployee',
+                        data: null,
+                        success: function (res) {
+                        // console.log(res);
+                        // console.log(res.data[1].emp_code);
+                        // console.log(res.data[1].emp_name);
+                        if(res.status == 'success'){
+                          $('#backfill_div').show();
+                          $('#backfill_select').show();
+                          $('#backfill_select').html("");
+                          //console.log(Object.keys(res.data)[1].emp_code);
+                          for (var i=1; i<= Object.keys(res.data).length ; i++) {
+                            $('#backfill_select').append('<option value='+ res.data[i].emp_code +' >'+res.data[i].emp_name+'</option>');
+                          }
+                        }
                       }
-                    }
-                  }
-                });
+                    });
+                    $('#backfill_select').val(res.data.backfill_select).attr("selected",true);
+                }else{
+                    $('#backfill_div').hide();
+                }
+                $('#demand_status').val(res.data.status).attr("selected",true);
                 $('#backfill_select').val(res.data.backfill_select).attr("selected",true);
-            }else{
-                $('#backfill_div').hide();
             }
-            $('#demand_status').val(res.data.status).attr("selected",true);
-            $('#backfill_select').val(res.data.backfill_select).attr("selected",true);
         }
+        });
+
     }
-    });
 
-}
-
-//This is for the skill matrix delete and
+    //This is for the skill matrix delete and
     function Delete_Skill_Element(id) {
         // console.log("print" + id);
         if (confirm('Are you sure you want to delete this record?')) {
@@ -264,18 +289,8 @@ function Update_Demand(id){
     
     }
     }
-     function Update_Skill_Element(id) {
-        // console.log("asdas");
-        // $("#updatePrimarySel").select2({
-        //     tags: false,
-        //     theme: "classic",
-        //     allowClear: true
-        // });
-        // $("#updateSecondarySel").select2({
-        //         tags: false,
-        //         theme: "classic",
-        //         allowClear: true
-        // });
+    function Update_Skill_Element(id) {
+       
         $("#secskillcolapse").removeClass("show");
         $("#IdskillNameCustom").val("");
         $.ajax({
@@ -376,4 +391,136 @@ function Update_Demand(id){
         }
         
     }
+    /* ######################## Project Fucntions ########################*/
+   
+    function editProject(idProject) {
 
+        $('#activDiv').show();
+        $('#multiSelectPurchaseOrderId').html("");
+        $('#multiSelectPurchaseOrderDiv').show();
+        $('#projectId').prop('readonly', true);
+        $('#ActionId').val("edit");
+
+        var POST = idProject;
+        $.ajax({
+        type: 'post',
+        url: '/project/editProjects',
+        data: {idProject},
+        success: function (res) {
+            console.log(res);
+            if (res.status = "success") { 
+
+                if(res.data.project_id[1]['active'] == 1){
+                    $("#active").prop('checked', true); 
+                }
+                else{
+                    $("#active").prop('checked', false); 
+                }
+                $('#projectId').val( res.data.project_id[1]['project_id']);
+                $('#projectNameId').val( res.data.project_id[1]['project_name']);
+                $('#projectCostCenterId').val( res.data.project_id[1]['cost_center']);
+
+                if(res.data.project_id[1]['pos'] != null){
+                    var multiSelect = res.data.project_id[1]['pos'].split(',') ; 
+
+                    for(var j = 0; j < multiSelect.length; j++) {
+                        $('#multiSelectPurchaseOrderId').append('<option name='+ multiSelect[j] +' selected="selected" >'+ multiSelect[j]  +'</option>');
+                    }
+                }
+
+            }
+            // else{
+
+            //     setTimeout(function() {                      
+            //         window.location.href = "/employee/certification";
+            //         }, 500);
+            //   }
+          }
+      });
+
+   
+
+    }
+         /* ######################## Purchase Order Fucntions ########################*/
+   
+    function editPurchaseOrder(idProject) {
+        
+        $('#activDiv').show();
+        $('#poNumId').prop('readonly', true);
+        $('#projectNameId').html("");
+        $('#poNumId').val("");
+        $('#startDateId').val("");
+        $('#endDateId').val("");
+        $('#ActionId').val("edit");
+
+        var POST = idProject;
+        $.ajax({
+        type: 'post',
+        url: '/project/editPurchaseOrder',
+        data: {idProject},
+        success: function (res) {
+            // console.log(res.data[1]);
+            if (res.status = "success") { 
+                // console.log(res.data[1].active);
+                
+                $('#poNumId').val( res.data[1].po_number);
+                $('#projectNameId').append('<option value='+ res.data[1].project_name.replace(/ /g, '+') +'>'+ res.data[1].project_name +'</option>')
+                // $('select[name="projectNameName"]').find('option[value= "'+res.data[1].project_name.replace(/ /g, '+')+'"]').attr("selected",true);
+                 // $("#projectNameId").val(res.data[1].project_name.replace(/ /g, '+')).attr("selected","selected");
+                // $('#projectNameId').val(res.data[1].project_name.replace(' ', '+').change();
+                $('#startDateId').val( res.data[1].start_date);
+                $('#endDateId').val( res.data[1].end_date);
+
+                var activeSamp = res.data[1].active ;
+                
+                if(activeSamp == '0'){
+                   
+                    $("#active").prop('checked', false); 
+                }
+                else{
+                    $("#active").prop('checked', true); 
+                }
+            }
+            // else{
+
+            //     setTimeout(function() {                      
+            //         window.location.href = "/employee/certification";
+            //         }, 500);
+            //   }
+          }
+      });
+    }
+     function deletePurchaseOrder(idProject) {
+         // console.log(idProject);
+        $('#activDiv').show();
+        $('#poNumId').val("");
+        $('#startDateId').val("");
+        $('#endDateId').val("");
+        $('#ActionId').val("edit");
+
+        var POST = idProject;
+        if (confirm('Are you sure you want to delete this record?')) {
+            $.ajax({
+            type: 'post',
+            url: '/project/deletePurchaseOrder',
+            data: {idProject},
+            success: function (res) {
+                // console.log(res);
+                if (res.status = "success") { 
+
+                    setTimeout(function() {                      
+                        window.location.href = "/project/purchaseorder";
+                    }, 500);
+                   
+
+                }
+                else{
+
+                    setTimeout(function() {                      
+                        window.location.href = "/employee/certification";
+                        }, 500);
+                  }
+              }
+          });
+        }
+    }

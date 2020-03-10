@@ -228,10 +228,31 @@
               </li>
             </ul>
           </li>
+           <li class="nav-item has-treeview menu-open">
+            <a id="demand-tab" href="#" class="nav-link">
+              <i class="fas fa-user-cog nav-icon "></i>
+              <p>Project Management<i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item" style="background-color: #343a40;">
+                <a id="projects-link" href="/project/projects" class="nav-link">
+                  <i class="fas fa-portrait nav-icon"></i>
+                  <p>Projects</p>
+                </a>
+              </li>
+              <li class="nav-item" style="background-color: #343a40;">
+                <a id="pruchase-order-link" href="/project/purchaseorder" class="nav-link">
+                  <i class="fas fa-archive nav-icon"></i>
+                  <p>Purchase Order</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item has-treeview menu-open">
             <a id="demand-tab" href="#" class="nav-link">
               <i class="fas fa-user-cog nav-icon "></i>
-              <p>Demand Management<i class="right fas fa-angle-left"></i>
+              <p>Hiring<i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">

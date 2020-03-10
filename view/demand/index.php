@@ -13,12 +13,12 @@ if(!isset($_SESSION['emp_code']) || count($_SESSION)== 0){
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h4 class="m-0 text-dark">Demand</h4>
+        <h4 class="m-0 text-dark">Hiring</h4>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="/home/">Home</a></li>
-          <li class="breadcrumb-item active">Demand</li>
+          <li class="breadcrumb-item active">Hiring</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -28,7 +28,7 @@ if(!isset($_SESSION['emp_code']) || count($_SESSION)== 0){
 <center>
 	<div class="">
         <div align="left" style="margin-left:2%;">
-        <button type="button" id="add_btn" name="add" class="btn btn-info " style="color: white;/*padding: 10px;*/" data-toggle="modal" data-target="#addDemandModal">New Demand</button>
+        <button type="button" id="add_btn" name="add" class="btn btn-info " style="color: white;/*padding: 10px;*/" data-toggle="modal" data-target="#addDemandModal">New Hire</button>
         <!-- <div class="col-md-3" style="float: right;">
           <a href="#" title="Example tile shortcut" class="tile-box tile-box-shortcut btn-danger">
              <span class="bs-badge badge-absolute"><?php echo $all['count']['count']; ?></span>

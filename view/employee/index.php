@@ -201,7 +201,7 @@ if(!isset($_SESSION['emp_code']) || count($_SESSION)== 0){
                         <span class="label-input1000">No</span>
                         <div class="switch">
                           <label>
-                            <input id="active" name="active" type="checkbox" >
+                            <input id="active" name="active" type="checkbox"  >
                             <span class="slider round"></span>
                           </label>
                         </div>
