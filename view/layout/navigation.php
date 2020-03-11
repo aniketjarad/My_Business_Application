@@ -12,7 +12,10 @@
         <a id="employee-menu-link" href="/employee/" class="nav-link" style="color: white;">Employee</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a id="demand-menu-link" href="/demand/" class="nav-link" style="color: white;">Demand</a>
+        <a id="demand-menu-link" href="/demand/" class="nav-link" style="color: white;">Hiring</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a id="demand-menu-link" href="/project/" class="nav-link" style="color: white;">Project</a>
       </li>
       <!-- <li class="nav-item d-none d-sm-inline-block" style="float: right;">
         <img src="/public/img/TSY_Logo_Small-White.png" style="height: 28px;width: 160px;" />
@@ -236,7 +239,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item" style="background-color: #343a40;">
-                <a id="projects-link" href="/project/projects" class="nav-link">
+                <a id="projects-link" href="/project/" class="nav-link">
                   <i class="fas fa-portrait nav-icon"></i>
                   <p>Projects</p>
                 </a>

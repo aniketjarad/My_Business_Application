@@ -199,6 +199,21 @@ $(document).ready(function() {
         $("#jd").html("");
         $("#cv").html("");
         $.ajax({
+          type: 'post',
+          url: '/project/getAllProjects',
+          data: null,
+          success: function (res) {
+
+            $('#tentative_mapping').html("");
+            
+            for (var i=1; i<=  Object.keys(res.data).length ; i++) {
+              $('#tentative_mapping').append('<option value="'+ res.data[i] +'" >'+res.data[i]+'</option>');
+            }
+
+          }
+        });
+        
+        $.ajax({
         type: 'post',
         url: '/demand/get',
         data: {"demand_id":id},
@@ -250,7 +265,7 @@ $(document).ready(function() {
             }
         }
         });
-
+        
     }
 
     //This is for the skill matrix delete and

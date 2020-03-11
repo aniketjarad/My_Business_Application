@@ -54,6 +54,33 @@ class ProjectModel {
         return $arrProjectDetails;
     }
 
+    /*Get All the details from the Project Table ot Display for ajax */
+    public function getAllProject() {
+        
+        $sql = "SELECT * FROM `projects` ORDER BY `project_id` ";
+        $result = mysqli_query($this->db, $sql);
+        $count = 1;
+        while($array = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+            $row->{$count} = $array;
+            $count++;
+        }
+
+        $arrProjectDetails = array();
+        // echo '<pre>';
+        // print_r($row);
+        // echo '</pre>';
+        // exit(0);
+         foreach($row as $key => $emp_data)
+            {
+                $arrProjectDetails[$key] = $emp_data['project_name'];
+            }
+            // echo '<pre>';
+            //  print_r($arrProjectDetails);
+            //  echo '</pre>';
+        
+        return $arrProjectDetails;
+    }
+
     /* Create the record of new Project when requested.*/
     public function addNewProjects($data) {
         // print_r($data['ActionName']);

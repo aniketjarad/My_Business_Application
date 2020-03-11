@@ -131,7 +131,8 @@ if(!isset($_SESSION['emp_code']) || count($_SESSION)== 0){
               </div>
               <div class="form-group">
                 <label >Tentative Mapping :</label>
-                <input type="text" class="form-control" name="tentative_mapping" id="tentative_mapping" placeholder="Enter Tentative Mapping" >
+                <select class="form-control" name="tentative_mapping" id="tentative_mapping">
+                </select>
               </div>
 
               <div class="form-group">

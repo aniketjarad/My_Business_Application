@@ -18,6 +18,21 @@ class ProjectController extends Controller {
 		$data = $obj->getAllProjects();
 		return $data;
 	}
+
+	public function getAllProjects() {
+
+		$obj = $this->loadModel('ProjectModel');
+		$data = $obj->getAllProject();
+		
+		if(count($data)) {
+		  	$result = ['status' => 'success' , 'data' =>$data];
+		}else{
+			$result = ['status' => 'error','data' => 'Please Contact Admin'];
+		}
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+
 	public function addNewProject() {
 		
 

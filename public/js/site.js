@@ -437,6 +437,20 @@ $(document).ready(function(){
         }
       }
     });
+
+    $.ajax({
+      type: 'post',
+      url: '/project/getAllProjects',
+      data: null,
+      success: function (res) {
+
+        $('#tentative_mapping').html("");
+        
+        for (var i=1; i<=  Object.keys(res.data).length ; i++) {
+          $('#tentative_mapping').append('<option value="'+ res.data[i] +'" >'+res.data[i]+'</option>');
+        }
+      }
+    });
   });
     //Chart Downloias
   // $('#saveServicenowChart').on('click',function (e) {
@@ -585,7 +599,7 @@ $(document).ready(function(){
     $('#activDiv').hide();
     $('#multiSelectPurchaseOrderDiv').hide();
     $('#hiddenProjectRes').hide();
-    $('#projectId').prop('readonly', false);
+    $('#projectId').removeAttr("required");
     $('#projectId').val("");
     $('#projectNameId').val("");
     $('#projectCostCenterId').val("");
