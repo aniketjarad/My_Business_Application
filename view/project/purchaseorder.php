@@ -4,7 +4,7 @@ if(!isset($_SESSION['emp_code']) || count($_SESSION)== 0){
 echo "<script>window.location.href='/home/login';</script>";
   exit;
 }else{
-  $data = $this->getAllProject();
+  // $data = $this->getAllProject();
   // print_r($data);
   $dataTable = $this->getAllPurchaseOrderDetails();
 
@@ -111,19 +111,8 @@ echo "<script>window.location.href='/home/login';</script>";
             <div class="form-group">
                 <label for="Projectname">Project Name : </label>
                 <select class="form-control" id="projectNameId"  name="projectNameName">
-                  <option value="" >----- Select Project -----</option>
-                   <?php          
-                      $count = 1;
-                      foreach($data as $key => $emp_data)
-                      {
-                       // print_r($emp_data); 
-                        $stripped = str_replace(' ', '+', $emp_data[$count]['project_name']);
-                      ?>     
-                       <option value=<?php echo $stripped; ?>  ><?php echo $emp_data[$count]['project_name']; ?></option>
-                         <?php 
-                         $count++;
-                       }
-                       ?>
+                  <!-- <option value="" >----- Select Project -----</option> -->
+                   
                 </select>
               </div>
             <div class="form-group" id="startDateDiv">

@@ -12,9 +12,38 @@
         }
 
         /**
-         * Insert record in URLs table
+         * Get All Employee Name
          */
-       
+        public function getAllEmpName()
+        {
+            $sql = "select * from emp_master order by emp_name";
+            $result = mysqli_query($this->db, $sql);
+            $count = 1;
+            //  $arrEmpName =array();
+            while($array = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                $row->{$count} = $array;
+                $count++;
+
+                // print_r($array['emp_code']);
+                // print_r($array['emp_name']);
+
+            }
+            foreach($row as $key => $emp_data)
+            {
+                if(!empty($arrEmpName[$emp_data['emp_code']])){
+                    $arrEmpName[$emp_data['emp_code']] = array();    
+                }else{
+                    $arrEmpName[$key]['emp_code'] = $emp_data['emp_code'];
+                    $arrEmpName[$key]['emp_name'] = $emp_data['emp_name'];                 
+                    
+                }
+            }
+             $arr_response['status'] = "success";
+            $arr_response['response'] = $arrEmpName;
+            // print_r($arr_response);
+            // exit();
+            return $arr_response;
+        }
         /**
          * Get all data from All Managers.
          */

@@ -96,21 +96,7 @@ if(!isset($_SESSION['emp_code']) || count($_SESSION)== 0){
               <div class="form-group">
                 <label for="emp_Name">Employee Name : </label>
                 <select class="form-control" id="employee_Name"  name="emp_Name">
-                   <?php 
-                      $i = 0 ;
-                      $data = $this->getAll();
-                      
-
-                      foreach($data as $key => $emp_data)
-                      {
-                        print_r($emp_data);
-                        $e_code = $emp_data['emp_code'];
-                        $e_name = $emp_data['emp_name'];
-                      ?>     
-                       <option value=<?php echo $e_code; ?>  ><?php echo $e_name; ?></option>
-                         <?php 
-                       }
-                       ?>
+                   
                 </select>
               </div>
               <div class="form-group"id="mulipleselectdiv_primary" >

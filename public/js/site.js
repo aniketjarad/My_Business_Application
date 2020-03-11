@@ -164,6 +164,27 @@ $(document).ready(function(){
     $('#employee_Name').attr("readonly",false);  
     $("#secskillcolapse").removeClass("show");
     $("#IdskillNameCustom").val("");
+    $("#employee_Name").empty();
+    $.ajax({
+      type: 'post',
+      url: '/employee/getAllEmpForSkill',
+      data:null,
+      success: function (res) {       
+        
+        if (res.status == 'success') {
+          
+           for(var i=1; i<=  Object.keys(res.data).length ; i++) {         
+             // console.log(res.data.result[j].text);
+
+            $('#employee_Name').append('<option value='+ res.data[i].emp_code +' >'+ res.data[i].emp_name +'</option>');
+          
+            }           
+        }
+      //   else if (res.status == 'error') {
+      //     console.log("Error");
+      //   }
+      }
+    });
     $.ajax({
       type: 'get',
       url: '/employee/getSkillList',
@@ -187,6 +208,7 @@ $(document).ready(function(){
 
 
   $('#addnewskill_btn').click( function (e) {
+
     e.preventDefault();
     $.ajax({
       type: 'post',
@@ -599,7 +621,7 @@ $(document).ready(function(){
     $('#activDiv').hide();
     $('#multiSelectPurchaseOrderDiv').hide();
     $('#hiddenProjectRes').hide();
-    $('#projectId').removeAttr("required");
+    $('#projectId').prop('readonly', false);
     $('#projectId').val("");
     $('#projectNameId').val("");
     $('#projectCostCenterId').val("");
@@ -643,10 +665,36 @@ $('#addPOBtn').on('click', function (e) {
     $('#poNumId').val("");
     $('#startDateId').val("");
     $('#endDateId').val("");
-    // $('#projectNameId').empty();
+    $('#poNumId').prop('readonly', false);
+    $('#projectNameId').attr('readonly', false);
+    // $('#projectNameId').attr("readonly",true);
+    $('#projectNameId').empty();
     $('#projectNameId').val("");
     $('#ActionId').val("add");
 
+    e.preventDefault();
+    $.ajax({
+      type: 'post',
+      url: '/project/getAllProjects',
+      data: null,
+      success: function (res) {
+          // console.log(res);
+          if (res.status == 'success') {
+            // $('#projectNameId').append('<option value=null >----- Select Project -----</option>');
+            for (var i=1; i<=  Object.keys(res.data).length ; i++) {
+             $('#projectNameId').append('<option value="'+ res.data[i] +'" >'+res.data[i]+'</option>');
+            }
+
+          }
+        // else if (res.status == 'error') {
+        //   $('#hidPoRes').show();
+        //   $('#hidPoRes').html('<span class="label-input50">'+res.data+'</span>');
+        //   setTimeout(function() {
+        //     window.location.href = "/project/purchaseorder";
+        //   }, 500);
+        // }
+      }
+    });
 
   });
 

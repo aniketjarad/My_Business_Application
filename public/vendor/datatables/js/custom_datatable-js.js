@@ -480,6 +480,7 @@ $(document).ready(function() {
                 
                 $('#poNumId').val( res.data[1].po_number);
                 $('#projectNameId').append('<option value='+ res.data[1].project_name.replace(/ /g, '+') +'>'+ res.data[1].project_name +'</option>')
+                $('#projectNameId').attr("readonly",true);
                 // $('select[name="projectNameName"]').find('option[value= "'+res.data[1].project_name.replace(/ /g, '+')+'"]').attr("selected",true);
                  // $("#projectNameId").val(res.data[1].project_name.replace(/ /g, '+')).attr("selected","selected");
                 // $('#projectNameId').val(res.data[1].project_name.replace(' ', '+').change();

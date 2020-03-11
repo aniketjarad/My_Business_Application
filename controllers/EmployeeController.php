@@ -31,6 +31,19 @@ class EmployeeController extends Controller {
 		$data = $obj->getAllSkills();
 		return $data;
 	}
+	public function getAllEmpForSkill() {
+		$obj = $this->loadModel('AllSkillsModel');
+		$response = $obj->getAllEmpName();
+		
+		if($response['status'] == 'success') {
+		  	$result = ['status' => 'success' , 'data' => $response['response']];
+		}else{
+			$result = ['status' => 'error','data' => $response['response']];
+		}
+		header('Content-Type: application/json');
+		echo json_encode($result);
+		// return $result;
+	}
 	public function getAllManager() {
 		$obj = $this->loadModel('EmployeeModel');
 		$data = $obj->getAllManagers();
